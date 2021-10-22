@@ -6,11 +6,12 @@ import {
   Link
 } from "react-router-dom";
 import Home from './pages/Home';
+import "./App.scss"
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="wrapper">
         <Switch>
           <Route path="/">
             <Home />
