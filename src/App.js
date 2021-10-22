@@ -6,34 +6,25 @@ import {
   Link
 } from "react-router-dom";
 import Home from './pages/Home';
-import About from './pages/About';
-function App(){
-   return (
-   <Router>
-       <div>
+
+function App() {
+  return (
+    <Router>
+      <div>
         <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
             </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/about">
-              <About/>
-            </Route>
           <Route path="/">
-            <Home/>
-          </Route>
-          <Route path="/about">
-            <About/>
+            <Home />
           </Route>
         </Switch>
-        </div>
-  </Router>
+      </div>
+    </Router>
   )
 }
 export default App;
