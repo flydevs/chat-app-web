@@ -1,31 +1,31 @@
-.HomeLayout{
-    width: 100vw;
-    height:99.5vh;
-    display: flex;
-    &__sidebar{
-        width:5%;
-        height:100%;
-        border-radius: 10px;
-        border: .1px solid black;
-    }
-    &__messages{
-        width:22.5%;
-        height:100%;
-        border-radius: 10px;
-        border: .1px solid black;
-    }
-    &__chat{
-        width:50%;
-        height:100%;
-        border-radius: 10px;
-        border: .1px solid black;
-    }
-    &__directory{
-        width:22.5%;
-        height:100%;
-        border-radius: 10px;
-        border: .1px solid black;
-    }
+.HomeLayout {
+  width: 100vw;
+  height: 99.5vh;
+  display: flex;
+  &__sidebar {
+    width: 5%;
+    height: 100%;
+    border-radius: 10px;
+    border: 0.1px solid black;
+  }
+  &__messages {
+    width: 22.5%;
+    height: 100%;
+    border-radius: 10px;
+    border: 0.1px solid black;
+  }
+  &__chat {
+    width: 50%;
+    height: 100%;
+    border-radius: 10px;
+    border: 0.1px solid black;
+  }
+  &__directory {
+    width: 22.5%;
+    height: 100%;
+    border-radius: 10px;
+    border: 0.1px solid black;
+  }
 }
 
 html,
