@@ -18,8 +18,9 @@ function ContactsCard({
         <h2>{contactName}</h2>
         <h3>{lastMessage}</h3>
         <div className="contactCard__info__badges">
-          {badges.map((badge) => (
+          {badges.map((badge,i) => (
             <div
+            key={i}
               className="contactCard__info__badges__badge"
               style={{
                 backgroundColor: badge.backgroundColor,
