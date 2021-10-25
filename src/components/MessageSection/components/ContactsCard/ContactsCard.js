@@ -1,3 +1,4 @@
+
 import React from "react";
 import Avatar from "../../../common/Avatar/Avatar";
 import "./contactsCard.scss";

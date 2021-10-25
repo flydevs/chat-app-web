@@ -1,3 +1,4 @@
+
 import React from "react";
 
 function Avatar({ profileImg, size }) {
@@ -21,3 +22,4 @@ function Avatar({ profileImg, size }) {
 }
 
 export default Avatar;
+
