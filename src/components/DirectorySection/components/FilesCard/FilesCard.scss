@@ -1,0 +1,76 @@
+.FileCard {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+
+  &__ImgContainer {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+
+    &__FilePic {
+      width: 18px;
+      height: 24px;
+    }
+
+    &--png {
+      background-color: rgba(240, 255, 244, 1);
+      color: green;
+    }
+
+    &--pdf {
+      background-color: rgba(255, 245, 245, 1);
+      color: red;
+    }
+
+    &--word {
+      background-color: rgba(235, 248, 255, 1);
+      color: blue;
+    }
+
+    &--xxl {
+      background-color: rgba(250, 245, 255, 1);
+      color: purple;
+    }
+  }
+
+  &__InfoFlex {
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+      font-size: 14px;
+      line-height: 21px;
+      font-weight: 600;
+    }
+
+    p {
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__Download {
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+    background-color: rgba(97, 94, 240, 0.1);
+    margin-left: auto;
+    cursor: pointer;
+
+    &__Icon {
+      font-size: 20px;
+      font-weight: 600;
+      color: rgba(97, 94, 240, 1);
+    }
+  }
+}

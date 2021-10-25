@@ -23,8 +23,7 @@
   &__directory {
     width: 22.5%;
     height: 100%;
-    border-radius: 10px;
-    border: 0.1px solid black;
+    overflow-y: hidden;
   }
 }
 
