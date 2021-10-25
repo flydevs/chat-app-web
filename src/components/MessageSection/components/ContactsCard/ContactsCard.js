@@ -1,12 +1,11 @@
 import React from 'react'
+import Avatar from '../../../common/Avatar/Avatar'
 import './contactsCard.scss'
 function ContactsCard({ profileImg, contactName, lastMessage, badges, selected, timeAgo }) {
     console.log(badges)
     return (
         <div className={"contactCard " + selected}>
-            <div className="contactCard__image">
-                <img src={profileImg} alt="" />
-            </div>
+            <Avatar size={48} profileImg={profileImg} />
             <div className="contactCard__info">
                 <h2>
                     {contactName}
