@@ -37,6 +37,7 @@ function DirectorySection() {
           <FilesCard type="png"></FilesCard>
           <FilesCard type="pdf"></FilesCard>
           <FilesCard type="pdf"></FilesCard>
+          <FilesCard type="psfsdf"></FilesCard>
         </div>
       </div>
     </div>
