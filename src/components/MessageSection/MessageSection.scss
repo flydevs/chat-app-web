@@ -1,4 +1,84 @@
-.messages__header{
-    display: flex;
-    height: 10%;
+.messages{
+    box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.08);
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 20px 24px;
+        border-block: 1px solid rgba(2, 0, 0, 0.08);
+        &__title{
+            display: flex;
+            align-items: center;
+            &__h2{
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 30px;
+            }
+            &__dropdownIcon svg{
+                padding-top: 5px;
+                margin-left: 5px;
+            }
+            &__badge{
+                background: #EDF2F7;
+                border-radius: 24px;
+                width: 28px;
+                height: 22px;
+                padding: 2px 8px;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 10px;
+            }
+        }
+        &__plusButton{
+            width: 40px;
+            height: 40px;
+            border-radius: 30px;
+            outline: none;
+            border: none;
+            background-color: #615EF0;
+            color: white;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 200;
+            box-shadow: 0px 0px 15px rgba(65, 62, 189, 0.24);
+        }
+    }
+    &__searchBar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 0;
+        &__lupa{
+            padding: 0 10px 0 20px;
+            background: #F3F3F3;
+            border-radius: 12px 0px 0px  12px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg{
+                opacity: .4;
+            }
+            
+
+        }
+        input{
+            font-size: 14px;
+            font-weight: 200;
+            width: 70%;
+            height: 48px;
+            background: #F3F3F3;
+            border-radius: 0 12px 12px 0;
+            border: none;
+        }
+        input:focus{
+           outline: none;
+        }
+    }
 }
