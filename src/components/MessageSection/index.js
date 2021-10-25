@@ -30,6 +30,9 @@ function MessageSection() {
                 </div>
                 <input type="search" placeholder='Search messages' />
             </div>
+            <div className="messages__contactsSection">
+
+            </div>
         </div>
     )
 }
