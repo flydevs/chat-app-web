@@ -79,4 +79,10 @@
            outline: none;
         }
     }
+    &__contactsSection{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
