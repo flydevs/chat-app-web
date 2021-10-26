@@ -3,7 +3,7 @@ import React from 'react';
 
 function ChatBody() {
     return(
-        <div>HELLO Body</div>
+        <div></div>
     )
 }
 
