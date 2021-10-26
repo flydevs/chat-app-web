@@ -8,7 +8,6 @@ function MessageSent({
     first,
     profileImg
 }) {
-    console.log(first)
     if (first) {
         return (
             <div className="chatTextColumn">

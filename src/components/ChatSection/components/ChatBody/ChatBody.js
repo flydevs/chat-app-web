@@ -2,8 +2,7 @@ import "./ChatBody.scss";
 import React from 'react';
 import MessageRecived from "./messageRecived/messageRecived";
 import MessageSent from "./messageSent/messageSent";
-import { FiPaperclip } from "react-icons/fi"
-import { IoIosPaperPlane } from "react-icons/io"
+
 
 function ChatBody() {
     return (
@@ -26,17 +25,6 @@ function ChatBody() {
             <MessageSent first={true} text={"aww"} profileImg={`https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`} />
             <MessageSent text={"omg, this is amazing!"} />
             <MessageSent text={"woohoooo"} />
-
-            <div className="chatFooter">
-                <FiPaperclip className="paperClip" />
-                <div className="textInputContainer">
-                    <input type="text" placeholder="Type a message" className="textInput"></input>
-                    <IoIosPaperPlane size={20} color={'#615EF0'} className="sendMessage" />
-                </div>
-            </div>
-
-
-
         </div>
     )
 }

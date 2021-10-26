@@ -1,47 +1,10 @@
 .chatContainer {
-    padding: 24px;
+    padding: 0px 24px 70px 24px;
     .chatBox {
         display: flex;
+        padding: 0px 24px 50px;
         flex-direction: column;
         justify-content: flex-start;
-    }
-    .chatFooter {
-        display: flex;
-        flex-direction: row nowrap;
-        align-items: center;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        .paperClip {
-            margin: 24px;
-            font-weight: 900;
-            font-size: 20px;
-            line-height: 20px;
-            color: #000000;
-        }
-        .textInputContainer{
-            position: relative;
-            display: flex;
-            flex-flow: row nowrap;
-            width: 30%;
-            .textInput {
-                width: 100%;
-                justify-content: stretch;
-                border: 2px solid #E2E8F0;
-                box-sizing: border-box;
-                border-radius: 12px;
-                background: #FFFFFF;
-                padding: 10px 20px;
-                font-size: 14px;
-                line-height: 150%;
-            }
-            .sendMessage {
-                position: absolute;
-                right: 24px;
-                top: 9px;
-                line-height: 20px;
-                }
-        }
     }
 
 }
