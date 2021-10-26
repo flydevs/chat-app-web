@@ -1,59 +1,60 @@
-.contactCard{
-    height: 93px;
-    width: 90%;
-    padding: 12px;
+//test
+.contactCard {
+  height: 93px;
+  width: 90%;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  &.selected {
+    background: rgba(97, 94, 240, 0.06);
+  }
+  &__image {
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
     border-radius: 12px;
-    display: flex;
-    &.selected{
-        background: rgba(97, 94, 240, 0.06);
+    margin-right: 12px;
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
     }
-    &__image{
-        width: 48px;
-        height: 48px;
-        overflow: hidden;
+  }
+  &__info {
+    margin-left: 16px;
+    h2 {
+      font-size: 14px;
+      line-height: 21px;
+      font-weight: 600;
+    }
+    h3 {
+      color: rgba($color: #000000, $alpha: 0.4);
+      line-height: 18px;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    &__badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      &__badge {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 400;
+        height: 22px;
         border-radius: 12px;
-        margin-right: 12px;
-        img{
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-    }
-    &__info { 
-        margin-left: 16px;
-        h2{
-        font-size: 14px;
+        font-size: 12px;
         line-height: 21px;
-        font-weight: 600;
-        }
-        h3{
-            color: rgba($color: #000000, $alpha: .4);
-            line-height: 18px;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-        &__badges{
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            &__badge{
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-weight: 400;
-                height: 22px;
-                border-radius: 12px;
-                font-size: 12px;
-                line-height: 21px;
-                padding: 2px 8px;
-            }
-        }
+        padding: 2px 8px;
+      }
     }
-    &__timeAgo{
-        font-size: 14px;
-        line-height: 21px;
-        color: rgba($color: #000000, $alpha: .3);
-        margin-left: auto;
-    }
+  }
+  &__timeAgo {
+    font-size: 14px;
+    line-height: 21px;
+    color: rgba($color: #000000, $alpha: 0.3);
+    margin-left: auto;
+  }
 }
