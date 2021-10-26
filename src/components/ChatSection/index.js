@@ -7,7 +7,7 @@ import ChatBody from './components/ChatBody/ChatBody';
 function ChatSection() {
     return (
         <div className="chatOverlay">
-            <ChatHeader />
+            <ChatHeader profileName="Florencio Dorrance" status="Online" statusBubble="#68D391" profileImg={`https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`} />
             <ChatBody />
         </div>
     )

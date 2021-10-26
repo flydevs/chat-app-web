@@ -9,8 +9,8 @@ function MessageSent({
     profileImg
 }) {
     console.log(first)
-    if(first) {
-        return(
+    if (first) {
+        return (
             <div className="chatTextColumn">
                 <div className="textLineWithAvatar">
                     <Avatar size={40} profileImg={profileImg} />
@@ -20,7 +20,7 @@ function MessageSent({
         )
     }
     else {
-        return( 
+        return (
             <div className="chatTextColumn">
                 <div className="textLineWithoutAvatar">
                     <p className="sentText">{text}</p>
