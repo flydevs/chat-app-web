@@ -1,4 +1,3 @@
-
 import React from "react";
 
 function Avatar({ profileImg, size }) {
@@ -9,7 +8,7 @@ function Avatar({ profileImg, size }) {
         width: size,
         height: size,
         overflow: "hidden",
-        borderRadius: 12,
+        borderRadius: 12
       }}
     >
       <img
@@ -22,4 +21,3 @@ function Avatar({ profileImg, size }) {
 }
 
 export default Avatar;
-
