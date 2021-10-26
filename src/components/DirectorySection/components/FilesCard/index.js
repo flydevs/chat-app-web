@@ -4,6 +4,7 @@ import {
   AiOutlineFileImage,
   AiOutlineFileWord,
   AiOutlineFilePdf,
+  AiOutlineFileText,
 } from "react-icons/ai";
 import "./FilesCard.scss";
 
@@ -20,6 +21,10 @@ const FilesCard = ({ type }) => {
     } else if (type == "word") {
       seticon(
         <AiOutlineFileWord className="FileCard__ImgContainer__FilePic" />
+      );
+    } else {
+      seticon(
+        <AiOutlineFileText className="FileCard__ImgContainer__FilePic" />
       );
     }
   }, [type]);
