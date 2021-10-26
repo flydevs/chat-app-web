@@ -1,0 +1,59 @@
+.headerContainer {
+    padding: 20px;
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(2, 0, 0, 0.08);
+    .profileContainer {
+         display: flex; 
+         flex-direction: row;
+         align-items: center;
+         .nameStatusContainer{
+             display: flex;
+             flex-direction: column;
+             margin-left: 16px;
+            .chatTitle {
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 25px;
+                color:#000000;
+            }
+            .chatStatusContainer {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                .statusDot{
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                }
+                .status {
+                    font-size: 12px;
+                    opacity: 0.6;
+                    }
+            }
+    
+        }
+    }
+    .callContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        width: 85px;
+        height: 40px;
+        background-color: #615EF01A;
+        padding-left: 10px;
+        .call {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #615EF0;
+            margin: 0px 8px;
+        }
+    }
+}
+

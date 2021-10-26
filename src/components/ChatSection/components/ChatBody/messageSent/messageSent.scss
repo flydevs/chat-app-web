@@ -1,0 +1,26 @@
+.chatTextColumn {
+    display: flex;
+    flex-flow: column nowrap;
+     .textLineWithAvatar {
+         display: flex;
+         flex-flow: row nowrap;
+     }
+     .textLineWithoutAvatar {
+        display: flex;
+        flex-flow: row nowrap;
+        margin: 10px 0px 0px 40px;
+     }
+     .sentText {
+         background-color: #f1f1f1;
+         padding: 8px 16px;
+         border-radius: 12px;
+         font-size: 14px;
+         line-height: 150%;
+         color: #000000;
+         clear:both;
+         float:left;
+         margin: 0px 10px;
+         text-transform: capitalize;
+     }
+
+ }
