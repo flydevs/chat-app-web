@@ -4,10 +4,13 @@ import MessageSection from "../../components/MessageSection";
 import ChatSection from "../../components/ChatSection";
 
 import "./Home.scss";
+import Sidebar from "../../components/Sidebar";
 function Home() {
   return (
     <div className="HomeLayout">
-      <div className="HomeLayout__sidebar">Sidebar</div>
+      <div className="HomeLayout__sidebar">
+        <Sidebar />
+      </div>
       <div className="HomeLayout__messages">
         <MessageSection />
       </div>
