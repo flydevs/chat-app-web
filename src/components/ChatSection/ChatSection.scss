@@ -1,44 +1,47 @@
-
 .chatOverlay {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+  .chatFooter {
     display: flex;
-    position: relative;
-    flex-direction: column;
-    margin: 0;
-    .chatFooter {
-        display: flex;
-        flex-direction: row nowrap;
-        align-items: center;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        .paperClip {
-            margin: 24px;
-            font-weight: 900;
-            font-size: 20px;
-            line-height: 20px;
-            color: #000000;
-        }
-        .textInputContainer{
-            position: relative;
-            display: flex;
-            flex-flow: row nowrap;
-            width: 100%;
-            .textInput {
-                width: 100%;
-                border: 2px solid #E2E8F0;
-                box-sizing: border-box;
-                border-radius: 12px;
-                background: #FFFFFF;
-                padding: 10px 20px;
-                font-size: 14px;
-                line-height: 150%;
-            }
-            .sendMessage {
-                position: absolute;
-                right: 24px;
-                top: 9px;
-                line-height: 20px;
-                }
-        }
+    flex-direction: row nowrap;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    padding: 10px 24px 10px 24px;
+    .paperClip {
+      margin-right: 24px;
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 20px;
+      color: #000000;
+      cursor: pointer;
     }
+    .textInputContainer {
+      position: relative;
+      display: flex;
+      flex-flow: row nowrap;
+      width: 100%;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      align-items: center;
+      padding: 10px 20px;
+      .textInput {
+        width: 100%;
+        border: none;
+        box-sizing: border-box;
+        border-radius: 12px;
+        background: #ffffff;
+        font-size: 14px;
+        line-height: 150%;
+      }
+      .sendMessage {
+        color: rgb(97, 94, 240);
+        cursor: pointer;
+      }
+    }
+  }
 }
