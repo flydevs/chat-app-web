@@ -21,6 +21,10 @@
       flex-direction: column;
       gap: 32px;
       cursor: pointer;
+
+      &__tab:hover {
+        color: rgba(97, 94, 240, 1);
+      }
     }
   }
 
