@@ -1,6 +1,6 @@
 import React from "react";
 import { BiHome, BiConversation, BiCalendarAlt } from "react-icons/bi";
-import { GrPieChart } from "react-icons/gr";
+import { HiOutlineChartPie } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import Avatar from "../common/Avatar/Avatar";
@@ -15,11 +15,11 @@ function Sidebar() {
           size={48}
         />
         <div className="sidebar__uppersection__tabs">
-          <BiHome />
-          <BiConversation className="selected" />
-          <GrPieChart />
-          <AiOutlineSearch />
-          <BiCalendarAlt />
+          <BiHome className="sidebar__uppersection__tabs__tab" />
+          <BiConversation className="sidebar__uppersection__tabs__tab selected" />
+          <HiOutlineChartPie className="sidebar__uppersection__tabs__tab" />
+          <AiOutlineSearch className="sidebar__uppersection__tabs__tab" />
+          <BiCalendarAlt className="sidebar__uppersection__tabs__tab" />
         </div>
       </div>
       <FiSettings className="sidebar__settings" />
