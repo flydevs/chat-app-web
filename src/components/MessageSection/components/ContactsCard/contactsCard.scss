@@ -1,10 +1,13 @@
-//test
 .contactCard {
   height: 93px;
   width: 90%;
   padding: 12px;
   border-radius: 12px;
   display: flex;
+  cursor: pointer;
+  &:hover {
+    background: rgba(97, 94, 240, 0.06);
+  }
   &.selected {
     background: rgba(97, 94, 240, 0.06);
   }

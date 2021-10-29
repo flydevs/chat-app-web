@@ -9,7 +9,7 @@ function DirectorySection() {
     <div className="DirectoryCont">
       <div className="DirectoryCont__head">
         <h2>Directory</h2>
-        <button className="DirectoryCont__head__more">
+        <button data-testid="MoreButton" className="DirectoryCont__head__more">
           <HiDotsVertical className="DirectoryCont__head__more__icon" />
         </button>
       </div>
