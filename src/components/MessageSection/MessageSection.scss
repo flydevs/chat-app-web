@@ -1,5 +1,8 @@
 .messages {
   box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.08);
+  overflow-y: hidden;
+  height: 100%;
+
   &__header {
     display: flex;
     justify-content: space-between;
@@ -81,10 +84,34 @@
       outline: none;
     }
   }
-  &__contactsSection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+
+  &__container {
+    height: 85%;
+    width: 100%;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+      height: 2px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #b3afb3;
+      border-radius: 0px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: #b3afb3;
+    }
+    &::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 0px;
+      box-shadow: inset 0px 0px 0px 0px #f0f0f0;
+    }
+
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
   }
 }

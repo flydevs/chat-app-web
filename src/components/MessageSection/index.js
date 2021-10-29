@@ -20,35 +20,38 @@ function MessageSection() {
         </div>
         <button className="messages__header__plusButton">+</button>
       </div>
+
       <div className="messages__searchBar">
         <div className="messages__searchBar__lupa">
           <RiSearchLine />
         </div>
         <input type="search" placeholder="Search messages" />
       </div>
-      <div className="messages__contactsSection">
-        {objeto.conversations.map((conver) => (
-          <ContactsCard
-            timeAgo={"15m"}
-            selected={""}
-            lastMessage={conver.message}
-            firstName={conver.firstName}
-            lastName={conver.lastName}
-            profileImg={conver.profileImg}
-            badges={[
-              {
-                text: "Question",
-                color: "orange",
-                backgroundColor: "rgba(254, 235, 200, 1)"
-              },
-              {
-                text: "Help wanted",
-                color: "rgba(56, 161, 105, 1)",
-                backgroundColor: "rgba(198, 246, 213, 1)"
-              }
-            ]}
-          />
-        ))}
+      <div className="messages__container">
+        <div className="messages__container__inner">
+          {objeto.conversations.map((conver) => (
+            <ContactsCard
+              timeAgo={"15m"}
+              selected={""}
+              lastMessage={conver.message}
+              firstName={conver.firstName}
+              lastName={conver.lastName}
+              profileImg={conver.profileImg}
+              badges={[
+                {
+                  text: "Question",
+                  color: "orange",
+                  backgroundColor: "rgba(254, 235, 200, 1)"
+                },
+                {
+                  text: "Help wanted",
+                  color: "rgba(56, 161, 105, 1)",
+                  backgroundColor: "rgba(198, 246, 213, 1)"
+                }
+              ]}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
