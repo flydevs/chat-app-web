@@ -2,6 +2,7 @@ import React from "react";
 import DirectorySection from "../../components/DirectorySection";
 import MessageSection from "../../components/MessageSection";
 import ChatSection from "../../components/ChatSection";
+import { ConversationsProvider } from "../../stores/ConversationsContext";
 
 import "./Home.scss";
 import Sidebar from "../../components/Sidebar";
@@ -12,7 +13,9 @@ function Home() {
         <Sidebar />
       </div>
       <div className="HomeLayout__messages">
-        <MessageSection />
+        <ConversationsProvider>
+          <MessageSection />
+        </ConversationsProvider>
       </div>
       <div className="HomeLayout__chat">
         <ChatSection />
