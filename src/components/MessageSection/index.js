@@ -4,16 +4,18 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
+import { NewConversationModal } from "./components/NewConversationModal/NewConversationModal";
 
 function MessageSection() {
   const objeto = useContext(ConversationsContext);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState(objeto.conversations);
   const regSearch = new RegExp(search, "i");
-
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const [showConversationModal, setShowConversationModal] = useState(false);
+
 
   useEffect(() => {
     //without this first render would give undefined on conversations array since async is not completed
@@ -34,6 +36,9 @@ function MessageSection() {
     }
   }, [search]);
 
+  const openModal = () => {
+    setShowConversationModal(prev => !prev)
+  }
 
   return (
     <div className="messages">
@@ -47,7 +52,8 @@ function MessageSection() {
             {results.length}
           </span>
         </div>
-        <button className="messages__header__plusButton">+</button>
+        <button onClick={openModal} className="messages__header__plusButton">+</button>
+        <NewConversationModal showConversationModal={showConversationModal} setShowConversationModal={setShowConversationModal} />
       </div>
 
       <div className="messages__searchBar">
