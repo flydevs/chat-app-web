@@ -10,12 +10,11 @@ function ContactsCard({
   selected,
   timeAgo
 }) {
-  console.log(badges);
   return (
     <div className={"contactCard " + selected}>
       <Avatar size={48} profileImg={profileImg} />
       <div className="contactCard__info">
-        <h2>{firstName + lastName}</h2>
+        <h2>{`${firstName}  ${lastName}`}</h2>
         <h3>{lastMessage}</h3>
         <div className="contactCard__info__badges">
           {badges.map((badge, i) => (

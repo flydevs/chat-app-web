@@ -112,6 +112,11 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+
+      &__nochats {
+        color: grey;
+        margin-top: 20%;
+      }
     }
   }
 }
