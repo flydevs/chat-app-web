@@ -7,7 +7,7 @@ export const NewConversationModal = ({ showConversationModal, setShowConversatio
     return (
         <>
             {showConversationModal ?
-                <div showConversationModal={showConversationModal} className="modal__wrapper">
+                <div className="modal__wrapper" >
                     <div className="modal">
                         <div className="modal__header">
                             <h2 className="modal__header__title">Start a New Conversation</h2>
@@ -15,7 +15,7 @@ export const NewConversationModal = ({ showConversationModal, setShowConversatio
                         </div>
                         <div className="modal__body">
                             <h2 className="modal__body__title"> Select a Team Member: </h2>
-                            <div classname="modal__body__contactsContainer">
+                            <div className="modal__body__contactsContainer">
                                 <MembersCards></MembersCards>
                                 <MembersCards></MembersCards>
                                 <MembersCards></MembersCards>
@@ -24,13 +24,9 @@ export const NewConversationModal = ({ showConversationModal, setShowConversatio
                         </div>
                         <div className="modal__footer">
                             <button className="modal__footer__button create">Create</button>
-
                         </div>
-
                     </div>
-
                 </div>
-
                 : null}
         </>
     )
