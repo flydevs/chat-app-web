@@ -8,32 +8,50 @@ import { ConversationsContext } from "../../stores/ConversationsContext";
 function MessageSection() {
   const objeto = useContext(ConversationsContext);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState(objeto.conversations);
+  const [results, setResults] = useState([]);
+  const [selected, setSelected] = useState(null);
   const regSearch = new RegExp(search, "i");
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const toggleSelected = (name) => {
+    //TODO: UPDATE TO USE USER UUID WHEN API READY
+    setSelected(name);
+  };
 
   useEffect(() => {
     //without this first render would give undefined on conversations array since async is not completed
     if (search === "") {
-      setResults(objeto.conversations);
+      setResults(
+        objeto.conversations
+          .sort(function (a, b) {
+            const date1 = new Date(a);
+            const date2 = new Date(b);
+            return date1 - date2;
+          })
+          .reverse()
+      );
     }
   }, [objeto.conversations]);
 
   useEffect(() => {
     if (search != "") {
       //compares search parameter and conversations names to find matches and render those convs.
-      const results = objeto.conversations.filter((obj) =>
-        regSearch.test(obj.firstName + obj.lastName)
-      );
+      const results = objeto.conversations
+        .filter((obj) => regSearch.test(obj.firstName + obj.lastName))
+        .sort(function (a, b) {
+          const date1 = new Date(a);
+          const date2 = new Date(b);
+          return date1 - date2;
+        })
+        .reverse();
+
       setResults(results);
     } else {
       setResults(objeto.conversations);
     }
   }, [search]);
-
 
   return (
     <div className="messages">
@@ -44,7 +62,7 @@ function MessageSection() {
             <BsChevronDown size={12} />
           </span>
           <span className="messages__header__title__badge">
-            {results.length}
+            {objeto.conversations.length}
           </span>
         </div>
         <button className="messages__header__plusButton">+</button>
@@ -67,11 +85,19 @@ function MessageSection() {
               <ContactsCard
                 key={i}
                 timeAgo={conver.createdAt}
-                selected={""}
+                selected={
+                  conver.firstName + conver.lastName === selected
+                    ? "selected"
+                    : ""
+                }
                 lastMessage={conver.message}
                 firstName={conver.firstName}
                 lastName={conver.lastName}
                 profileImg={conver.profileImg}
+                unread={conver.unread ? "unread" : ""}
+                toggleSelected={() =>
+                  toggleSelected(conver.firstName + conver.lastName)
+                }
                 badges={[
                   {
                     text: "Question",

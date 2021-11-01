@@ -11,6 +11,10 @@
   &.selected {
     background: rgba(97, 94, 240, 0.06);
   }
+  &.unread {
+    background-color: #00adff29;
+    border: 1px solid #80808012;
+  }
   &__image {
     width: 48px;
     height: 48px;
