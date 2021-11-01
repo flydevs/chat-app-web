@@ -1,4 +1,5 @@
 import React from "react";
+import { TimeAgo } from "../../../../utils/timeAgoCalculator";
 import Avatar from "../../../common/Avatar/Avatar";
 import "./contactsCard.scss";
 function ContactsCard({
@@ -31,7 +32,7 @@ function ContactsCard({
           ))}
         </div>
       </div>
-      <div className="contactCard__timeAgo">{timeAgo}</div>
+      <div className="contactCard__timeAgo">{TimeAgo(timeAgo)}</div>
     </div>
   );
 }

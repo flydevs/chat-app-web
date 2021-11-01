@@ -34,6 +34,7 @@ function MessageSection() {
     }
   }, [search]);
 
+
   return (
     <div className="messages">
       <div className="messages__header">
@@ -65,7 +66,7 @@ function MessageSection() {
             results.map((conver, i) => (
               <ContactsCard
                 key={i}
-                timeAgo={"15m"}
+                timeAgo={conver.createdAt}
                 selected={""}
                 lastMessage={conver.message}
                 firstName={conver.firstName}
