@@ -34,6 +34,7 @@ function MessageSection() {
     }
   }, [search]);
 
+
   return (
     <div className="messages">
       <div className="messages__header">
