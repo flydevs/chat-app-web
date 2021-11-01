@@ -30,7 +30,7 @@ function MessageSection() {
       <div className="messages__contactsSection">
         {objeto.conversations.map((conver) => (
           <ContactsCard
-            timeAgo={"15m"}
+            timeAgo={conver.createdAt}
             selected={""}
             lastMessage={conver.message}
             firstName={conver.firstName}
