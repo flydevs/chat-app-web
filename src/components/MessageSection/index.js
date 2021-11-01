@@ -4,6 +4,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
+import { NewConversationModal } from "./components/NewConversationModal/NewConversationModal";
 
 function MessageSection() {
   const objeto = useContext(ConversationsContext);
@@ -11,10 +12,11 @@ function MessageSection() {
   const [results, setResults] = useState([]);
   const [selected, setSelected] = useState(null);
   const regSearch = new RegExp(search, "i");
-
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
+  const [showConversationModal, setShowConversationModal] = useState(false);
+
   const toggleSelected = (name) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
     setSelected(name);
@@ -53,6 +55,10 @@ function MessageSection() {
     }
   }, [search]);
 
+  const openModal = () => {
+    setShowConversationModal(prev => !prev)
+  }
+
   return (
     <div className="messages">
       <div className="messages__header">
@@ -65,7 +71,8 @@ function MessageSection() {
             {objeto.conversations.length}
           </span>
         </div>
-        <button className="messages__header__plusButton">+</button>
+        <button onClick={openModal} className="messages__header__plusButton">+</button>
+        <NewConversationModal showConversationModal={showConversationModal} setShowConversationModal={setShowConversationModal} />
       </div>
 
       <div className="messages__searchBar">
