@@ -9,10 +9,15 @@ function ContactsCard({
   lastMessage,
   badges,
   selected,
-  timeAgo
+  timeAgo,
+  toggleSelected,
+  unread
 }) {
   return (
-    <div className={"contactCard " + selected}>
+    <div
+      className={"contactCard " + selected + " " + unread}
+      onClick={toggleSelected}
+    >
       <Avatar size={48} profileImg={profileImg} />
       <div className="contactCard__info">
         <h2>{`${firstName}  ${lastName}`}</h2>

@@ -5,7 +5,7 @@ import { getConvers } from "../utils/conversutils";
 const ConversationsContext = React.createContext();
 
 const ConversationsProvider = ({ children }) => {
-  const [conversations, setConversations] = useState([{}]);
+  const [conversations, setConversations] = useState([]);
 
   useEffect(() => {
     const func = async () => {
