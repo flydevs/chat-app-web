@@ -3,7 +3,7 @@ import "./NewConversationModal.scss";
 import { MdClose } from "react-icons/md";
 import MembersCards from "../../../DirectorySection/components/MembersCards";
 
-export const NewConversationModal = ({
+const NewConversationModal = ({
   showConversationModal,
   setShowConversationModal
 }) => {
@@ -14,11 +14,14 @@ export const NewConversationModal = ({
           <div className="modal">
             <div className="modal__header">
               <h2 className="modal__header__title">Start a New Conversation</h2>
-              <MdClose
-                onClick={() => setShowConversationModal((prev) => !prev)}
-                className="modal__header__close"
-                size={25}
-              />
+
+              <button aria-label='closeButton' className="modal__header__closeContainer">
+                <MdClose
+                  onClick={() => setShowConversationModal((prev) => !prev)}
+                  className="modal__header__closeContainer__close"
+                  size={25}
+                />
+              </button>
             </div>
             <div className="modal__body">
               <h2 className="modal__body__title"> Select a Team Member: </h2>
@@ -38,3 +41,5 @@ export const NewConversationModal = ({
     </>
   );
 };
+
+export { NewConversationModal };

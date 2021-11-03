@@ -1,9 +1,10 @@
-import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import React, { Component } from "react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import "regenerator-runtime/runtime";
 import { ConversationsProvider } from "../../stores/ConversationsContext";
 import MessageSection from "./index";
+import { NewConversationModal } from "./components/NewConversationModal/NewConversationModal";
 
 beforeEach(() => {
   global.fetch = jest.fn(() =>
@@ -51,8 +52,6 @@ describe("Message section", () => {
         <MessageSection />
       </ConversationsProvider>
     );
-
-    screen.debug();
   });
   waitFor(() => {
     expect(screen.getByTestId("title").innerHTML).toBe("Title: ");
@@ -66,8 +65,6 @@ describe("Message section", () => {
     );
 
     expect(await screen.findByText("Edmond Murphy")).toBeInTheDocument();
-
-    screen.debug();
   });
   //----------------------------------------------------------------------------//
   test("All conversations from the context mock being displayed", async () => {
@@ -79,19 +76,33 @@ describe("Message section", () => {
 
     expect(await screen.findAllByTestId("card")).toHaveLength(2);
 
-    screen.debug();
   });
+  //----------------------------------------------------------------------------//
+  test("clicking on button renders the modal", () => {
 
-  // test("element has class", async () => {     not working yet
-  //   render(
-  //     <ConversationsProvider>
-  //       <MessageSection />
-  //     </ConversationsProvider>
-  //   );
+    const messageComponent = render(
+      <ConversationsProvider>
+        <MessageSection />
+      </ConversationsProvider>
+    )
+    const plusButton = messageComponent.getByRole("button");
+    fireEvent.click(plusButton);
 
-  //   const unreaded = await screen.getByTestId("container").querySelector([])
-  //   expect(await unreaded).toHaveClass("contact");
+    expect(screen.getByText("Start a New Conversation"))
+  });
+  //----------------------------------------------------------------------------//
+  test("clicking on button 2 times shouldn't render the modal", () => {
 
-  //   screen.debug();
-  // });
+    const messageComponent = render(
+      <ConversationsProvider>
+        <MessageSection />
+      </ConversationsProvider>
+    )
+    const plusButton = messageComponent.getByRole("button");
+    const modalTitle = screen.queryByText("Start a New Conversation")
+
+    fireEvent.dblClick(plusButton);
+
+    expect(modalTitle).toBeNull();
+  });
 });
