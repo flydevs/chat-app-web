@@ -12,10 +12,11 @@ function MessageSection() {
   const [results, setResults] = useState([]);
   const [selected, setSelected] = useState(null);
   const regSearch = new RegExp(search, "i");
+  const [showConversationModal, setShowConversationModal] = useState(false);
+
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
-  const [showConversationModal, setShowConversationModal] = useState(false);
 
   const toggleSelected = (name) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
@@ -56,8 +57,8 @@ function MessageSection() {
   }, [search]);
 
   const openModal = () => {
-    setShowConversationModal(prev => !prev)
-  }
+    setShowConversationModal((prev) => !prev);
+  };
 
   return (
     <div className="messages">
@@ -71,8 +72,13 @@ function MessageSection() {
             {objeto.conversations.length}
           </span>
         </div>
-        <button onClick={openModal} className="messages__header__plusButton">+</button>
-        <NewConversationModal showConversationModal={showConversationModal} setShowConversationModal={setShowConversationModal} />
+        <button onClick={openModal} className="messages__header__plusButton">
+          +
+        </button>
+        <NewConversationModal
+          showConversationModal={showConversationModal}
+          setShowConversationModal={setShowConversationModal}
+        />
       </div>
 
       <div className="messages__searchBar">
@@ -86,7 +92,7 @@ function MessageSection() {
         />
       </div>
       <div className="messages__container">
-        <div className="messages__container__inner">
+        <div data-testid="container" className="messages__container__inner">
           {results.length > 0 ? (
             results.map((conver, i) => (
               <ContactsCard
