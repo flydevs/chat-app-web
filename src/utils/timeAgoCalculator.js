@@ -3,7 +3,12 @@ const TimeAgo = (timeStamp) => {
     let seconds = Math.floor((new Date() - timeStamp) / 1000);
 
     let interval = seconds / 31536000;
-
+    if (!timeStamp) {
+        return ""
+    }
+    if (interval < 0) {
+        return ""
+    }
     if (interval > 1) {
         return Math.floor(interval) + "y";
     }

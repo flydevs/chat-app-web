@@ -10,10 +10,7 @@ export const NewConversationModal = ({
   return (
     <>
       {showConversationModal ? (
-        <div
-          //   showConversationModal={showConversationModal}
-          className="modal__wrapper"
-        >
+        <div className="modal__wrapper">
           <div className="modal">
             <div className="modal__header">
               <h2 className="modal__header__title">Start a New Conversation</h2>
