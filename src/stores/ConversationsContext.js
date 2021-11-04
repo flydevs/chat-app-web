@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import React from "react";
 import { getConvers } from "../utils/conversutils";
 
@@ -10,7 +10,7 @@ const ConversationsProvider = ({ children }) => {
   useEffect(() => {
     const func = async () => {
       const convers = await getConvers();
-      await setConversations(convers);
+      setConversations(convers);
     };
 
     func();

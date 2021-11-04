@@ -17,6 +17,7 @@ function ContactsCard({
     <div
       className={"contactCard " + selected + " " + unread}
       onClick={toggleSelected}
+      data-testid="card"
     >
       <Avatar size={48} profileImg={profileImg} />
       <div className="contactCard__info">
