@@ -7,7 +7,7 @@ import MessageSent from "./messageSent/messageSent";
 function ChatBody() {
     return (
         <div className="chatContainer">
-            <div className="chatBox"></div>
+            <div className="chatContainer__chatBox"></div>
             <MessageSent first={true} text={"omg, this is amazing"} profileImg={`https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`} />
             <MessageSent text={"perfect!"} />
             <MessageSent text={"wow, this is really epic"} />

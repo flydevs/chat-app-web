@@ -1,6 +1,6 @@
 .chatContainer {
   padding: 0px 24px 20px 24px;
-  .chatBox {
+  &__chatBox {
     display: flex;
     padding: 0px 24px 50px;
     flex-direction: column;
