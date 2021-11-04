@@ -11,9 +11,9 @@ function MessageSent({
     if (first) {
         return (
             <div className="chatTextColumn">
-                <div className="textLineWithAvatar">
+                <div className="chatTextColumn__textLineWithAvatar">
                     <Avatar size={40} profileImg={profileImg} />
-                    <p className="sentText">{text}</p>
+                    <p className="chatTextColumn__sentText">{text}</p>
                 </div>
             </div>
         )
@@ -21,8 +21,8 @@ function MessageSent({
     else {
         return (
             <div className="chatTextColumn">
-                <div className="textLineWithoutAvatar">
-                    <p className="sentText">{text}</p>
+                <div className="chatTextColumn__textLineWithoutAvatar">
+                    <p className="chatTextColumn__sentText">{text}</p>
                 </div>
             </div>
         )
