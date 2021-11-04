@@ -11,19 +11,19 @@ function ChatHeader({
 }) {
     return (
         <div className="headerContainer">
-            <div className="profileContainer">
+            <div className="headerContainer__profileContainer">
                 <Avatar size={40} profileImg={profileImg} />
-                <div className="nameStatusContainer">
-                    <h2 className="chatTitle">{profileName}</h2>
-                    <div className="chatStatusContainer">
-                        <div className="statusDot" style={{ backgroundColor: statusBubble }}></div>
-                        <p className="status">{status}</p>
+                <div className="headerContainer__profileContainer__nameStatusContainer">
+                    <h2 className="headerContainer__profileContainer__nameStatusContainer__chatTitle">{profileName}</h2>
+                    <div className="headerContainer__profileContainer__nameStatusContainer__chatStatusContainer">
+                        <div className="headerContainer__profileContainer__nameStatusContainer__chatStatusContaine__statusDot" style={{ backgroundColor: statusBubble }}></div>
+                        <p className="headerContainer__profileContainer__nameStatusContainer__chatStatusContaine__status">{status}</p>
                     </div>
                 </div>
             </div>
-            <div className="callContainer">
+            <div className="headerContainer__callContainer">
                 <BsFillTelephoneFill size={18} color={"#615EF0"} />
-                <p className="call">Call</p>
+                <p className="headerContainer__callContainer__call">Call</p>
             </div>
         </div>
     )

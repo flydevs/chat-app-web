@@ -4,7 +4,7 @@
   flex-direction: column;
   margin: 0;
   height: 100%;
-  .chatFooter {
+  &__footer {
     display: flex;
     flex-direction: row nowrap;
     align-items: center;
@@ -12,7 +12,7 @@
     position: absolute;
     bottom: 0;
     padding: 10px 24px 10px 24px;
-    .paperClip {
+    &__paperClip {
       margin-right: 24px;
       font-weight: 900;
       font-size: 20px;
@@ -20,7 +20,7 @@
       color: #000000;
       cursor: pointer;
     }
-    .textInputContainer {
+    &__textInputContainer {
       position: relative;
       display: flex;
       flex-flow: row nowrap;
@@ -29,7 +29,7 @@
       border-radius: 12px;
       align-items: center;
       padding: 10px 20px;
-      .textInput {
+      &__textInput {
         width: 100%;
         border: none;
         box-sizing: border-box;
@@ -37,8 +37,9 @@
         background: #ffffff;
         font-size: 14px;
         line-height: 150%;
+        outline: none;
       }
-      .sendMessage {
+      &__sendMessage {
         color: rgb(97, 94, 240);
         cursor: pointer;
       }
