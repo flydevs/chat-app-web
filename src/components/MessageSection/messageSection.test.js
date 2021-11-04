@@ -4,7 +4,6 @@ import "@testing-library/jest-dom";
 import "regenerator-runtime/runtime";
 import { ConversationsProvider } from "../../stores/ConversationsContext";
 import MessageSection from "./index";
-import { NewConversationModal } from "./components/NewConversationModal/NewConversationModal";
 
 beforeEach(() => {
   global.fetch = jest.fn(() =>

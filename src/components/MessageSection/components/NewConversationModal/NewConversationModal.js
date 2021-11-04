@@ -15,9 +15,8 @@ const NewConversationModal = ({
             <div className="modal__header">
               <h2 className="modal__header__title">Start a New Conversation</h2>
 
-              <button aria-label='closeButton' className="modal__header__closeContainer">
+              <button onClick={() => setShowConversationModal((prev) => !prev)} aria-label='closeButton' className="modal__header__closeContainer">
                 <MdClose
-                  onClick={() => setShowConversationModal((prev) => !prev)}
                   className="modal__header__closeContainer__close"
                   size={25}
                 />
