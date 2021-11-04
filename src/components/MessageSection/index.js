@@ -61,7 +61,7 @@ function MessageSection() {
   };
 
   return (
-    <div className="messages">
+    <div data-testid="messages" className="messages">
       <div className="messages__header">
         <div className="messages__header__title">
           <h2 className="messages__header__title__h2">Messages</h2>
