@@ -1,8 +1,10 @@
 import React from "react";
+import { contactsCardProps } from "../../../../utils/interfaces";
 import { TimeAgo } from "../../../../utils/timeAgoCalculator";
 import Avatar from "../../../common/Avatar/Avatar";
 import "./contactsCard.scss";
-function ContactsCard({
+
+const ContactsCard: React.FC<contactsCardProps> = ({
   profileImg,
   firstName,
   lastName,
@@ -12,7 +14,7 @@ function ContactsCard({
   timeAgo,
   toggleSelected,
   unread
-}) {
+}) => {
   return (
     <div
       className={"contactCard " + selected + " " + unread}
@@ -41,6 +43,6 @@ function ContactsCard({
       <div className="contactCard__timeAgo">{TimeAgo(timeAgo)}</div>
     </div>
   );
-}
+};
 
 export default ContactsCard;

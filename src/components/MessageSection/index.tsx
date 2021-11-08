@@ -4,21 +4,20 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
-import { NewConversationModal } from "./components/NewConversationModal/NewConversationModal";
+import { objectInterface } from "../../utils/interfaces";
 
-function MessageSection() {
+const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState("");
   const regSearch = new RegExp(search, "i");
-  const [showConversationModal, setShowConversationModal] = useState(false);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const toggleSelected = (name) => {
+  const toggleSelected = (name: string) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
     setSelected(name);
   };
@@ -28,10 +27,10 @@ function MessageSection() {
     if (search === "") {
       setResults(
         objeto.conversations
-          .sort(function (a, b) {
-            const date1 = new Date(a);
-            const date2 = new Date(b);
-            return date1 - date2;
+          .sort(function (a: number, b: number) {
+            const date1: Date = new Date(a);
+            const date2: Date = new Date(b);
+            return date1.getTime() - date2.getTime();
           })
           .reverse()
       );
@@ -42,11 +41,13 @@ function MessageSection() {
     if (search != "") {
       //compares search parameter and conversations names to find matches and render those convs.
       const results = objeto.conversations
-        .filter((obj) => regSearch.test(obj.firstName + obj.lastName))
-        .sort(function (a, b) {
+        .filter((obj: objectInterface) =>
+          regSearch.test(obj.firstName + obj.lastName)
+        )
+        .sort(function (a: number, b: number) {
           const date1 = new Date(a);
           const date2 = new Date(b);
-          return date1 - date2;
+          return date1.getTime() - date2.getTime();
         })
         .reverse();
 
@@ -55,10 +56,6 @@ function MessageSection() {
       setResults(objeto.conversations);
     }
   }, [search]);
-
-  const openModal = () => {
-    setShowConversationModal((prev) => !prev);
-  };
 
   return (
     <div data-testid="messages" className="messages">
@@ -72,13 +69,7 @@ function MessageSection() {
             {objeto.conversations.length}
           </span>
         </div>
-        <button onClick={openModal} className="messages__header__plusButton">
-          +
-        </button>
-        <NewConversationModal
-          showConversationModal={showConversationModal}
-          setShowConversationModal={setShowConversationModal}
-        />
+        <button className="messages__header__plusButton">+</button>
       </div>
 
       <div className="messages__searchBar">
@@ -94,7 +85,7 @@ function MessageSection() {
       <div className="messages__container">
         <div data-testid="container" className="messages__container__inner">
           {results.length > 0 ? (
-            results.map((conver, i) => (
+            results.map((conver: objectInterface, i: number) => (
               <ContactsCard
                 key={i}
                 timeAgo={conver.createdAt}
@@ -134,6 +125,6 @@ function MessageSection() {
       </div>
     </div>
   );
-}
+};
 
 export default MessageSection;

@@ -192,19 +192,6 @@ describe("Message section", () => {
     screen.debug();
   });
   //----------------------------------------------------------------------------//
-  test("clicking on button renders the modal", () => {
-    const messageComponent = render(
-      <ConversationsProvider>
-        <MessageSection />
-      </ConversationsProvider>
-    );
-    const plusButton = messageComponent.getByRole("button");
-    fireEvent.click(plusButton);
-
-    expect(screen.getByText("Start a New Conversation"));
-  });
-
-  //----------------------------------------------------------------------------//
 
   test("searching Retha should update input value bring one card back", async () => {
     render(
@@ -230,6 +217,8 @@ describe("Message section", () => {
     expect(screen.getByText("Retha Erdman"));
   });
 
+  //----------------------------------------------------------------------------//
+
   test("shouldn't distinguish uppercase", async () => {
     render(
       <ConversationsProvider>
@@ -252,19 +241,5 @@ describe("Message section", () => {
     expect(searchbar.value).toBe("ReTHa");
     expect(cards).toHaveLength(1);
     expect(screen.getByText("Retha Erdman"));
-  });
-
-  test("clicking on button 2 times shouldn't render the modal", () => {
-    const messageComponent = render(
-      <ConversationsProvider>
-        <MessageSection />
-      </ConversationsProvider>
-    );
-    const plusButton = messageComponent.getByRole("button");
-    const modalTitle = screen.queryByText("Start a New Conversation");
-
-    fireEvent.dblClick(plusButton);
-
-    expect(modalTitle).toBeNull();
   });
 });
