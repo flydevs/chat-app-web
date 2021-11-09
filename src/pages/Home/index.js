@@ -1,6 +1,6 @@
 import React from "react";
 import DirectorySection from "../../components/DirectorySection";
-import MessageSection from "../../components/MessageSection";
+import MessageSection from "../../components/MessageSection/index.tsx";
 import ChatSection from "../../components/ChatSection";
 import { ConversationsProvider } from "../../stores/ConversationsContext";
 

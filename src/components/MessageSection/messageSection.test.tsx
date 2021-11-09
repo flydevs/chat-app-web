@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-  act
-} from "@testing-library/react";
+import { fireEvent, render, screen, act } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import "regenerator-runtime/runtime";
 import { ConversationsProvider } from "../../stores/ConversationsContext";
@@ -47,7 +41,7 @@ beforeEach(() => {
           }
         ])
     })
-  );
+  ) as jest.Mock;
 });
 
 describe("Message section", () => {
@@ -91,7 +85,7 @@ describe("Message section", () => {
 
     const unreaded = await (
       await screen.findByText("Edmond Murphy")
-    ).parentElement.parentElement;
+    ).parentElement!.parentElement!;
 
     expect(await unreaded).toHaveClass("contactCard unread");
   });
@@ -107,7 +101,7 @@ describe("Message section", () => {
 
     const selection = await (
       await screen.findByText("Retha Erdman")
-    ).parentElement.parentElement;
+    ).parentElement!.parentElement!;
 
     fireEvent.click(selection);
 
@@ -125,11 +119,11 @@ describe("Message section", () => {
 
     const selection1 = await (
       await screen.findByText("Retha Erdman")
-    ).parentElement.parentElement;
+    ).parentElement!.parentElement!;
 
     const selection2 = await (
       await screen.findByText("Edmond Murphy")
-    ).parentElement.parentElement;
+    ).parentElement!.parentElement!;
 
     fireEvent.click(selection1);
     fireEvent.click(selection2);
@@ -147,7 +141,9 @@ describe("Message section", () => {
       </ConversationsProvider>
     );
 
-    const searchbar = screen.getByPlaceholderText("Search messages");
+    const searchbar = screen.getByPlaceholderText(
+      "Search messages"
+    ) as HTMLInputElement;
     let cards = await screen.findAllByTestId("card");
 
     await act(async () => {
@@ -173,7 +169,9 @@ describe("Message section", () => {
       </ConversationsProvider>
     );
 
-    const searchbar = screen.getByPlaceholderText("Search messages");
+    const searchbar = screen.getByPlaceholderText(
+      "Search messages"
+    ) as HTMLInputElement;
     let cards = await screen.findAllByTestId("card");
 
     await act(async () => {
@@ -192,19 +190,6 @@ describe("Message section", () => {
     screen.debug();
   });
   //----------------------------------------------------------------------------//
-  test("clicking on button renders the modal", () => {
-    const messageComponent = render(
-      <ConversationsProvider>
-        <MessageSection />
-      </ConversationsProvider>
-    );
-    const plusButton = messageComponent.getByRole("button");
-    fireEvent.click(plusButton);
-
-    expect(screen.getByText("Start a New Conversation"));
-  });
-
-  //----------------------------------------------------------------------------//
 
   test("searching Retha should update input value bring one card back", async () => {
     render(
@@ -213,7 +198,9 @@ describe("Message section", () => {
       </ConversationsProvider>
     );
 
-    const searchbar = screen.getByPlaceholderText("Search messages");
+    const searchbar = screen.getByPlaceholderText(
+      "Search messages"
+    ) as HTMLInputElement;
     let cards = await screen.findAllByTestId("card");
 
     await act(async () => {
@@ -230,6 +217,8 @@ describe("Message section", () => {
     expect(screen.getByText("Retha Erdman"));
   });
 
+  //----------------------------------------------------------------------------//
+
   test("shouldn't distinguish uppercase", async () => {
     render(
       <ConversationsProvider>
@@ -237,7 +226,9 @@ describe("Message section", () => {
       </ConversationsProvider>
     );
 
-    const searchbar = screen.getByPlaceholderText("Search messages");
+    const searchbar = screen.getByPlaceholderText(
+      "Search messages"
+    ) as HTMLInputElement;
     let cards = await screen.findAllByTestId("card");
 
     await act(async () => {
@@ -252,19 +243,5 @@ describe("Message section", () => {
     expect(searchbar.value).toBe("ReTHa");
     expect(cards).toHaveLength(1);
     expect(screen.getByText("Retha Erdman"));
-  });
-
-  test("clicking on button 2 times shouldn't render the modal", () => {
-    const messageComponent = render(
-      <ConversationsProvider>
-        <MessageSection />
-      </ConversationsProvider>
-    );
-    const plusButton = messageComponent.getByRole("button");
-    const modalTitle = screen.queryByText("Start a New Conversation");
-
-    fireEvent.dblClick(plusButton);
-
-    expect(modalTitle).toBeNull();
   });
 });
