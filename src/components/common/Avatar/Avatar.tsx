@@ -1,7 +1,11 @@
-
 import React from "react";
 
-function Avatar({ profileImg, size }) {
+interface propsInterface {
+  profileImg?: string;
+  size: number;
+}
+
+const Avatar: React.FC<propsInterface> = ({ profileImg, size }) => {
   return (
     <div
       className="avatar"
@@ -9,17 +13,16 @@ function Avatar({ profileImg, size }) {
         width: size,
         height: size,
         overflow: "hidden",
-        borderRadius: 12,
+        borderRadius: 12
       }}
     >
       <img
-        src={profileImg}
+        src={profileImg ? profileImg : "./images/default-avatar.png"}
         alt="avatar"
         style={{ objectFit: "cover", width: "100%", height: "100%" }}
       />
     </div>
   );
-}
+};
 
 export default Avatar;
-

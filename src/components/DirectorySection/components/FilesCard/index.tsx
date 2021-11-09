@@ -4,12 +4,16 @@ import {
   AiOutlineFileImage,
   AiOutlineFileWord,
   AiOutlineFilePdf,
-  AiOutlineFileText,
+  AiOutlineFileText
 } from "react-icons/ai";
 import "./FilesCard.scss";
 
-const FilesCard = ({ type }) => {
-  const [icon, seticon] = useState("");
+interface propsInterface {
+  type: string;
+}
+
+const FilesCard: React.FC<propsInterface> = ({ type }) => {
+  const [icon, seticon] = useState<React.ReactNode>(null);
 
   useEffect(() => {
     if (type == "png") {
