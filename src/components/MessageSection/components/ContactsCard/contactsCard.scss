@@ -1,4 +1,20 @@
+@keyframes notifGrow {
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  50% {
+    width: 20px;
+    height: 20px;
+  }
+  100% {
+    width: 15px;
+    height: 15px;
+  }
+}
+
 .contactCard {
+  position: relative;
   height: 93px;
   width: 90%;
   padding: 12px;
@@ -10,8 +26,6 @@
   }
   &.selected {
     background: rgba(97, 94, 240, 0.06);
-  }
-  &.unread {
     background-color: #00adff29;
     border: 1px solid #80808012;
   }
@@ -68,5 +82,26 @@
     line-height: 21px;
     color: rgba($color: #000000, $alpha: 0.3);
     margin-left: auto;
+  }
+
+  &__unread {
+    animation: notifGrow 1s ease-out;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 50%;
+    background-color: #615ef0;
+    background-image: linear-gradient(
+      -45deg,
+      rgba(255, 255, 220, 0.3) 0%,
+      transparent 100%
+    );
   }
 }

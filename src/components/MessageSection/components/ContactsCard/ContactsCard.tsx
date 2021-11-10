@@ -17,7 +17,7 @@ const ContactsCard: React.FC<contactsCardProps> = ({
 }) => {
   return (
     <div
-      className={"contactCard " + selected + " " + unread}
+      className={"contactCard " + selected + " "}
       onClick={toggleSelected}
       data-testid="card"
     >
@@ -41,6 +41,7 @@ const ContactsCard: React.FC<contactsCardProps> = ({
         </div>
       </div>
       <div className="contactCard__timeAgo">{TimeAgo(timeAgo)}</div>
+      {unread > 0 ? <div className="contactCard__unread">{unread}</div> : null}
     </div>
   );
 };
