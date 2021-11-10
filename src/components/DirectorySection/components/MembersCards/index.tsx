@@ -2,7 +2,7 @@ import React from "react";
 import "./MembersCards.scss";
 import Avatar from "../../../common/Avatar/Avatar";
 
-const MembersCards = () => {
+const MembersCards: React.FC = () => {
   return (
     <div className="MemberCard">
       <Avatar

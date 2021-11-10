@@ -5,13 +5,16 @@ import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
 import { objectInterface } from "../../utils/interfaces";
+import { randomNum } from "../../utils/conversutils";
 
 const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<objectInterface[]>([]);
   const [selected, setSelected] = useState("");
   const regSearch = new RegExp(search, "i");
+
+  console.log(objeto);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -27,9 +30,9 @@ const MessageSection: React.FC = () => {
     if (search === "") {
       setResults(
         objeto.conversations
-          .sort(function (a: number, b: number) {
-            const date1: Date = new Date(a);
-            const date2: Date = new Date(b);
+          .sort((a: objectInterface, b: objectInterface) => {
+            const date1: Date = new Date(a.createdAt);
+            const date2: Date = new Date(b.createdAt);
             return date1.getTime() - date2.getTime();
           })
           .reverse()
@@ -44,9 +47,9 @@ const MessageSection: React.FC = () => {
         .filter((obj: objectInterface) =>
           regSearch.test(obj.firstName + obj.lastName)
         )
-        .sort(function (a: number, b: number) {
-          const date1 = new Date(a);
-          const date2 = new Date(b);
+        .sort((a: objectInterface, b: objectInterface) => {
+          const date1 = new Date(a.createdAt);
+          const date2 = new Date(b.createdAt);
           return date1.getTime() - date2.getTime();
         })
         .reverse();
@@ -98,7 +101,7 @@ const MessageSection: React.FC = () => {
                 firstName={conver.firstName}
                 lastName={conver.lastName}
                 profileImg={conver.profileImg}
-                unread={conver.unread ? "unread" : ""}
+                unread={randomNum(-5, 12)}
                 toggleSelected={() =>
                   toggleSelected(conver.firstName + conver.lastName)
                 }

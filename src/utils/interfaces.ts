@@ -4,7 +4,7 @@ interface objectInterface {
   createdAt: number;
   profileImg: string;
   message: string;
-  unread: boolean;
+  unread: number;
   badges: {
     backgroundColor: string;
     color: string;
@@ -26,7 +26,7 @@ interface contactsCardProps {
   selected: string;
   timeAgo: number;
   toggleSelected: () => void;
-  unread: string;
+  unread: number;
 }
 
 export type { objectInterface, contactsCardProps };
