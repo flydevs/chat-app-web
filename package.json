@@ -4,7 +4,9 @@
   "description": "A react chat web app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack serve",
+    "start": "node server.js",
+    "dev": "webpack serve",
+    "heroku-postbuild": "webpack",
     "test": "jest"
   },
   "repository": {
@@ -22,6 +24,9 @@
   "bugs": {
     "url": "https://github.com/flydevs/chat-app-web/issues"
   },
+  "engines": {
+    "node": "12.13.0 - 16.13.0"
+  },
   "homepage": "https://github.com/flydevs/chat-app-web#readme",
   "dependencies": {
     "@babel/core": "^7.15.8",
@@ -36,6 +41,7 @@
     "@types/testing-library__jest-dom": "^5.14.1",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.4.0",
+    "express": "^4.17.1",
     "html-webpack-plugin": "^5.4.0",
     "jest-css-modules": "^2.1.0",
     "node-sass": "^6.0.1",
