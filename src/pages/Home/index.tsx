@@ -12,14 +12,14 @@ function Home() {
       <div className="HomeLayout__sidebar">
         <Sidebar />
       </div>
-      <div className="HomeLayout__messages">
         <ConversationsProvider>
-          <MessageSection />
-        </ConversationsProvider>
+      <div className="HomeLayout__messages">
+        <MessageSection />
       </div>
       <div className="HomeLayout__chat">
         <ChatSection />
       </div>
+        </ConversationsProvider>
       <div className="HomeLayout__directory">
         <DirectorySection />
       </div>

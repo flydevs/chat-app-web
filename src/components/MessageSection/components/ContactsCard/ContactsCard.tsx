@@ -6,8 +6,7 @@ import "./contactsCard.scss";
 
 const ContactsCard: React.FC<contactsCardProps> = ({
   profileImg,
-  firstName,
-  lastName,
+  name,
   lastMessage,
   badges,
   selected,
@@ -23,7 +22,7 @@ const ContactsCard: React.FC<contactsCardProps> = ({
     >
       <Avatar size={48} profileImg={profileImg} />
       <div className="contactCard__info">
-        <h2>{`${firstName}  ${lastName}`}</h2>
+        <h2>{`${name}`}</h2>
         <h3>{lastMessage}</h3>
         <div className="contactCard__info__badges">
           {badges.map((badge, i) => (

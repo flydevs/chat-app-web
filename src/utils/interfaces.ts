@@ -1,3 +1,50 @@
+interface uuid{
+  uuid: string
+}
+
+interface apiResponse{
+  data: {
+    status: number;
+    message: string;
+  }
+}
+
+interface apiConversation{
+    name?: string,
+    uuid: uuid,
+    avatarUrl?:string,
+    type: number,
+    createdAt: number,
+    lastMsgUuid: uuid
+  
+}
+
+interface userConversation{
+  uuid: uuid,
+  userUuid: uuid,
+  lastAccessUuid: uuid,
+  createdAt: number
+}
+
+interface userProfile{
+  phone: string,
+  firstName: string,
+  lastName: string,
+  userName: string,
+  description: string,
+  avatarUrl: string,
+  createdAt: number
+}
+
+interface conversationWParticipants{
+  conversation: apiConversation, userConversation: userConversation, participants: userConversation[]
+}
+
+interface getConversationsResponse {
+  response: apiResponse,
+  data: conversationWParticipants[]
+}
+
 interface objectInterface {
   firstName: string;
   lastName: string;
@@ -15,8 +62,7 @@ interface objectInterface {
 
 interface contactsCardProps {
   profileImg: string;
-  firstName: string;
-  lastName: string;
+  name: string;
   lastMessage: string;
   badges: {
     text: string;
@@ -29,4 +75,4 @@ interface contactsCardProps {
   unread: number;
 }
 
-export type { objectInterface, contactsCardProps };
+export type { objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid };

@@ -4,14 +4,14 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
-import { objectInterface } from "../../utils/interfaces";
+import { objectInterface, conversationWParticipants } from "../../utils/interfaces";
 import { randomNum } from "../../utils/conversutils";
 
 const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<objectInterface[]>([]);
-  const [selected, setSelected] = useState("");
+  const [results, setResults] = useState<conversationWParticipants[]>([]);
+  const [selected, setSelected] = [objeto.selected, objeto.setSelected];
   const regSearch = new RegExp(search, "i");
 
   console.log(objeto);
@@ -20,9 +20,9 @@ const MessageSection: React.FC = () => {
     setSearch(e.target.value);
   };
 
-  const toggleSelected = (name: string) => {
+  const toggleSelected = (contact: conversationWParticipants) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
-    setSelected(name);
+    setSelected(contact);
   };
 
   useEffect(() => {
@@ -30,9 +30,9 @@ const MessageSection: React.FC = () => {
     if (search === "") {
       setResults(
         objeto.conversations
-          .sort((a: objectInterface, b: objectInterface) => {
-            const date1: Date = new Date(a.createdAt);
-            const date2: Date = new Date(b.createdAt);
+          .sort((a: conversationWParticipants, b: conversationWParticipants) => {
+            const date1: Date = new Date(a.conversation.createdAt );
+            const date2: Date = new Date(b.conversation.createdAt);
             return date1.getTime() - date2.getTime();
           })
           .reverse()
@@ -44,12 +44,12 @@ const MessageSection: React.FC = () => {
     if (search != "") {
       //compares search parameter and conversations names to find matches and render those convs.
       const results = objeto.conversations
-        .filter((obj: objectInterface) =>
-          regSearch.test(obj.firstName + obj.lastName)
+        .filter((obj: conversationWParticipants) =>
+          regSearch.test(obj.conversation.name! + obj.conversation.name!)
         )
-        .sort((a: objectInterface, b: objectInterface) => {
-          const date1 = new Date(a.createdAt);
-          const date2 = new Date(b.createdAt);
+        .sort((a: conversationWParticipants, b: conversationWParticipants) => {
+          const date1 = new Date(a.conversation.createdAt);
+          const date2 = new Date(b.conversation.createdAt);
           return date1.getTime() - date2.getTime();
         })
         .reverse();
@@ -88,22 +88,23 @@ const MessageSection: React.FC = () => {
       <div className="messages__container">
         <div data-testid="container" className="messages__container__inner">
           {results.length > 0 ? (
-            results.map((conver: objectInterface, i: number) => (
+            results.map((conver: conversationWParticipants, i: number) => (
               <ContactsCard
                 key={i}
-                timeAgo={conver.createdAt}
+                timeAgo={conver.conversation.createdAt}
                 selected={
-                  conver.firstName + conver.lastName === selected
+                  //Later change this to use the uuid
+                  selected &&
+                  conver.conversation.name === selected.conversation.name
                     ? "selected"
                     : ""
                 }
-                lastMessage={conver.message}
-                firstName={conver.firstName}
-                lastName={conver.lastName}
-                profileImg={conver.profileImg}
+                lastMessage={conver.conversation.lastMsgUuid.uuid}
+                name={conver.conversation.name!}
+                profileImg={conver.conversation.avatarUrl!}
                 unread={randomNum(-5, 12)}
                 toggleSelected={() =>
-                  toggleSelected(conver.firstName + conver.lastName)
+                  toggleSelected(conver)
                 }
                 badges={[
                   {
