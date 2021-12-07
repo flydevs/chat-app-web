@@ -9,40 +9,59 @@ interface apiResponse{
   }
 }
 
-interface apiConversation{
+interface userProfile{
+  phone: string,
+  first_name?: string,
+  last_name?: string,
+  user_name: string,
+  description?: string,
+  avatar_url?: string,
+  created_at: number
+}
+
+interface getUserProfiles{
+  response: apiResponse,
+  data: userProfile[],
+}
+
+interface conversation{
     name?: string,
     uuid: uuid,
-    avatarUrl?:string,
+    avatar_url?:string,
     type: number,
-    createdAt: number,
-    lastMsgUuid: uuid
+    created_at: number,
+    last_msg_uuid: uuid
   
 }
 
 interface userConversation{
   uuid: uuid,
-  userUuid: uuid,
-  lastAccessUuid: uuid,
-  createdAt: number
-}
-
-interface userProfile{
-  phone: string,
-  firstName: string,
-  lastName: string,
-  userName: string,
-  description: string,
-  avatarUrl: string,
-  createdAt: number
+  user_uuid: uuid,
+  last_access_uuid: uuid,
+  created_at: number
 }
 
 interface conversationWParticipants{
-  conversation: apiConversation, userConversation: userConversation, participants: userConversation[]
+  conversation: conversation, user_conversation: userConversation, participants: userConversation[]
 }
 
 interface getConversationsResponse {
   response: apiResponse,
   data: conversationWParticipants[]
+}
+
+interface message{
+  uuid: uuid,
+  conversation_uuid: uuid,
+  author_uuid: uuid,
+  text: string,
+  created_at: number,
+  updated_at: number
+}
+
+interface getMessagesResponse{
+  response: apiResponse,
+  data: message[]
 }
 
 interface objectInterface {
@@ -75,4 +94,4 @@ interface contactsCardProps {
   unread: number;
 }
 
-export type { objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid };
+export type { objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };

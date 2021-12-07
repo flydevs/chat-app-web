@@ -19,7 +19,7 @@ const MessageSection: React.FC = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
-
+//This gives the whole conversation, which allows to ChatHeader to get the conversation info there (later might change to just use uuid)
   const toggleSelected = (contact: conversationWParticipants) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
     setSelected(contact);
@@ -31,8 +31,8 @@ const MessageSection: React.FC = () => {
       setResults(
         objeto.conversations
           .sort((a: conversationWParticipants, b: conversationWParticipants) => {
-            const date1: Date = new Date(a.conversation.createdAt );
-            const date2: Date = new Date(b.conversation.createdAt);
+            const date1: Date = new Date(a.conversation.created_at );
+            const date2: Date = new Date(b.conversation.created_at);
             return date1.getTime() - date2.getTime();
           })
           .reverse()
@@ -48,8 +48,8 @@ const MessageSection: React.FC = () => {
           regSearch.test(obj.conversation.name! + obj.conversation.name!)
         )
         .sort((a: conversationWParticipants, b: conversationWParticipants) => {
-          const date1 = new Date(a.conversation.createdAt);
-          const date2 = new Date(b.conversation.createdAt);
+          const date1 = new Date(a.conversation.created_at);
+          const date2 = new Date(b.conversation.created_at);
           return date1.getTime() - date2.getTime();
         })
         .reverse();
@@ -91,17 +91,17 @@ const MessageSection: React.FC = () => {
             results.map((conver: conversationWParticipants, i: number) => (
               <ContactsCard
                 key={i}
-                timeAgo={conver.conversation.createdAt}
+                timeAgo={conver.conversation.created_at}
                 selected={
                   //Later change this to use the uuid
                   selected &&
-                  conver.conversation.name === selected.conversation.name
+                  conver.conversation.uuid.uuid === selected.conversation.uuid.uuid
                     ? "selected"
                     : ""
                 }
-                lastMessage={conver.conversation.lastMsgUuid.uuid}
+                lastMessage={conver.conversation.last_msg_uuid.uuid}
                 name={conver.conversation.name!}
-                profileImg={conver.conversation.avatarUrl!}
+                profileImg={conver.conversation.avatar_url!}
                 unread={randomNum(-5, 12)}
                 toggleSelected={() =>
                   toggleSelected(conver)
