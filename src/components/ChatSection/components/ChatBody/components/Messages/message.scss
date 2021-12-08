@@ -1,0 +1,42 @@
+.chatTextColumn {
+    display: flex;
+    flex-flow: column nowrap;
+    
+    &__messageDiv {
+        display: flex;
+        flex-flow: row nowrap;
+    
+        &__withoutAvatar {
+            &__received{
+                margin: 10px 40px 0px 0px;
+            }
+            &__sent{
+                margin: 10px 0px 0px 40px;
+            }
+        }
+        &__sent {
+            justify-content: flex-end;
+         }
+    }
+    &__text {
+        padding: 10px 16px;
+        border-radius: 12px;
+        font-size: 14px;
+        line-height: 150%;
+        clear:both;
+        float:left;
+        margin: 0px 10px;
+        &__sent{
+            background-color: #615EF0;
+            border: 1px solid;
+            border-color: #d6d5d5;
+            color: #ffffff;
+        }
+        &__received{
+            background-color: #ecebeb;
+            border: 1px solid;
+            border-color: #a5a5a5;
+            color: #000000;
+        }
+    }
+ }

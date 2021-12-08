@@ -1,7 +1,7 @@
 import { uuid, getUserProfiles } from './interfaces'
 const getUsers= async (users:uuid[]) => {
     const requestHeaders: HeadersInit = new Headers();
-    requestHeaders.set("access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg5MTUxOTUsInV1aWQiOiI2ZDQ5ZDM4Zi0xZGZjLTRmM2ItOWQ1Yy00YThkNTkwZmE5YTIiLCJwZXJtaXNzaW9ucyI6MH0.n6oz3IJmPXtmvEfIs5FET4PBLex2fOOU-PM3wVKe26g")
+    requestHeaders.set("access-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkwMDA1MzksInV1aWQiOiI2ZDQ5ZDM4Zi0xZGZjLTRmM2ItOWQ1Yy00YThkNTkwZmE5YTIiLCJwZXJtaXNzaW9ucyI6MH0.W7f0Vq3_DOSubCNgtIaOJrKMh8bHrqxLN5HWEcXbPPk")
     let url = `http://localhost:7999/user?`
     users.forEach((uuid:uuid) => {
         url += '&uuid='+uuid.uuid
@@ -14,7 +14,7 @@ const getUsers= async (users:uuid[]) => {
     );
     const jn: getUserProfiles= await data.json();
     jn.data.forEach((user) => {
-        localStorage.setItem(users[0].uuid, JSON.stringify(user))
+        localStorage.setItem(user.uuid.uuid, JSON.stringify(user))
     }
     )
     return

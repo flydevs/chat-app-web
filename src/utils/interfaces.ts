@@ -10,6 +10,7 @@ interface apiResponse{
 }
 
 interface userProfile{
+  uuid: uuid,
   phone: string,
   first_name?: string,
   last_name?: string,

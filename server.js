@@ -8,7 +8,7 @@ var app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8084);
 
 
 var server = app.listen(app.get('port'), function() {

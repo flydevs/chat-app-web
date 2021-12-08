@@ -44,13 +44,14 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
         })
       })
       if (unknown_users.length > 0){
-        getUsers(unknown_users)
+        await getUsers(unknown_users)
       }
       convers.forEach((conver)=>{
         if (conver.conversation.type == 1){
           let user_string = localStorage.getItem(conver.participants[1].user_uuid.uuid)
           let user: userProfile = JSON.parse(user_string!)
-          conver.conversation.name = (user.first_name == undefined ? "" : user.first_name + " ") + user.last_name == undefined ? "" : user.last_name
+          let name = (user.first_name == undefined ? "" : (user.first_name + " ")) + (user.last_name == undefined ? "" : user.last_name)
+          conver.conversation.name = name
           conver.conversation.avatar_url = user.avatar_url
         }
       })

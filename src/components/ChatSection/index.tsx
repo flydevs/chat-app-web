@@ -29,7 +29,7 @@ function ChatSection() {
             <div className="chatOverlay__footer">
                 <FiPaperclip className="chatOverlay__footer__paperClip" />
                 <div className="chatOverlay__footer__textInputContainer">
-                    <input type="text" placeholder="Type a message" className="chatOverlay__footer__textInputContainer__textInput"></input>
+                    <input type="text" placeholder="Type a message" className="chatOverlay__footer__textInputContainer__textInput" onKeyPress={sendMessage}></input>
                     <IoIosPaperPlane size={20} color={'#615EF0'} className="chatOverlay__footer__textInputContainer__sendMessage" />
                 </div>
             </div>

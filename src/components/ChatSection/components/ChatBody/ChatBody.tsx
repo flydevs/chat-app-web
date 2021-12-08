@@ -1,7 +1,5 @@
 import "./ChatBody.scss";
 import React from 'react';
-import MessageRecived from "./messageRecived/messageRecived";
-import MessageSent from "./messageSent/messageSent";
 import { message } from "../../../../utils/interfaces";
 import {MessagesList} from "./MessagesList"
 
