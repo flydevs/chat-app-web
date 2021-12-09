@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, ReactNode } from "react";
 import React from "react";
-import { getConvers } from "../utils/conversutils";
-import { getUsers } from "../utils/usersutils";
+import { getConvers } from "../utils/back/conversutils";
+import { getUsers } from "../utils/back/usersutils";
 import { objectInterface, getConversationsResponse, conversationWParticipants, uuid, userProfile } from "../utils/interfaces";
 
 interface propsInterface {

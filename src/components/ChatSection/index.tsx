@@ -5,13 +5,20 @@ import ChatBody from './components/ChatBody/ChatBody';
 import { FiPaperclip } from "react-icons/fi";
 import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
 import { ConversationsContext } from '../../stores/ConversationsContext';
-import { getMessages } from '../../utils/chatutils';
+import { getMessages, sendMessage } from '../../utils/back/chatutils';
 import { message } from "../../utils/interfaces";
 
 function ChatSection() {
     const selected = useContext(ConversationsContext).selected
     const conversation = selected?.conversation
     const [messages, setMessages] = useState<message[]>([])
+
+    const handleSendMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key == 'Enter'){
+            sendMessage(e.currentTarget.value, conversation?.uuid!)
+            e.currentTarget.value = ""
+        }
+    }
 
     useEffect(()=>{
         const func = async() => {
@@ -29,7 +36,7 @@ function ChatSection() {
             <div className="chatOverlay__footer">
                 <FiPaperclip className="chatOverlay__footer__paperClip" />
                 <div className="chatOverlay__footer__textInputContainer">
-                    <input type="text" placeholder="Type a message" className="chatOverlay__footer__textInputContainer__textInput" onKeyPress={sendMessage}></input>
+                    <input type="text" placeholder="Type a message" className="chatOverlay__footer__textInputContainer__textInput" onKeyPress={handleSendMessage}></input>
                     <IoIosPaperPlane size={20} color={'#615EF0'} className="chatOverlay__footer__textInputContainer__sendMessage" />
                 </div>
             </div>
