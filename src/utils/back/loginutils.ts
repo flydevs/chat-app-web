@@ -1,10 +1,8 @@
+import { time } from "console";
 import { uuid } from "../interfaces";
-import { AuthInfoInterface } from "./request_interfaces";
+import { apiResponse, AuthInfoInterface, LoginProp } from "./request_interfaces";
 
-type LoginProp = {
-    username:string,
-    password:string
-}
+
 
 const PostLoginForm =   async (credentials:LoginProp):Promise<AuthInfoInterface> => {
     const url = `http://localhost:7999/login`
@@ -16,13 +14,18 @@ const PostLoginForm =   async (credentials:LoginProp):Promise<AuthInfoInterface>
     }
        );
     let response: AuthInfoInterface
+    console.log("here go the logins")
+    data.headers.forEach(console.log)
     if (data.status != 200){
         response = { status: data.status}} else {
-            response = { status: data.status
-            data: {
-                
-            }
-            }
+        const jn:{data: uuid, response: apiResponse} = await data.json()
+        response = { status: data.status,
+        data: {
+            uuid: jn.data,
+            access_token: data.headers.get("Access-Token")!,
+            refresh_token: data.headers.get("Refresh-Token")!,
+        }
+        }
         };
     return response
     

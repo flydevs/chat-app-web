@@ -16,8 +16,7 @@ function Everything() {
   let logged = useContext(AuthContext).logged 
   return (
     <Router>
-      {logged ? null : <LoginPage/>  }
-      {logged ? null : <BackDrop/>}
+      {logged ? null : <LoginPage />  }
       <div className="wrapper">
         <Switch>
           <Route path="/">

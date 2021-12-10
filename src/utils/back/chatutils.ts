@@ -1,17 +1,19 @@
 import { getMessagesResponse, uuid } from "../interfaces";
-import { access_token, mock_uuid } from "../mock_auth";
-import { SendMessageInterface } from "./request_interfaces";
+import { AuthInfo, SendMessageInterface } from "./request_interfaces";
 
 
-function standardRequest():HeadersInit {
+function standardRequest(token:string):HeadersInit {
     const requestHeaders: HeadersInit = new Headers();
-    requestHeaders.set("access-token", access_token)
+    requestHeaders.set("access-token", token)
     requestHeaders.set("Content-Type", "application/json")
     return requestHeaders
 }
 
-const getMessages = async (uuid: string) => {
-    let requestHeaders = standardRequest()
+const getMessages = async (userinfo:AuthInfo,uuid: string) => {
+    if (userinfo.access_token == undefined){
+        return []
+    }
+    let requestHeaders = standardRequest(userinfo.access_token)
     const data = await fetch(
         `http://localhost:7999/message/`+uuid,
         {method: "GET",
@@ -24,11 +26,14 @@ const getMessages = async (uuid: string) => {
     return jn.data
 }
 
-const sendMessage = async (text: string, convoUuid: uuid) => {
-    let requestHeaders = standardRequest()
+const sendMessage = async (userinfo:AuthInfo,text: string, convoUuid: uuid) => {
+    if (userinfo.access_token == undefined || userinfo.uuid == undefined){
+        return
+    }
+    let requestHeaders = standardRequest(userinfo.access_token!)
     let body: SendMessageInterface= {message:
         {
-            author_uuid: mock_uuid,
+            author_uuid: userinfo.uuid!,
             text: text,
             conversation_uuid: convoUuid
         }

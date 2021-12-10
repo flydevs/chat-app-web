@@ -1,6 +1,14 @@
 interface uuid{
     uuid: string
   }
+
+interface apiResponse{
+  data: {
+    status: number;
+    message: string;
+  }
+}
+
 interface SendMessageInterface{
     message: {
         author_uuid: uuid,
@@ -9,14 +17,21 @@ interface SendMessageInterface{
     }
 }
 
-interface AuthInfoInterface {
+interface AuthInfo{
+    uuid: uuid | undefined,
+    access_token: string | undefined,
+    refresh_token: string | undefined,
+}
+
+interface AuthLoginResponse {
     status: number
-    data?: {
-        uuid: uuid,
-        access_token: string,
-        refresh_token: string,
-    }
+    data?: AuthInfo
 
 }
 
-export type {SendMessageInterface, AuthInfoInterface}
+interface LoginProp {
+    username:string,
+    password:string
+}
+
+export type {SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, LoginProp}

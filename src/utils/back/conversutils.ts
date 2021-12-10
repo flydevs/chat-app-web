@@ -1,11 +1,14 @@
 import { objectInterface, getConversationsResponse } from "../interfaces";
-import { access_token, mock_uuid } from "../mock_auth";
+import { AuthInfo } from "./request_interfaces";
 
-const getConvers = async () => {
+const getConvers = async (userinfo:AuthInfo) => {
+  if (userinfo.access_token == undefined || userinfo.uuid == undefined){
+    return[]
+}
   const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set("access-token", access_token)
+  requestHeaders.set("access-token", userinfo.access_token)
   const data = await fetch(
-    `http://localhost:7999/conversation/`+mock_uuid.uuid,
+    `http://localhost:7999/conversation/`+userinfo.uuid.uuid,
     { method: "GET",
     headers: requestHeaders}
   );

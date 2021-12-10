@@ -5,10 +5,12 @@ import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
 import { objectInterface, conversationWParticipants } from "../../utils/interfaces";
-import { randomNum } from "../../utils/conversutils";
+import { randomNum } from "../../utils/back/conversutils";
+import { AuthContext } from "../../stores/AuthContext";
 
 const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
+  const authInfo = useContext(AuthContext);
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<conversationWParticipants[]>([]);
   const [selected, setSelected] = [objeto.selected, objeto.setSelected];

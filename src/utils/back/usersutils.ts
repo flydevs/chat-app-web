@@ -1,8 +1,12 @@
 import { uuid, getUserProfiles } from '../interfaces'
 import { access_token } from '../mock_auth';
-const getUsers= async (users:uuid[]) => {
+import { AuthInfo } from './request_interfaces';
+const getUsers= async (userinfo:AuthInfo,users:uuid[]) => {
+    if (userinfo.access_token == undefined){
+        return
+    }
     const requestHeaders: HeadersInit = new Headers();
-    requestHeaders.set("access-token", access_token)
+    requestHeaders.set("access-token", userinfo.access_token)
     let url = `http://localhost:7999/user?`
     users.forEach((uuid:uuid) => {
         url += '&uuid='+uuid.uuid

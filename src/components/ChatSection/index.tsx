@@ -7,15 +7,17 @@ import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
 import { ConversationsContext } from '../../stores/ConversationsContext';
 import { getMessages, sendMessage } from '../../utils/back/chatutils';
 import { message } from "../../utils/interfaces";
+import { AuthContext } from '../../stores/AuthContext';
 
 function ChatSection() {
     const selected = useContext(ConversationsContext).selected
+    const userinfo = useContext(AuthContext)
     const conversation = selected?.conversation
     const [messages, setMessages] = useState<message[]>([])
 
     const handleSendMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key == 'Enter'){
-            sendMessage(e.currentTarget.value, conversation?.uuid!)
+            sendMessage(userinfo.userInfo,e.currentTarget.value, conversation?.uuid!)
             e.currentTarget.value = ""
         }
     }
@@ -23,7 +25,7 @@ function ChatSection() {
     useEffect(()=>{
         const func = async() => {
             if (conversation?.uuid.uuid != undefined){
-                const messages = await getMessages(conversation?.uuid.uuid)
+                const messages = await getMessages(userinfo.userInfo,conversation?.uuid.uuid)
                 setMessages(messages)
             }
         }
