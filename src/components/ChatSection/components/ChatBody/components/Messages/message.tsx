@@ -1,6 +1,7 @@
+import { useContext } from "react";
 import { json } from "stream/consumers";
+import { AuthContext } from "../../../../../../stores/AuthContext";
 import { message, userProfile } from "../../../../../../utils/interfaces";
-import { mock_uuid } from "../../../../../../utils/mock_auth";
 import Avatar from '../../../../../common/Avatar/Avatar';
 import "./message.scss";
 
@@ -11,7 +12,7 @@ type MessageProps = {
 }
 
 const Message = ({message, first, group}:MessageProps) => {
-    const authorUuid: string= mock_uuid.uuid
+    const authorUuid: string= useContext(AuthContext).userInfo.uuid?.uuid!
     const placeholderSentMessage:string = `https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`
     const placeholderReceivedMessage:string = `'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'`
 

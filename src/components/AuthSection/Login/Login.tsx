@@ -19,7 +19,6 @@ const Login = () => {
         let response: AuthInfoInterface=  await PostLoginForm(request)
 
         if (response.status == 200){
-            console.log(response.data)
             AuthCtx.setUser.setAccessToken(response.data?.access_token)
             AuthCtx.setUser.setRefreshToken(response.data?.refresh_token)
             AuthCtx.setUser.setUser(response.data?.uuid)
@@ -27,7 +26,6 @@ const Login = () => {
             localStorage.setItem("accessToken", response.data?.access_token!)
             localStorage.setItem("refreshToken", response.data?.refresh_token!)
             AuthCtx.setLogged(true)
-            await new Promise(r => setTimeout(r, 100000));
             window.location.reload()
         }
     }

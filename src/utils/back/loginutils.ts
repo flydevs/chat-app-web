@@ -14,8 +14,6 @@ const PostLoginForm =   async (credentials:LoginProp):Promise<AuthInfoInterface>
     }
        );
     let response: AuthInfoInterface
-    console.log("here go the logins")
-    data.headers.forEach(console.log)
     if (data.status != 200){
         response = { status: data.status}} else {
         const jn:{data: uuid, response: apiResponse} = await data.json()
