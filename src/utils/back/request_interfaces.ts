@@ -3,11 +3,16 @@ interface uuid{
   }
 
 interface apiResponse{
-  data: {
+  response: {
     status: number;
     message: string;
   }
 }
+interface apiResponseFix{
+  status: number;
+  message: string;
+}
+
 
 interface SendMessageInterface{
     message: {
@@ -29,9 +34,26 @@ interface AuthLoginResponse {
 
 }
 
+interface AuthRegisterResponse {
+  response: apiResponseFix
+}
+
 interface LoginProp {
     username:string,
     password:string
 }
 
-export type {SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, LoginProp}
+interface RegisterProp {
+  login_info: {
+    login_user:string,
+    login_password:string
+  },
+  profile_info: {
+    phone:string,
+    first_name:string,
+    last_name: string,
+    avatar_url:string
+  }
+}
+
+export type {SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp}

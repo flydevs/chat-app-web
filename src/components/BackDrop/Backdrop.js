@@ -2,13 +2,12 @@ import React from "react"
 import "./BackDrop.scss"
 
 function BackDrop(props) {
-    var styling= {zIndex: ""}
+    var style = "backdrop"
     if (window.width <= 800) {
-        styling.backgroundColor= "Black"
-        styling.opacity= "0.50"
+        style+= "__biggerThan800"
     }
     return (
-        <div className='backdrop' style={styling}/>
+        <div className={style}/>
     )
 }
 

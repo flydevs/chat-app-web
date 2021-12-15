@@ -5,6 +5,7 @@ import "./App.scss";
 import { AuthProvider, AuthContext } from "./stores/AuthContext";
 import BackDrop from "./components/BackDrop/Backdrop";
 import { LoginPage } from "./pages/Login";
+import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 function App(){
   return(
@@ -14,9 +15,11 @@ function App(){
 
 function Everything() {
   let logged = useContext(AuthContext).logged 
+  console.log(logged)
   return (
     <Router>
       {logged ? null : <LoginPage />  }
+      {logged ? null : <BackDrop/>}
       <div className="wrapper">
         <Switch>
           <Route path="/">

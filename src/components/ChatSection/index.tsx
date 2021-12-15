@@ -6,7 +6,7 @@ import { FiPaperclip } from "react-icons/fi";
 import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
 import { ConversationsContext } from '../../stores/ConversationsContext';
 import { getMessages, sendMessage } from '../../utils/back/chatutils';
-import { message } from "../../utils/interfaces";
+import { message, userProfile } from "../../utils/interfaces";
 import { AuthContext } from '../../stores/AuthContext';
 
 function ChatSection() {
@@ -14,6 +14,18 @@ function ChatSection() {
     const userinfo = useContext(AuthContext)
     const conversation = selected?.conversation
     const [messages, setMessages] = useState<message[]>([])
+
+    const makeHeader = () => {
+        
+        if (selected?.private){
+            let user_string = localStorage.getItem(selected.participants[0].user_uuid.uuid)
+            let user:userProfile = JSON.parse(user_string!)
+            return (<ChatHeader profileName={(user.first_name! + user.last_name!)} profileImg={user.avatar_url!} status="Online"
+            statusBubble="#68D391"/>)
+        } else{
+            return (<ChatHeader profileName={conversation!.name} status="Online" profileImg={conversation!.avatar_url} statusBubble="#68D391" />)
+        }
+    }
 
     const handleSendMessage = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key == 'Enter'){
@@ -33,7 +45,7 @@ function ChatSection() {
     },[conversation])
     return (
         <div className="chatOverlay">
-            {conversation ? <ChatHeader profileName={conversation.name} status="Online" profileImg={conversation.avatar_url} statusBubble="#68D391" />: <ChatHeader profileName="Florencio Dorrance" status="Online" statusBubble="#68D391" profileImg={`https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`}/>}
+            {conversation ? makeHeader(): <ChatHeader profileName="Florencio Dorrance" status="Online" statusBubble="#68D391" profileImg={`https://image.freepik.com/free-photo/pleasant-looking-serious-man-stands-profile-has-confident-expression-wears-casual-white-t-shirt_273609-16959.jpg`}/>}
             <ChatBody messages={messages} />
             <div className="chatOverlay__footer">
                 <FiPaperclip className="chatOverlay__footer__paperClip" />

@@ -4,7 +4,7 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
-import { objectInterface, conversationWParticipants } from "../../utils/interfaces";
+import { PrivateConvo, GroupConvo, objectInterface, conversationWParticipants, userProfile } from "../../utils/interfaces";
 import { randomNum } from "../../utils/back/conversutils";
 import { AuthContext } from "../../stores/AuthContext";
 
@@ -12,7 +12,7 @@ const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
   const authInfo = useContext(AuthContext);
   const [search, setSearch] = useState("");
-  const [results, setResults] = useState<conversationWParticipants[]>([]);
+  const [results, setResults] = useState<(PrivateConvo | GroupConvo)[]>([]);
   const [selected, setSelected] = [objeto.selected, objeto.setSelected];
   const regSearch = new RegExp(search, "i");
 
@@ -22,7 +22,7 @@ const MessageSection: React.FC = () => {
     setSearch(e.target.value);
   };
 //This gives the whole conversation, which allows to ChatHeader to get the conversation info there (later might change to just use uuid)
-  const toggleSelected = (contact: conversationWParticipants) => {
+  const toggleSelected = (contact: PrivateConvo | GroupConvo) => {
     //TODO: UPDATE TO USE USER UUID WHEN API READY
     setSelected(contact);
   };
@@ -32,7 +32,7 @@ const MessageSection: React.FC = () => {
     if (search === "") {
       setResults(
         objeto.conversations
-          .sort((a: conversationWParticipants, b: conversationWParticipants) => {
+          .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
             const date1: Date = new Date(a.conversation.created_at );
             const date2: Date = new Date(b.conversation.created_at);
             return date1.getTime() - date2.getTime();
@@ -46,10 +46,10 @@ const MessageSection: React.FC = () => {
     if (search != "") {
       //compares search parameter and conversations names to find matches and render those convs.
       const results = objeto.conversations
-        .filter((obj: conversationWParticipants) =>
+        .filter((obj: PrivateConvo | GroupConvo) =>
           regSearch.test(obj.conversation.name! + obj.conversation.name!)
         )
-        .sort((a: conversationWParticipants, b: conversationWParticipants) => {
+        .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
           const date1 = new Date(a.conversation.created_at);
           const date2 = new Date(b.conversation.created_at);
           return date1.getTime() - date2.getTime();
@@ -90,10 +90,18 @@ const MessageSection: React.FC = () => {
       <div className="messages__container">
         <div data-testid="container" className="messages__container__inner">
           {results.length > 0 ? (
-            results.map((conver: conversationWParticipants, i: number) => (
-              <ContactsCard
+            results.map((conver: PrivateConvo | GroupConvo, i: number) => {
+              let user: userProfile | undefined
+              if (conver.private) {
+              let user_string = localStorage.getItem(conver.participants[0].user_uuid.uuid)
+              if (user_string != null){
+              user = conver.private ? JSON.parse(user_string) : undefined
+              }
+              }
+              console.log("This is where private should appear")
+              return (<ContactsCard
                 key={i}
-                timeAgo={conver.conversation.created_at}
+                timeAgo={conver.conversation.last_msg.created_at}
                 selected={
                   //Later change this to use the uuid
                   selected &&
@@ -101,9 +109,9 @@ const MessageSection: React.FC = () => {
                     ? "selected"
                     : ""
                 }
-                lastMessage={conver.conversation.last_msg_uuid.uuid}
-                name={conver.conversation.name!}
-                profileImg={conver.conversation.avatar_url!}
+                lastMessage={conver.conversation.last_msg.text}
+                name={conver.private ? (user?.first_name!) + (user?.last_name!) : conver.conversation.name!}
+                profileImg={conver.private ? user?.avatar_url! : conver.conversation.avatar_url!}
                 unread={randomNum(-5, 12)}
                 toggleSelected={() =>
                   toggleSelected(conver)
@@ -120,8 +128,8 @@ const MessageSection: React.FC = () => {
                     backgroundColor: "rgba(198, 246, 213, 1)"
                   }
                 ]}
-              />
-            ))
+              />)
+              })
           ) : (
             <h3 className="messages__container__inner__nochats">
               No chats found.

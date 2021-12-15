@@ -1,9 +1,12 @@
+const null_uuid_string = "0000000-00000000-00000"
+const null_uuid:uuid = {uuid: null_uuid_string}
+
 interface uuid{
   uuid: string
 }
 
 interface apiResponse{
-  data: {
+  response: {
     status: number;
     message: string;
   }
@@ -31,7 +34,7 @@ interface conversation{
     avatar_url?:string,
     type: number,
     created_at: number,
-    last_msg_uuid: uuid
+    last_msg: message
   
 }
 
@@ -45,6 +48,15 @@ interface userConversation{
 interface conversationWParticipants{
   conversation: conversation, user_conversation: userConversation, participants: userConversation[]
 }
+
+interface PrivateConvo extends conversationWParticipants{
+  private: true
+}
+
+interface GroupConvo extends conversationWParticipants{
+  private: false
+}
+
 
 interface getConversationsResponse {
   response: apiResponse,
@@ -94,5 +106,5 @@ interface contactsCardProps {
   toggleSelected: () => void;
   unread: number;
 }
-
-export type { objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };
+export {null_uuid_string,null_uuid}
+export type {  PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };

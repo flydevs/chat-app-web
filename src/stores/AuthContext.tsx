@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, ReactNode } from "react";
 import React from "react";
 import { userProfile, uuid } from "../utils/interfaces";
 import { AuthInfo } from "../utils/back/request_interfaces";
+import { getUsers } from "../utils/back/usersutils";
 
 //This whole file is am mess, fix later
 
@@ -53,9 +54,11 @@ const AuthProvider = ({children}:propsInterface) => {
 
         current_access_token = storage_access_token!
         current_refresh_token = storage_refresh_token!
+        
+        getUsers({uuid: current_user_uuid, access_token: current_access_token, refresh_token: current_refresh_token}, [current_user_uuid])
     }
     
-    const [logged, setLogged] = useState<boolean>(false);
+    const [logged, setLogged] = useState<boolean>(auth_exists);
     const [uuid, setUser] = useState<uuid | undefined>(current_user_uuid);
     const [access_token, setAccessToken] = useState<string | undefined>(current_access_token);
     const [refresh_token, setRefreshToken] = useState<string | undefined>(current_refresh_token);

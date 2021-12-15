@@ -1,8 +1,20 @@
 import { time } from "console";
 import { uuid } from "../interfaces";
-import { apiResponse, AuthInfoInterface, LoginProp } from "./request_interfaces";
+import { apiResponse, apiResponseFix, AuthInfoInterface, AuthRegisterResponse, LoginProp, RegisterProp } from "./request_interfaces";
 
-
+const PostRegisterForm = async (credentials:RegisterProp):Promise<apiResponseFix> => {
+    const url = `http://localhost:7999/user`
+    const body = JSON.stringify(credentials)
+    const data = await fetch(
+           url,
+         { method: "POST",
+         body: body
+    }
+    );
+    let jn:AuthRegisterResponse =  await data.json()
+    console.log(jn)
+    return jn.response
+}
 
 const PostLoginForm =   async (credentials:LoginProp):Promise<AuthInfoInterface> => {
     const url = `http://localhost:7999/login`
@@ -29,4 +41,4 @@ const PostLoginForm =   async (credentials:LoginProp):Promise<AuthInfoInterface>
     
 }
 
-export {PostLoginForm}
+export {PostLoginForm, PostRegisterForm}

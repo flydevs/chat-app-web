@@ -18,9 +18,6 @@ const getConvers = async (userinfo:AuthInfo) => {
     if (element.conversation.name === undefined){
       element.conversation.name = "TEST";
     };
-    if (element.conversation.last_msg_uuid === undefined){
-      element.conversation.last_msg_uuid = {uuid:"what"};
-    };
   });
   return jn.data;
 };
