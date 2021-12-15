@@ -33,9 +33,9 @@ const MessageSection: React.FC = () => {
       setResults(
         objeto.conversations
           .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
-            const date1: Date = new Date(a.conversation.created_at );
-            const date2: Date = new Date(b.conversation.created_at);
-            return date1.getTime() - date2.getTime();
+            const date1: number = a.conversation.last_msg.created_at != null ? a.conversation.last_msg.created_at : a.conversation.created_at;
+            const date2: number = b.conversation.last_msg.created_at != null ? b.conversation.last_msg.created_at : b.conversation.created_at;
+            return date1 - date2;
           })
           .reverse()
       );
@@ -50,9 +50,9 @@ const MessageSection: React.FC = () => {
           regSearch.test(obj.conversation.name! + obj.conversation.name!)
         )
         .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
-          const date1 = new Date(a.conversation.created_at);
-          const date2 = new Date(b.conversation.created_at);
-          return date1.getTime() - date2.getTime();
+          const date1: number = a.conversation.last_msg.created_at != null ? a.conversation.last_msg.created_at : a.conversation.created_at;
+          const date2: number = b.conversation.last_msg.created_at != null ? b.conversation.last_msg.created_at : b.conversation.created_at;
+          return date1 - date2;
         })
         .reverse();
 
