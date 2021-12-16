@@ -1,6 +1,5 @@
 const TimeAgo = (timeStamp: number) => {
   let seconds = Math.floor((new Date().getTime() / 1000) - timeStamp);
-  console.log(new Date().getTime())
   let interval = seconds / 31536000;
   if (!timeStamp) {
     return "";

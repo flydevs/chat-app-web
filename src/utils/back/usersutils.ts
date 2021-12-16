@@ -11,7 +11,6 @@ const getUsers= async (userinfo:AuthInfo,users:uuid[]) => {
     users.forEach((uuid:uuid) => {
         url += '&uuid='+uuid.uuid
     })
-    console.log(url)
     const data = await fetch(
         url,
       { method: "GET",

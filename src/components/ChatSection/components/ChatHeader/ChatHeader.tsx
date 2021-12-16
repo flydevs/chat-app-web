@@ -2,13 +2,21 @@ import "./ChatHeader.scss";
 import React from "react";
 import Avatar from "../../../common/Avatar/Avatar";
 import { BsFillTelephoneFill } from "react-icons/bs";
+import { IoIosPerson } from "react-icons/io";
 
-function ChatHeader({
+type ChatHeaderProps = {
+    profileImg: string,
+    profileName: string,
+    status: string,
+    statusBubble: string
+}
+
+const ChatHeader = ({
     profileImg,
     profileName,
     status,
     statusBubble
-}) {
+}:ChatHeaderProps) => {
     return (
         <div className="headerContainer">
             <div className="headerContainer__profileContainer">
@@ -29,4 +37,17 @@ function ChatHeader({
     )
 }
 
-export default ChatHeader;
+const NoChatSelected = () => {
+    return (
+        <div className="headerContainer">
+            <div className="headerContainer__profileContainer">
+                <IoIosPerson size={40}/>
+                <div className="headerContainer__profileContainer__nameStatusContainer">
+                    <h2 className="headerContainer__profileContainer__nameStatusContainer__chatTitle">Select a chat or start a new conversation</h2>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export {ChatHeader, NoChatSelected};

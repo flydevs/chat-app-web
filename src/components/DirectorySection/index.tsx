@@ -16,28 +16,17 @@ function DirectorySection() {
       <div className="DirectoryCont__main">
         <div className="DirectoryCont__main__flex">
           <h4>Team Members</h4>
-          <div>6</div>
+          <div>0</div>
         </div>
         <div className="DirectoryCont__main__cards">
-          <MembersCards />
-          <MembersCards />
-          <MembersCards />
-          <MembersCards />
-          <MembersCards />
         </div>
       </div>
       <div className="DirectoryCont__main">
         <div className="DirectoryCont__main__flex">
           <h4>Files</h4>
-          <div>125</div>
+          <div>0</div>
         </div>
         <div className="DirectoryCont__main__cards">
-          <FilesCard type="png"></FilesCard>
-          <FilesCard type="word"></FilesCard>
-          <FilesCard type="png"></FilesCard>
-          <FilesCard type="pdf"></FilesCard>
-          <FilesCard type="pdf"></FilesCard>
-          <FilesCard type="psfsdf"></FilesCard>
         </div>
       </div>
     </div>

@@ -3,15 +3,13 @@ import React from 'react';
 import { message } from "../../../../utils/interfaces";
 import {MessagesList} from "./MessagesList"
 
-type MessageProps = {
-    messages: message[]
-}
 
-const ChatBody= ({messages}: MessageProps) => {
+
+const ChatBody= () => {
     return (
         <div className="chatContainer">
             <div className="chatContainer__chatBox"></div>
-            <MessagesList messages={messages}/>
+            <MessagesList/>
         </div>
     )
 }

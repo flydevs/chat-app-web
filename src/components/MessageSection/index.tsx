@@ -16,7 +16,7 @@ const MessageSection: React.FC = () => {
   const [selected, setSelected] = [objeto.selected, objeto.setSelected];
   const regSearch = new RegExp(search, "i");
 
-  console.log(objeto);
+  //console.log(objeto);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -98,7 +98,7 @@ const MessageSection: React.FC = () => {
               user = conver.private ? JSON.parse(user_string) : undefined
               }
               }
-              console.log("This is where private should appear")
+            //  console.log("This is where private should appear")
               return (<ContactsCard
                 key={i}
                 timeAgo={conver.conversation.last_msg.created_at}

@@ -6,6 +6,7 @@ import { ConversationsProvider } from "../../stores/ConversationsContext";
 
 import "./Home.scss";
 import Sidebar from "../../components/Sidebar";
+import { ChatProvider } from "../../stores/ChatContext";
 function Home() {
   return (
     <div className="HomeLayout">
@@ -17,7 +18,9 @@ function Home() {
         <MessageSection />
       </div>
       <div className="HomeLayout__chat">
+        <ChatProvider>
         <ChatSection />
+        </ChatProvider>
       </div>
         </ConversationsProvider>
       <div className="HomeLayout__directory">
