@@ -1,6 +1,7 @@
 import {useState} from "react"
 import { Login } from "../../components/AuthSection/Login/Login"
 import { Register } from "../../components/AuthSection/Register/Register"
+import { Sidebar } from "../../components/Sidebar"
 import './index.scss'
 
 function LoginPage() {
@@ -15,14 +16,19 @@ function LoginPage() {
     }
 
     return(
-        <div className="LoginContainer">
-            <div className="LoginContainer__Menu">
-            <button onClick={setLogin}>Login</button>
-            <button onClick={setRegister}>Register</button>
+        <div>
+            <div style={{left:"0px", position:"absolute"}}>
+            <Sidebar selected="login"/>
             </div>
-            {isLogin ? <Login /> : <Register/>}
+            <div className="LoginContainer">
+                <div className="LoginContainer__Menu">
+                <button onClick={setLogin}>Login</button>
+                <button onClick={setRegister}>Register</button>
+                </div>
+                {isLogin ? <Login /> : <Register/>}
+            </div>
         </div>
     )
 }
 
-export {LoginPage}
+export default LoginPage;

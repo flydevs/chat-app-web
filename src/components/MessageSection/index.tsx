@@ -112,7 +112,7 @@ const MessageSection: React.FC = () => {
                 lastMessage={conver.conversation.last_msg.text}
                 name={conver.private ? (user?.first_name!) + (user?.last_name!) : conver.conversation.name!}
                 profileImg={conver.private ? user?.avatar_url! : conver.conversation.avatar_url!}
-                unread={randomNum(-5, 12)}
+                unread={0}
                 toggleSelected={() =>
                   toggleSelected(conver)
                 }

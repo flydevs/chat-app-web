@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import "./App.scss";
 import { AuthProvider, AuthContext } from "./stores/AuthContext";
 import BackDrop from "./components/BackDrop/Backdrop";
-import { LoginPage } from "./pages/Login";
+import LoginPage from "./pages/Login";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
 
 function App(){
@@ -18,12 +18,13 @@ function Everything() {
   console.log(logged)
   return (
     <Router>
-      {logged ? null : <LoginPage />  }
-      {logged ? null : <BackDrop/>}
       <div className="wrapper">
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/login">
+          <LoginPage />
           </Route>
         </Switch>
       </div>

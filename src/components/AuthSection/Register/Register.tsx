@@ -32,9 +32,7 @@ const Register = () =>{
         console.log(RegisterForm)
         let response = await PostRegisterForm(RegisterForm)
         registerError = response
-        if (response.status == 200){
-            window.location.reload()
-        }
+ 
 
     }
     return(
