@@ -1,0 +1,45 @@
+@import '../../components/common/sass/general';
+
+$selected-back-color: azure;
+$selected-text-color: #000000;
+
+.Login{
+    display: flex;
+    background-color: azure;
+
+    &__Container{
+        width: 100%;
+    &__Menu{
+        display: flex;
+        width: calc(100% - 10px);
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 10px;
+    button{
+        background-color: rgb(118, 116, 245);
+        color: white;
+        text-align: left;
+        font-size: 35px;
+        height: 70px;
+        padding-left: 10px;
+        width: 100%;
+        border: 0;
+
+        &:hover{
+            background-color:$selected-back-color;
+            color: $selected-text-color;
+        }
+    }
+    }
+    }
+    &__Sidebar{
+        @include sidebar;
+    }
+}
+
+.Selected{
+    background-color:$selected-back-color !important;
+    color: $selected-text-color !important;
+}
+
+@include general

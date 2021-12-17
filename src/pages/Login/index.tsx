@@ -1,10 +1,16 @@
-import {useState} from "react"
+import {useContext, useState} from "react"
 import { Login } from "../../components/AuthSection/Login/Login"
 import { Register } from "../../components/AuthSection/Register/Register"
 import { Sidebar } from "../../components/Sidebar"
-import './index.scss'
+import { HiOutlineLogout } from "react-icons/hi"
+import './Login.scss'
+import { AuthContext } from "../../stores/AuthContext"
+import { Redirect, Route } from "react-router-dom"
+
 
 function LoginPage() {
+    const AuthCtx = useContext(AuthContext)
+    const logged = AuthCtx.logged
     const [isLogin, setIsLogin] = useState(true)
 
     const setRegister = () => {
@@ -15,18 +21,25 @@ function LoginPage() {
         setIsLogin(true)
     }
 
+    const LoginContainer = () => {
+        return (
+        <div className="Login__Container">
+            <div className="Login__Container__Menu">
+                <button onClick={setLogin} className={isLogin ? "Selected" : ""}><h2>Log in</h2></button>
+                <button onClick={setRegister} className={isLogin ? "" : "Selected"}><h2>Register</h2></button>
+            </div>
+            {isLogin ? <Login /> : <Register/>}
+        </div>
+        )
+    }
+
     return(
-        <div>
-            <div style={{left:"0px", position:"absolute"}}>
+        <div className="Login">
+            <div>
             <Sidebar selected="login"/>
             </div>
-            <div className="LoginContainer">
-                <div className="LoginContainer__Menu">
-                <button onClick={setLogin}>Login</button>
-                <button onClick={setRegister}>Register</button>
-                </div>
-                {isLogin ? <Login /> : <Register/>}
-            </div>
+            {logged ? <Redirect to="/"/> : <LoginContainer/>}
+
         </div>
     )
 }

@@ -1,0 +1,40 @@
+.Form{ 
+    position: relative;
+    margin-top: 5vh;
+    margin-left:25px;
+p {
+    font-size: 20px;
+    margin: 20px 0;
+}
+input{
+    height: 20px;
+    width: 60%;
+    min-width: 230px;
+    max-width: 600px;
+    &:focus{
+        outline: none !important;
+        border-color: mediumslateblue;
+        box-shadow: 0 0 10px rgb(175, 165, 231);
+    }
+}  
+    &__Separator{
+        font-size: 30px;
+        width: max-content;
+        background-color: rgb(131, 160, 224);
+        color: rgb(255, 255, 255);
+        border-radius: 5px;
+        padding: 7px;
+    }
+    &__Button{
+        font-size: 20px;
+        color: rgb(227, 227, 228);
+        height: 50px !important;
+        min-width: 0px !important;
+        width: 150px !important;
+        background-color: rgba(75, 73, 202, 0.877);
+        border: 2px solid ;
+        border-color: rgb(228, 205, 253);
+        margin: 0;
+        cursor: pointer;
+    }
+}

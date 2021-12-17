@@ -1,6 +1,10 @@
 .chatContainer {
   padding: 0px 24px 20px 24px;
+  position: relative;
+  max-height: calc(100% - 138px);
+  overflow-y: scroll;
   &__chatBox {
+    position: relative;
     display: flex;
     padding: 0px 24px 50px;
     flex-direction: column;

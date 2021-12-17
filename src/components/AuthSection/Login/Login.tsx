@@ -3,6 +3,8 @@ import { AuthContext } from "../../../stores/AuthContext";
 import { PostLoginForm } from "../../../utils/back/loginutils";
 import { AuthInfoInterface, LoginProp } from "../../../utils/back/request_interfaces";
 
+import "../index.scss"
+
 const Login = () => {
     let AuthCtx = useContext(AuthContext)
 
@@ -32,10 +34,12 @@ const Login = () => {
         }
     }
     return(
-        <form method="POST" onSubmit={LoginSubmit}>
-            <input type="text" placeholder="username" name="username" />
-            <input type="text" placeholder="password" name="password" />
-            <input type="submit" value="Log in"/> 
+        <form method="POST" onSubmit={LoginSubmit} className="Form">
+            <p>Username</p>
+            <p><input type="text" placeholder="username" name="username" /></p>
+            <p>Password</p>
+            <p><input type="text" placeholder="password" name="password" /></p>
+            <p><input type="submit" value="Log in" className="Form__Button"/> </p>
         </form>
     )
 }

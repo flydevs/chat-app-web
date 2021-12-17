@@ -3,6 +3,7 @@ import React from "react";
 import Avatar from "../../../common/Avatar/Avatar";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { IoIosPerson } from "react-icons/io";
+import { HiInformationCircle } from "react-icons/hi";
 
 type ChatHeaderProps = {
     profileImg: string,
@@ -50,4 +51,17 @@ const NoChatSelected = () => {
     )
 }
 
-export {ChatHeader, NoChatSelected};
+const NotLoggedHeader = () => {
+    return (
+        <div className="headerContainer">
+            <div className="headerContainer__profileContainer">
+                <HiInformationCircle size={40}/>
+                <div className="headerContainer__profileContainer__nameStatusContainer">
+                    <h2 className="headerContainer__profileContainer__nameStatusContainer__chatTitle">Login to access Chats</h2>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export {ChatHeader, NoChatSelected, NotLoggedHeader};

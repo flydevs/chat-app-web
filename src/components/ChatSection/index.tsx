@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import "./ChatSection.scss"
-import { ChatHeader,NoChatSelected } from './components/ChatHeader/ChatHeader';
+import { ChatHeader,NoChatSelected,NotLoggedHeader } from './components/ChatHeader/ChatHeader';
 import ChatBody from './components/ChatBody/ChatBody';
 import { FiPaperclip } from "react-icons/fi";
 import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
@@ -33,7 +33,7 @@ function ChatSection() {
 
     return (
         <div className="chatOverlay">
-            {conversation ? makeHeader(): <NoChatSelected/>}
+            {userinfo.logged ? (conversation ? makeHeader(): <NoChatSelected/>) : <NotLoggedHeader/> }
             <ChatBody/>
             <div className="chatOverlay__footer">
                 <FiPaperclip className="chatOverlay__footer__paperClip" />
