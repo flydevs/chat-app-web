@@ -9,13 +9,14 @@ function standardRequest(token:string):HeadersInit {
     return requestHeaders
 }
 
-const getMessages = async (userinfo:AuthInfo,uuid: string) => {
+const getMessages = async (userinfo:AuthInfo,uuid: string, extraparams:string|null) => {
     if (userinfo.access_token == undefined){
         return []
     }
+    console.log(extraparams)
     let requestHeaders = standardRequest(userinfo.access_token)
     const data = await fetch(
-        `http://localhost:7999/message/`+uuid,
+        `http://localhost:7999/message/`+uuid + (extraparams != null ? extraparams : ""),
         {method: "GET",
         headers: requestHeaders
     });
