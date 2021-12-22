@@ -11,15 +11,14 @@ const MessagesList = () => {
     return(
         <div>
     {messages.map((message, i) => {
-    //    console.log("Here we have this " + i)
-    //    console.log(messages)
-        var first: boolean = false
-        if (i==0 || messages[i-1].author_uuid.uuid != message.author_uuid.uuid){
-            first = true
-        }
-        return <Message message={message} first={first} group={true} />
+            var first: boolean = false
+            if (i==0 || messages[i-1].author_uuid.uuid != message.author_uuid.uuid){
+                first = true
+            }
+            return <Message key={i} message={message} first={first} group={true}/>
 
-   })}
+        })
+        }
    </div>
     )
 }

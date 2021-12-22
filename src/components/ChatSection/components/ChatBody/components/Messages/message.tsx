@@ -30,7 +30,7 @@ const Message = ({message, first, group}:MessageProps) => {
 
     if (first) {
         return (
-            <div className="chatTextColumn">
+            <div className="chatTextColumn" id={message.uuid.uuid}>
                 <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv"+sentOrReceived}>
                     <p className={"chatTextColumn__text chatTextColumn__text"+sentOrReceived}>{message.text}</p>
                     <Avatar size={40} profileImg={author_parsed.avatar_url} />
@@ -41,7 +41,7 @@ const Message = ({message, first, group}:MessageProps) => {
     }
     else {
         return (
-            <div className="chatTextColumn">
+            <div className="chatTextColumn" id={message.uuid.uuid}>
                 <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv__withoutAvatar" + sentOrReceived + " chatTextColumn__messageDiv"+sentOrReceived}>
                     <p className={"chatTextColumn__text chatTextColumn__text"+sentOrReceived}>{message.text}</p>
                 </div>

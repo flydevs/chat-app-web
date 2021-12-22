@@ -6,6 +6,7 @@ import { ChatContext } from "../../../../stores/ChatContext";
 import { AuthContext } from "../../../../stores/AuthContext";
 import { getMessages } from "../../../../utils/back/chatutils";
 import { ConversationsContext } from "../../../../stores/ConversationsContext";
+import { ScrollWhenFetchingOlderMessages } from "./components/scrolling/scrolling";
 
 const ChatBody= () => {
     const ChatCxt = useContext(ChatContext)
@@ -23,16 +24,21 @@ const ChatBody= () => {
                         const older_messages =await getMessages(AuthCxt.userInfo, ConvoCtx.selected?.conversation.uuid.uuid!, "?before=" + last_message);
                         older_messages.push.apply(older_messages, ChatCxt.messages);
                         
+                        let scroll_to_msg_uuid =    ChatCxt.messages[0].uuid.uuid
                         ChatCxt.setMessages(older_messages);
+                        //scrolling
+                        ScrollWhenFetchingOlderMessages(scroll_to_msg_uuid)
+                        //------
                 };
                 };
                 func();
             }
         }
     return (
-        <div onScroll={fetchOlderMessage} className="chatContainer">
+        <div onScroll={fetchOlderMessage} className="chatContainer" id="chatContainer">
             <div className="chatContainer__chatBox"></div>
             <MessagesList/>
+            <div id="bottom"/>
         </div>
     )
 }
