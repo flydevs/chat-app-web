@@ -7,7 +7,7 @@ import { FiSettings } from "react-icons/fi";
 import Avatar from "../common/Avatar/Avatar";
 import "./Sidebar.scss";
 import { AuthContext } from "../../stores/AuthContext";
-import { userProfile } from "../../utils/interfaces";
+import { storageUsers, userProfile } from "../../utils/interfaces";
 import { LogoutHandle } from "../AuthSection/Logout/Logout";
 
 const ChangePage = () => {
@@ -22,9 +22,10 @@ const Sidebar = ({selected}:SidebarProps) => {
   const AuthCtx =useContext(AuthContext)
   const logged = AuthCtx.logged
   let users_prof: userProfile | undefined
-  const users_string = localStorage.getItem(AuthCtx.userInfo.uuid?.uuid!)
-  if (users_string != null) {
-    users_prof = JSON.parse(users_string)
+  let users_string = localStorage.getItem("user")
+  if (users_string != null){
+  let users:storageUsers = JSON.parse(users_string!) 
+  users_prof = users[AuthCtx.userInfo.uuid?.uuid!]
   }
 
   return (

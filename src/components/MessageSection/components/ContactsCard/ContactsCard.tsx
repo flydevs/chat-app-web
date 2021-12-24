@@ -3,21 +3,7 @@ import { contactsCardProps, conversationWParticipants, userProfile } from "../..
 import { TimeAgo } from "../../../../utils/timeAgoCalculator";
 import Avatar from "../../../common/Avatar/Avatar";
 import "./contactsCard.scss";
-/*
-type ConversationProps = {
-  conversation:conversationWParticipants
-}
 
-const PrivateConversation = ({conversation}:ConversationProps) => {
-  let part_string = localStorage.getItem(conversation.participants[1].uuid.uuid)
-  let profile: userProfile = part_string != null ? JSON.parse(part_string) : {uuid: {uuid: "0"}, phone: 0, first_name: "Loading...", user_name: "", created_at: 1}
-  return (
-    <div>
-      <ContactsCard profileImg="" name={} lastMessage="" badges= />
-    </div>
-  )
-} 
-*/
 const ContactsCard: React.FC<contactsCardProps> = ({
   profileImg,
   name,

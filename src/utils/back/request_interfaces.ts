@@ -23,13 +23,15 @@ interface SendMessageInterface{
         conversation_uuid?: uuid,
     },
     create_conversation?: boolean
-    new_convo?: {conversation: NewConversationInterface}
+    new_convo?: NewConversationInterface
 }
 
 interface NewConversationInterface{
+  conversation: {
   name?: string,
   avatar_url?:string,
-  type:number,
+  type:number
+  },
   participants: {user_uuid: uuid}[]
 
 }

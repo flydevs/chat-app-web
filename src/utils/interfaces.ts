@@ -1,3 +1,6 @@
+import { JsxElement } from "typescript";
+import { apiResponseFix } from "./back/request_interfaces";
+
 const null_uuid_string = "0000000-00000000-00000"
 const null_uuid:uuid = {uuid: null_uuid_string}
 
@@ -24,7 +27,7 @@ interface userProfile{
 }
 
 interface getUserProfiles{
-  response: apiResponse,
+  response: apiResponseFix,
   data: userProfile[],
 }
 
@@ -34,7 +37,7 @@ interface conversation{
     avatar_url?:string,
     type: number,
     created_at: number,
-    last_msg: message
+    last_msg?: message
   
 }
 
@@ -57,6 +60,10 @@ interface GroupConvo extends conversationWParticipants{
   private: false
 }
 
+interface NewConvo extends conversationWParticipants{
+  private: boolean,
+  new: true,
+}
 
 interface getConversationsResponse {
   response: apiResponse,
@@ -106,5 +113,10 @@ interface contactsCardProps {
   toggleSelected: () => void;
   unread: number;
 }
+
+interface storageUsers {
+ [uuid:string]: userProfile; 
+}
+
 export {null_uuid_string,null_uuid}
-export type {  PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };
+export type {  NewConvo,storageUsers,PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };

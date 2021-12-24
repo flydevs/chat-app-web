@@ -30,19 +30,20 @@ const createConversRequest = async (userinfo:AuthInfo, text: string, type: numbe
   let message = CreateMessage(userinfo.uuid, text)
   let body = createConversationMessage(message, createConversation(type, participants, name, avatar_url)) 
   const data = await fetch(
-    `http://localhost:7999/message/`,
+    `http://localhost:7999/message`,
     { method: "POST",
     headers: standardRequest(userinfo.access_token),
     body: JSON.stringify(body)
   }
     );
   const jn: UuidResponse = await data.json()
+  console.log(jn.response)
   return jn.data
 };
 
-const createConversationMessage = (message:SendMessageInterface, conversation:NewConversationInterface):SendMessageInterface => {
+const createConversationMessage = (message:SendMessageInterface, conversation_and_participants:NewConversationInterface):SendMessageInterface => {
   message.create_conversation = true
-  message.new_convo= {conversation: conversation}
+  message.new_convo= conversation_and_participants
   return message
 }
 
@@ -52,9 +53,10 @@ const createConversation = (type:number, participants: uuid[], name?: string, av
     participant_list.push({user_uuid: participant})
   });
   return {
+  conversation:  {
   name: name,
   type: type,
-  avatar_url: avatar_url,
+  avatar_url: avatar_url},
   participants: participant_list
 };
 };

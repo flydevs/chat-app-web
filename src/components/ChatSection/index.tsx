@@ -6,19 +6,24 @@ import { FiPaperclip } from "react-icons/fi";
 import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
 import { ConversationsContext } from '../../stores/ConversationsContext';
 import { getMessages, sendMessage } from '../../utils/back/chatutils';
-import { message, userProfile } from "../../utils/interfaces";
+import { message, storageUsers, userProfile, uuid } from "../../utils/interfaces";
 import { AuthContext } from '../../stores/AuthContext';
+import { createConversRequest } from '../../utils/back/conversutils'
 
 function ChatSection() {
     const selected = useContext(ConversationsContext).selected
     const userinfo = useContext(AuthContext)
     const conversation = selected?.conversation
 
+    let users:storageUsers = {}
+    const users_string = localStorage.getItem("users")
+    if (users_string != null) {
+        users= JSON.parse(users_string)
+    }
 
     const makeHeader = () => {
         if (selected?.private){
-            let user_string = localStorage.getItem(selected.participants[0].user_uuid.uuid)
-            let user:userProfile = JSON.parse(user_string!)
+            let user:userProfile = users[selected.participants[0].user_uuid.uuid]
             return (<ChatHeader profileName={(user.first_name!+ " " + user.last_name!)} profileImg={user.avatar_url!} status="Online"
             statusBubble="#68D391"/>)
         } else{
@@ -27,7 +32,13 @@ function ChatSection() {
     }
 
     const handleSendMessage = (e: HTMLInputElement) => {
-        sendMessage(userinfo.userInfo,e.value, conversation?.uuid!)
+        if ("new" in selected!){
+            let participants: uuid[] = []
+            selected.participants.forEach((participant) => {participants.push(participant.user_uuid)})
+            createConversRequest(userinfo.userInfo,e.value, conversation?.type!, participants, conversation?.name, conversation?.avatar_url)
+        } else {
+            sendMessage(userinfo.userInfo,e.value, conversation?.uuid!)
+        }
         e.value = ""
     }
 

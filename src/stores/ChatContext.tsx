@@ -71,7 +71,9 @@ const ChatProvider = ({children}:ChatProps) => {
             clearTimeout(timeout)
             setTimeoutVariable(null)
         }
-        func()
+        if (!("makeElement" in selected)){
+            func()
+        }
         }
     }, [selected])
     return(

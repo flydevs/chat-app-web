@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { json } from "stream/consumers";
 import { AuthContext } from "../../../../../../stores/AuthContext";
-import { message, userProfile } from "../../../../../../utils/interfaces";
+import { message, storageUsers, userProfile } from "../../../../../../utils/interfaces";
 import Avatar from '../../../../../common/Avatar/Avatar';
 import "./message.scss";
 
@@ -13,14 +13,14 @@ type MessageProps = {
 
 const Message = ({message, first, group}:MessageProps) => {
     const authorUuid: string= useContext(AuthContext).userInfo.uuid?.uuid!
-
-    let author_string = localStorage.getItem(message.author_uuid.uuid)
-    if (author_string == null){
+    const users_string = localStorage.getItem("users")
+    const users:storageUsers = JSON.parse(users_string!)
+    const author_parsed = users[message.author_uuid.uuid]
+    if (author_parsed == undefined || author_parsed == null){
         return(
             <div>Error</div>
         )
     }
-    let author_parsed: userProfile =  JSON.parse(author_string) 
 
     let sentOrReceived: string = (():string=>{
         let result = ""

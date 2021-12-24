@@ -4,9 +4,12 @@ import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
-import { PrivateConvo, GroupConvo, objectInterface, conversationWParticipants, userProfile } from "../../utils/interfaces";
+import { PrivateConvo, GroupConvo, objectInterface, conversationWParticipants, userProfile, storageUsers } from "../../utils/interfaces";
 import { randomNum } from "../../utils/back/conversutils";
 import { AuthContext } from "../../stores/AuthContext";
+import { SearchBar } from "../../utils/searchbar/searchbar";
+import { CreateConversation } from "./components/CreateConversation/CreateConversation";
+import BackDrop from "../BackDrop/Backdrop";
 
 const MessageSection: React.FC = () => {
   const objeto = useContext(ConversationsContext);
@@ -14,7 +17,12 @@ const MessageSection: React.FC = () => {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<(PrivateConvo | GroupConvo)[]>([]);
   const [selected, setSelected] = [objeto.selected, objeto.setSelected];
+
+  const [users, setUsers] = useState<storageUsers>({})
+
   const regSearch = new RegExp(search, "i");
+
+  const [createConversationModal, setCreateConvoModal]= useState<boolean>(false)
 
   //console.log(objeto);
 
@@ -28,13 +36,16 @@ const MessageSection: React.FC = () => {
   };
 
   useEffect(() => {
+    const updated_users_string = localStorage.getItem("users")
+    const updated_users: storageUsers = JSON.parse(updated_users_string!)
+    setUsers(updated_users)
     //without this first render would give undefined on conversations array since async is not completed
     if (search === "") {
       setResults(
         objeto.conversations
           .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
-            const date1: number = a.conversation.last_msg.created_at != null ? a.conversation.last_msg.created_at : a.conversation.created_at;
-            const date2: number = b.conversation.last_msg.created_at != null ? b.conversation.last_msg.created_at : b.conversation.created_at;
+            const date1: number = a.conversation.last_msg!.created_at != null ? a.conversation.last_msg!.created_at : a.conversation.created_at;
+            const date2: number = b.conversation.last_msg!.created_at != null ? b.conversation.last_msg!.created_at : b.conversation.created_at;
             return date1 - date2;
           })
           .reverse()
@@ -50,8 +61,8 @@ const MessageSection: React.FC = () => {
           regSearch.test(obj.conversation.name! + obj.conversation.name!)
         )
         .sort((a: PrivateConvo | GroupConvo, b: PrivateConvo | GroupConvo) => {
-          const date1: number = a.conversation.last_msg.created_at != null ? a.conversation.last_msg.created_at : a.conversation.created_at;
-          const date2: number = b.conversation.last_msg.created_at != null ? b.conversation.last_msg.created_at : b.conversation.created_at;
+          const date1: number = a.conversation.last_msg!.created_at != null ? a.conversation.last_msg!.created_at : a.conversation.created_at;
+          const date2: number = b.conversation.last_msg!.created_at != null ? b.conversation.last_msg!.created_at : b.conversation.created_at;
           return date1 - date2;
         })
         .reverse();
@@ -74,34 +85,23 @@ const MessageSection: React.FC = () => {
             {objeto.conversations.length}
           </span>
         </div>
-        <button className="messages__header__plusButton">+</button>
+        <button className="messages__header__plusButton" onClick={() => {setCreateConvoModal(true)}}>+</button>
       </div>
-
-      <div className="messages__searchBar">
-        <div className="messages__searchBar__lupa">
-          <RiSearchLine />
-        </div>
-        <input
-          onChange={handleSearchChange}
-          type="search"
-          placeholder="Search messages"
-        />
-      </div>
+      {createConversationModal && <CreateConversation/>}
+      {createConversationModal && <BackDrop turnbackdropoff={()=>{setCreateConvoModal(false)}}/>}
+      <SearchBar handleSearchChange={handleSearchChange} message={"Search messages"}/>
       <div className="messages__container">
         <div data-testid="container" className="messages__container__inner">
           {results.length > 0 ? (
             results.map((conver: PrivateConvo | GroupConvo, i: number) => {
               let user: userProfile | undefined
               if (conver.private) {
-              let user_string = localStorage.getItem(conver.participants[0].user_uuid.uuid)
-              if (user_string != null){
-              user = conver.private ? JSON.parse(user_string) : undefined
-              }
+                user = users[conver.participants[0].user_uuid.uuid]
               }
             //  console.log("This is where private should appear")
               return (<ContactsCard
                 key={i}
-                timeAgo={conver.conversation.last_msg.created_at}
+                timeAgo={conver.conversation.last_msg!.created_at}
                 selected={
                   //Later change this to use the uuid
                   selected &&
@@ -109,7 +109,7 @@ const MessageSection: React.FC = () => {
                     ? "selected"
                     : ""
                 }
-                lastMessage={conver.conversation.last_msg.text}
+                lastMessage={conver.conversation.last_msg!.text}
                 name={conver.private ? (user?.first_name!) + (user?.last_name!) : conver.conversation.name!}
                 profileImg={conver.private ? user?.avatar_url! : conver.conversation.avatar_url!}
                 unread={0}
