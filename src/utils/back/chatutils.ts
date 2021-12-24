@@ -1,24 +1,17 @@
 import { getMessagesResponse, uuid } from "../interfaces";
 import { AuthInfo, SendMessageInterface } from "./request_interfaces";
+import { standardRequest } from "./common";
 
-
-function standardRequest(token:string):HeadersInit {
-    const requestHeaders: HeadersInit = new Headers();
-    requestHeaders.set("access-token", token)
-    requestHeaders.set("Content-Type", "application/json")
-    return requestHeaders
-}
 
 const getMessages = async (userinfo:AuthInfo,uuid: string, extraparams:string|null) => {
     if (userinfo.access_token == undefined){
         return []
     }
     console.log(extraparams)
-    let requestHeaders = standardRequest(userinfo.access_token)
     const data = await fetch(
         `http://localhost:7999/message/`+uuid + (extraparams != null ? extraparams : ""),
         {method: "GET",
-        headers: requestHeaders
+        headers: standardRequest(userinfo.access_token)
     });
     const jn: getMessagesResponse= await data.json();
     if (jn.data == null){
@@ -32,13 +25,7 @@ const sendMessage = async (userinfo:AuthInfo,text: string, convoUuid: uuid) => {
         return
     }
     let requestHeaders = standardRequest(userinfo.access_token!)
-    let body: SendMessageInterface= {message:
-        {
-            author_uuid: userinfo.uuid!,
-            text: text,
-            conversation_uuid: convoUuid
-        }
-    }
+    let body: SendMessageInterface= CreateMessage(userinfo.uuid!, text, convoUuid)
     let jsonBody = JSON.stringify(body)
     const data = await fetch(
         `http://localhost:7999/message`,
@@ -46,6 +33,16 @@ const sendMessage = async (userinfo:AuthInfo,text: string, convoUuid: uuid) => {
         body: jsonBody,
         headers: requestHeaders
     });
+};
+
+const CreateMessage = (author:uuid, text:string, conversation?:uuid):SendMessageInterface => {
+    return {
+        message:{
+            author_uuid: author,
+            text: text,
+            conversation_uuid: conversation
+        }
+    }
 }
 
-export {getMessages, sendMessage};
+export {getMessages, sendMessage, CreateMessage};

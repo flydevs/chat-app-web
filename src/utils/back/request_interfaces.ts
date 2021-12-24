@@ -1,3 +1,5 @@
+import internal from "stream";
+
 interface uuid{
     uuid: string
   }
@@ -18,8 +20,18 @@ interface SendMessageInterface{
     message: {
         author_uuid: uuid,
         text: string,
-        conversation_uuid: uuid,
-    }
+        conversation_uuid?: uuid,
+    },
+    create_conversation?: boolean
+    new_convo?: {conversation: NewConversationInterface}
+}
+
+interface NewConversationInterface{
+  name?: string,
+  avatar_url?:string,
+  type:number,
+  participants: {user_uuid: uuid}[]
+
 }
 
 interface AuthInfo{
@@ -31,7 +43,11 @@ interface AuthInfo{
 interface AuthLoginResponse {
     status: number
     data?: AuthInfo
+}
 
+interface UuidResponse {
+  data?: uuid,
+  response: apiResponseFix
 }
 
 interface AuthRegisterResponse {
@@ -56,4 +72,4 @@ interface RegisterProp {
   }
 }
 
-export type {SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp}
+export type {UuidResponse, SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp, NewConversationInterface}
