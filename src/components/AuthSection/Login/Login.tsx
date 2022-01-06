@@ -21,9 +21,9 @@ const Login = () => {
         let response: AuthInfoInterface=  await PostLoginForm(request)
 
         if (response.status == 200){
-            AuthCtx.setUser.setAccessToken(response.data?.access_token);
-            AuthCtx.setUser.setRefreshToken(response.data?.refresh_token);
-            AuthCtx.setUser.setUser(response.data?.uuid);
+            AuthCtx.setAuth.setAccessToken(response.data?.access_token);
+            AuthCtx.setAuth.setRefreshToken(response.data?.refresh_token);
+            AuthCtx.setAuth.setUuid(response.data?.uuid);
             localStorage.setItem("uuid",response.data?.uuid?.uuid!);
             localStorage.setItem("accessToken", response.data?.access_token!);
             localStorage.setItem("refreshToken", response.data?.refresh_token!);

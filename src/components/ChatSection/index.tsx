@@ -11,15 +11,11 @@ import { AuthContext } from '../../stores/AuthContext';
 import { createConversRequest } from '../../utils/back/conversutils'
 
 function ChatSection() {
-    const selected = useContext(ConversationsContext).selected
+    const ConvCtx = useContext(ConversationsContext)
+    const selected = ConvCtx.selected
     const userinfo = useContext(AuthContext)
     const conversation = selected?.conversation
-
-    let users:storageUsers = {}
-    const users_string = localStorage.getItem("users")
-    if (users_string != null) {
-        users= JSON.parse(users_string)
-    }
+    const users = ConvCtx.users
 
     const makeHeader = () => {
         if (selected?.private){

@@ -11,7 +11,7 @@ interface propsInterface{
 }
 
 type setUserInfo ={
-    setUser: (arg0:uuid | undefined) => void
+    setUuid: (arg0:uuid | undefined) => void
     setAccessToken: (arg0:string | undefined) => void
     setRefreshToken: (arg0:string | undefined) => void
 }
@@ -20,7 +20,7 @@ interface AuthProp{
     logged: boolean
     setLogged: (arg0:boolean) => void
     userInfo:AuthInfo
-    setUser:setUserInfo 
+    setAuth:setUserInfo 
 
 }
 
@@ -32,8 +32,8 @@ const AuthContext = React.createContext<AuthProp>({
     access_token: undefined,
     refresh_token: undefined,
 },
-    setUser:{
-    setUser: (arg0:uuid | undefined) => {},
+    setAuth:{
+    setUuid: (arg0:uuid | undefined) => {},
     setAccessToken: (arg0:string | undefined) => {},
     setRefreshToken: (arg0:string | undefined) => {}
     }
@@ -50,28 +50,27 @@ const AuthProvider = ({children}:propsInterface) => {
     let auth_exists = false
     if (uuid_string != null){
         current_user_uuid = {uuid: uuid_string}
-        auth_exists = true
 
         current_access_token = storage_access_token!
         current_refresh_token = storage_refresh_token!
         
-        getUsers({uuid: current_user_uuid, access_token: current_access_token, refresh_token: current_refresh_token}, [current_user_uuid])
+        auth_exists = true
     }
     
     const [logged, setLogged] = useState<boolean>(auth_exists);
-    const [uuid, setUser] = useState<uuid | undefined>(current_user_uuid);
+    const [uuid, setUuid] = useState<uuid | undefined>(current_user_uuid);
     const [access_token, setAccessToken] = useState<string | undefined>(current_access_token);
     const [refresh_token, setRefreshToken] = useState<string | undefined>(current_refresh_token);
     
-    const user={
+    const userInfo={
         uuid, access_token, refresh_token
     }
     const setUserAuth={
-        setUser, setAccessToken, setRefreshToken
+        setUuid, setAccessToken, setRefreshToken
     }
 
     return (
-        <AuthContext.Provider value={{logged, setLogged, userInfo: user, setUser: setUserAuth}}>
+        <AuthContext.Provider value={{logged, setLogged, userInfo: userInfo, setAuth: setUserAuth}}>
             {children}
         </AuthContext.Provider>
     )

@@ -21,11 +21,12 @@ const getUsers= async (userinfo:AuthInfo,users:uuid[]) => {
     const jn: getUserProfiles= await data.json();
     let users_storage_string = localStorage.getItem("users")
     let users_storage:storageUsers = (users_storage_string != null) ? JSON.parse(users_storage_string) : {}
+    let new_users_storage:storageUsers = {}
     jn.data.forEach((user) => {
-        users_storage[user.uuid.uuid] = user
+        new_users_storage[user.uuid.uuid] = user
     });
-    localStorage.setItem("users", JSON.stringify(users_storage))
-    return
+    localStorage.setItem("users", JSON.stringify({...users_storage, ...new_users_storage}))
+    return new_users_storage
 }
 
 const searchContact = async (userinfo:AuthInfo, query:string):Promise<userProfile[]>=>{

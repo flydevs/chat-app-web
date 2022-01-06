@@ -7,6 +7,7 @@ import { FiSettings } from "react-icons/fi";
 import Avatar from "../common/Avatar/Avatar";
 import "./Sidebar.scss";
 import { AuthContext } from "../../stores/AuthContext";
+import { ConversationsContext } from "../../stores/ConversationsContext";
 import { storageUsers, userProfile } from "../../utils/interfaces";
 import { LogoutHandle } from "../AuthSection/Logout/Logout";
 
@@ -19,14 +20,11 @@ type SidebarProps= {
 }
 
 const Sidebar = ({selected}:SidebarProps) => {
+  const users = useContext(ConversationsContext).users
   const AuthCtx =useContext(AuthContext)
   const logged = AuthCtx.logged
   let users_prof: userProfile | undefined
-  let users_string = localStorage.getItem("user")
-  if (users_string != null){
-  let users:storageUsers = JSON.parse(users_string!) 
   users_prof = users[AuthCtx.userInfo.uuid?.uuid!]
-  }
 
   return (
     <div className="sidebar">

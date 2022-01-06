@@ -10,10 +10,12 @@ interface propsInterface {
 }
 
 const ConversationsContext = React.createContext<{
+  users: storageUsers,
   conversations: (PrivateConvo | GroupConvo)[],
   selected: PrivateConvo | GroupConvo | NewConvo | undefined,
   setSelected: (arg0: PrivateConvo | GroupConvo) => void
 }>({
+  users: {},
   conversations: [],
   selected: undefined
   ,
@@ -22,14 +24,16 @@ const ConversationsContext = React.createContext<{
 
 const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
   const authInfo= useContext(AuthContext)
+  const [users, setUsers] = useState<storageUsers>({});
   const [conversations, setConversations] = useState<(PrivateConvo | GroupConvo)[]>([]);
   const [selected, setSelected] = useState<PrivateConvo | GroupConvo | NewConvo | undefined>();
   const AuthCtx = useContext(AuthContext)
   let logged = AuthCtx.logged
 
+  const [timeout, setTimeoutVariable] = useState<NodeJS.Timeout | null>(null)
+
+  let fetch_AuthUser = true;
   const short_poll = async () => {
-    const users_string = localStorage.getItem("users")
-    const users:storageUsers = (users_string != null) ? JSON.parse(users_string) : {}
     const func = async () => {
         console.log("short-polling")
         const convers = await getConvers(authInfo.userInfo);
@@ -37,8 +41,8 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
         let unknown_users: uuid[] = []
         convers.forEach((conver) => {
           conver.participants.forEach((user)=>{
-            let user_stored: userProfile | null = users[user.user_uuid.uuid]
-            if (user_stored == null && !(user.user_uuid.uuid in unknown_users)){
+            let user_stored: userProfile | undefined = users[user.user_uuid.uuid]
+            if (user_stored == undefined && !(user.user_uuid.uuid in unknown_users)){
               unknown_users.push(user.user_uuid)
             }
           })
@@ -50,22 +54,32 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
             classified_convos.push(transform_convo)
           }
         })
-        if (unknown_users.length > 0){
-          await getUsers(authInfo.userInfo,unknown_users)
+
+        if (fetch_AuthUser){
+          unknown_users.push(authInfo.userInfo.uuid!)
+          fetch_AuthUser = false
         }
+        if (unknown_users.length > 0){
+          const new_users = await getUsers(authInfo.userInfo,unknown_users);
+          setUsers({...users, ...new_users})
+        }
+        setTimeoutVariable(null);
         setConversations(classified_convos);
-        setTimeout(()=>{func()}, 3000)
     };
     func()
     }
-  useEffect(() => {
-    if (logged) {
-      short_poll()
+
+  useEffect(() =>{
+    const func = async () =>{
+    if (timeout == null) {
+      setTimeoutVariable(setTimeout(()=>{short_poll()}, 3000));
     }
-  }, [logged])
+  }
+    func()
+  }, [conversations])
 
   return (
-    <ConversationsContext.Provider value={{ conversations, selected, setSelected }}>
+    <ConversationsContext.Provider value={{ users, conversations, selected, setSelected }}>
       {children}
     </ConversationsContext.Provider>
   );

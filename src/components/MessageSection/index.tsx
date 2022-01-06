@@ -24,8 +24,6 @@ const MessageSection: React.FC = () => {
 
   const [createConversationModal, setCreateConvoModal]= useState<boolean>(false)
 
-  //console.log(objeto);
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
@@ -36,9 +34,7 @@ const MessageSection: React.FC = () => {
   };
 
   useEffect(() => {
-    const updated_users_string = localStorage.getItem("users")
-    const updated_users: storageUsers = JSON.parse(updated_users_string!)
-    setUsers(updated_users)
+    setUsers(objeto.users)
     //without this first render would give undefined on conversations array since async is not completed
     if (search === "") {
       setResults(
