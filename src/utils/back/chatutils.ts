@@ -7,7 +7,6 @@ const getMessages = async (userinfo:AuthInfo,uuid: string, extraparams:string|nu
     if (userinfo.access_token == undefined){
         return []
     }
-    console.log(extraparams)
     const data = await fetch(
         `http://localhost:7999/message/`+uuid + (extraparams != null ? extraparams : ""),
         {method: "GET",

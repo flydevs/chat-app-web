@@ -35,7 +35,6 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
   let fetch_AuthUser = true;
   const short_poll = async () => {
     const func = async () => {
-        console.log("short-polling")
         const convers = await getConvers(authInfo.userInfo);
         let classified_convos:(PrivateConvo | GroupConvo)[] = []
         let unknown_users: uuid[] = []

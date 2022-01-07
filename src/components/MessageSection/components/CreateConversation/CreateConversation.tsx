@@ -25,7 +25,7 @@ const CreateConversation = () => {
         let conversation: NewConvo = {
             private: true,
             new: true,
-            conversation: {uuid: {uuid: "000000"}, type: 0, created_at: 0},
+            conversation: {uuid: {uuid: "000000"}, type: 1, created_at: 0},
             user_conversation: user_convo,
             participants:  [{uuid: {uuid: "000000"}, user_uuid: user.uuid, last_access_uuid: {uuid: "000000"}, created_at: 0},user_convo]
         }

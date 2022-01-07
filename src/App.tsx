@@ -15,7 +15,6 @@ function App(){
 
 function Everything() {
   let logged = useContext(AuthContext).logged 
-  console.log(logged)
   return (
     <Router>
       <div className="wrapper">

@@ -25,7 +25,7 @@ const getConvers = async (userinfo:AuthInfo) => {
 
 const createConversRequest = async (userinfo:AuthInfo, text: string, type: number, participants: uuid[], name?:string, avatar_url?:string) => {
   if (userinfo.access_token == undefined || userinfo.uuid == undefined){
-    return[]
+    return
 }
   let message = CreateMessage(userinfo.uuid, text)
   let body = createConversationMessage(message, createConversation(type, participants, name, avatar_url)) 

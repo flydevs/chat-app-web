@@ -17,6 +17,8 @@ function ChatSection() {
     const conversation = selected?.conversation
     const users = ConvCtx.users
 
+    const [replace, setReplace] = useState<string | null>(null)
+
     const makeHeader = () => {
         if (selected?.private){
             let user:userProfile = users[selected.participants[0].user_uuid.uuid]
@@ -27,11 +29,33 @@ function ChatSection() {
         }
     }
 
+//If replaced is not null, then the conversation was a "fake" one and a message was sent creating a new conversation.
+//This looks for the created conversation.
+    useEffect(()=>{
+        if (replace !== null) {
+            ConvCtx.conversations.forEach((conversation_object) => {
+                if (conversation_object.conversation.uuid.uuid == replace) {
+                    ConvCtx.setSelected(conversation_object)
+                    setReplace(null)
+                }
+            });
+        }
+    }, [ConvCtx.conversations])
+
     const handleSendMessage = (e: HTMLInputElement) => {
         if ("new" in selected!){
             let participants: uuid[] = []
             selected.participants.forEach((participant) => {participants.push(participant.user_uuid)})
-            createConversRequest(userinfo.userInfo,e.value, conversation?.type!, participants, conversation?.name, conversation?.avatar_url)
+            const promise_uuid = createConversRequest(userinfo.userInfo,e.value, conversation?.type!, participants, conversation?.name, conversation?.avatar_url)
+            const ReplaceWithCreatedConversation = async () =>{
+                let uuid = await promise_uuid
+                if (uuid === undefined){
+                    return
+                }
+                setReplace(uuid.uuid)
+            };
+            ReplaceWithCreatedConversation()
+//---------
         } else {
             sendMessage(userinfo.userInfo,e.value, conversation?.uuid!)
         }
