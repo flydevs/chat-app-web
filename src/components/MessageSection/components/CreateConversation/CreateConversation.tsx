@@ -18,6 +18,7 @@ const CreateConversation = () => {
     const users_string = localStorage.getItem("users") 
     if (users_string != null){
         known_users = JSON.parse(users_string)
+        delete known_users[AuthCtx.userInfo.uuid?.uuid!]
     }
 
     const select=(user:userProfile) => {
