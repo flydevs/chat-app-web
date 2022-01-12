@@ -83,7 +83,7 @@ const MessageSection: React.FC = () => {
         </div>
         <button className="messages__header__plusButton" onClick={() => {setCreateConvoModal(true)}}>+</button>
       </div>
-      {createConversationModal && <CreateConversation/>}
+      {createConversationModal && <CreateConversation turnbackdropoff={()=>{setCreateConvoModal(false)}}/>}
       {createConversationModal && <BackDrop turnbackdropoff={()=>{setCreateConvoModal(false)}}/>}
       <SearchBar handleSearchChange={handleSearchChange} message={"Search messages"}/>
       <div className="messages__container">

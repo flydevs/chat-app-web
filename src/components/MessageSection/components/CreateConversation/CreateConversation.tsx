@@ -8,7 +8,11 @@ import { NewConvo, storageUsers, userProfile } from "../../../../utils/interface
 import ContactsCard from "../ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../../../stores/ConversationsContext";
 
-const CreateConversation = () => {
+interface CreateConversationProps {
+    turnbackdropoff: () => void
+}
+
+const CreateConversation = ({turnbackdropoff}:CreateConversationProps) => {
     const AuthCtx = useContext(AuthContext)
     const ConvoCtx = useContext(ConversationsContext)
     const [search,setSearch] = useState<string>("");
@@ -31,6 +35,7 @@ const CreateConversation = () => {
             participants:  [{uuid: {uuid: "000000"}, user_uuid: user.uuid, last_access_uuid: {uuid: "000000"}, created_at: 0},user_convo]
         }
         ConvoCtx.setSelected(conversation)
+        turnbackdropoff()
     }
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
