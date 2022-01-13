@@ -6,9 +6,10 @@ import { FiPaperclip } from "react-icons/fi";
 import { IoIosPaperPlane, IoIosBookmark } from "react-icons/io";
 import { ConversationsContext } from '../../stores/ConversationsContext';
 import { getMessages, sendMessage } from '../../utils/back/chatutils';
-import { message, storageUsers, userProfile, uuid } from "../../utils/interfaces";
+import { CreateDummyUserProfile, message, NewConvo, storageUsers, userProfile, uuid } from "../../utils/interfaces";
 import { AuthContext } from '../../stores/AuthContext';
 import { createConversRequest } from '../../utils/back/conversutils'
+import { getUsers } from '../../utils/back/usersutils';
 
 function ChatSection() {
     const ConvCtx = useContext(ConversationsContext)
@@ -20,8 +21,27 @@ function ChatSection() {
     const [replace, setReplace] = useState<string | null>(null)
 
     const makeHeader = () => {
+        const newConvoProfileManaging = (convo:NewConvo):userProfile =>{
+                //if NewConvo checks whether the user is inside the ConversationContext users object. 
+                if (users.hasOwnProperty(convo.participants[0].user_uuid.uuid)) {
+                    return users[convo.participants[0].user_uuid.uuid]
+                } else {
+                    let dummy_user = CreateDummyUserProfile({uuid: convo.participants[0].user_uuid.uuid, first_name: "retrieving user info..."});
+                    getUsers(userinfo.userInfo, [convo.participants[0].user_uuid]).then((retrieved_user) =>{
+                        let new_user = retrieved_user![convo.participants[0].user_uuid.uuid];
+                        
+                        let name_doc = document.getElementById("chatHeaderProfileName") as HTMLParagraphElement;
+                        name_doc!.innerHTML = new_user.first_name + ' ' + new_user.last_name
+                        
+                        let img_doc = document.getElementById("chatHeaderProfileImg") as HTMLImageElement
+                        img_doc.src = new_user.avatar_url!
+                        
+                    })
+                    return dummy_user
+        }
+    }
         if (selected?.private){
-            let user:userProfile = users[selected.participants[0].user_uuid.uuid]
+            let user:userProfile = !("new" in selected) ? users[selected.participants[0].user_uuid.uuid]: newConvoProfileManaging(selected)
             return (<ChatHeader profileName={(user.first_name!+ " " + user.last_name!)} profileImg={user.avatar_url!} status="Online"
             statusBubble="#68D391"/>)
         } else{

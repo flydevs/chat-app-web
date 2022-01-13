@@ -20,6 +20,7 @@ const Avatar: React.FC<propsInterface> = ({ profileImg, size }) => {
         src={!(profileImg || profileImg == "") ? "./images/default-avatar.png" : profileImg }
         alt="avatar"
         style={{ objectFit: "cover", width: "100%", height: "100%" }}
+        id="chatHeaderProfileImg"
       />
     </div>
   );

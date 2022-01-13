@@ -15,6 +15,27 @@ interface apiResponse{
   }
 }
 
+const CreateDummyUserProfile = (par0: {
+  uuid?: string,
+  phone?: string,
+  first_name?: string,
+  last_name?: string,
+  user_name?: string,
+  description?: string,
+  avatar_url?: string,
+  created_at?: number}):userProfile => {
+    return {
+      uuid: {uuid: (par0.uuid != undefined) ? par0.uuid : "00000000-0000-0000-0000-000000000000"},
+      phone: (par0.phone != undefined) ? par0.phone : "00000000",
+      first_name: par0.first_name,
+      last_name: par0.last_name,
+      user_name: (par0.user_name) ? par0.user_name : "",
+      description: (par0.description) ? par0.description : "",
+      avatar_url: par0.avatar_url,
+      created_at: (par0.created_at) ? par0.created_at : 0,
+    }
+}
+
 interface userProfile{
   uuid: uuid,
   phone: string,
@@ -118,5 +139,5 @@ interface storageUsers {
  [uuid:string]: userProfile; 
 }
 
-export {null_uuid_string,null_uuid}
+export {null_uuid_string,null_uuid,CreateDummyUserProfile}
 export type {  NewConvo,storageUsers,PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };
