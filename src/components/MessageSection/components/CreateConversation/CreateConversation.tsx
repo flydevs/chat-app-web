@@ -14,15 +14,15 @@ interface CreateConversationProps {
 }
 
 const SelectedContext = React.createContext<{
-    select: userProfile[],
-    setSelect: (arg0:userProfile[])=>void
+    select: storageUsers,
+    setSelect: (arg0:storageUsers)=>void
 }>({
-    select:[],
-    setSelect: ([])=>{}
+    select:{},
+    setSelect: ({})=>{}
 });
 
 const CreateConversationWrapper = ({turnbackdropoff}:CreateConversationProps) =>{
-    const [select, setSelect] = useState<userProfile[]>([])
+    const [select, setSelect] = useState<storageUsers>({})
 
     return (
     <SelectedContext.Provider value={{select, setSelect}}>
@@ -94,11 +94,11 @@ const SearchContactPrivate = ({turnbackdropoff}:CreateConversationProps) => {
         <div className="CreateConvo__SearchContact" >
             <SearchBar message="Search contact" handleSearchChange={handleSearchChange} />    
             {contacts.length > 0 ? contacts.map((contact, i) => {
-                return poblateContactsCard(i, contact, select)
+                return poblateContactsCard(i, contact, select, undefined)
             }) : <div className="CreateConvo__SearchContact__NoUsers"><p>No users.</p></div>}
             <div className="CreateConvo__SearchContact__KnownUsers"/>
             {Object.entries(known_users).map((contact, i) =>{
-                  return poblateContactsCard(i, contact[1], select)
+                  return poblateContactsCard(i, contact[1], select, undefined)
             })}
         </div>
     )
@@ -119,7 +119,7 @@ const SearchContactGroup = () => {
 
     const select=(user:userProfile) => {
        let list_selected = SelectedCtx.select
-       list_selected.push(user)
+       list_selected[user.uuid.uuid] = user
        SelectedCtx.setSelect(list_selected)
     };
 
@@ -136,14 +136,14 @@ const SearchContactGroup = () => {
     return (
         <div className="CreateConvo__SearchContact" >
             <SearchBar message="Search contact" handleSearchChange={handleSearchChange} />    
-            {SelectedCtx.select.length > 0 && SelectedCtx.select.map((contact, i) => {
+            {Object.entries(SelectedCtx.select).map((contact, i) => {
                 return (
                 <div className="CreateConvo__GroupContactSelected">
-                {poblateContactsCard(i, contact, select)}
+                {poblateContactsCard(i, contact[1], select, undefined)}
                 <div className="CreateConvo__GroupContactSelected__button" onClick={
                     ()=>{
                         let list_selected = SelectedCtx.select
-                        list_selected.splice(i, 1)
+                        delete list_selected[contact[0]]
                         SelectedCtx.setSelect(list_selected)
                     }
                 }>X</div>
@@ -151,18 +151,23 @@ const SearchContactGroup = () => {
                 )
             })}
             {contacts.length > 0 ? contacts.map((contact, i) => {
-                return poblateContactsCard(i, contact, select)
+                return poblateContactsCard(i, contact, select, Object.keys(SelectedCtx.select))
             }) : <div className="CreateConvo__SearchContact__NoUsers"><p>No users.</p></div>}
             <div className="CreateConvo__SearchContact__KnownUsers"/>
             {Object.entries(known_users).map((contact, i) =>{
-                  return poblateContactsCard(i, contact[1], select)
+                  return poblateContactsCard(i, contact[1], select, Object.keys(SelectedCtx.select))
             })}
         </div>
     )
 };
 
 
-const poblateContactsCard = (key:number, user:userProfile, selectFunc: (arg0:userProfile)=>void):JSX.Element => {
+const poblateContactsCard = (key:number, user:userProfile, selectFunc: (arg0:userProfile)=>void, ignore:string[] | undefined):JSX.Element | null => {
+    if (ignore != undefined && ignore.length > 0){
+        if (ignore.includes(user.uuid.uuid)){
+            return null
+        }
+    }
     return(<ContactsCard
         key={key}
         timeAgo={0}
