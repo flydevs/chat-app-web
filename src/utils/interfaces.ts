@@ -139,5 +139,10 @@ interface storageUsers {
  [uuid:string]: userProfile; 
 }
 
+interface newError {
+  danger: number
+  message: string
+}
+
 export {null_uuid_string,null_uuid,CreateDummyUserProfile}
-export type {  NewConvo,storageUsers,PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles };
+export type {  NewConvo,storageUsers,PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles, newError };

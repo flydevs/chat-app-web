@@ -1,5 +1,5 @@
 import { SearchBar } from "../../../../../utils/searchbar/searchbar";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "./style.scss";
 import { AuthContext } from "../../../../../stores/AuthContext";
@@ -8,7 +8,7 @@ import { NewConvo, storageUsers, userProfile } from "../../../../../utils/interf
 import { ConversationsContext } from "../../../../../stores/ConversationsContext";
 
 import { leaveBackdropProp, poblateContactsCard, poblateSelectedContactsCard } from "./common";
-import { SelectedContext } from "./selectedContext";
+import { CreateConversationContext } from "./CreateConversationContext";
 
 const SearchContactPrivate = ({turnbackdropoff}:leaveBackdropProp) => {
     const AuthCtx = useContext(AuthContext)
@@ -63,7 +63,7 @@ const SearchContactPrivate = ({turnbackdropoff}:leaveBackdropProp) => {
 
 const SearchContactGroup = () => {
     const AuthCtx = useContext(AuthContext)
-    const SelectedCtx= useContext(SelectedContext)
+    const SelectedCtx= useContext(CreateConversationContext)
     const [search,setSearch] = useState<string>("");
     const [contacts, setContacts] = useState<userProfile[]>([])
 
@@ -94,7 +94,7 @@ const SearchContactGroup = () => {
         <div className="SearchContact" >
             <SearchBar message="Search contact" handleSearchChange={handleSearchChange} />    
             {Object.entries(SelectedCtx.select).map((contact, i) => {
-                return poblateSelectedContactsCard(i, contact[1], select, SelectedCtx)
+                return poblateSelectedContactsCard(i, contact[1], ()=>{}, SelectedCtx)
             })}
             {contacts.length > 0 ? contacts.map((contact, i) => {
                 return poblateContactsCard(i, contact, select, Object.keys(SelectedCtx.select))
