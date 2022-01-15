@@ -18,8 +18,6 @@ function ChatSection() {
     const conversation = selected?.conversation
     const users = ConvCtx.users
 
-    const [replace, setReplace] = useState<string | null>(null)
-
     const makeHeader = () => {
         const newConvoProfileManaging = (convo:NewConvo):userProfile =>{
                 //if NewConvo checks whether the user is inside the ConversationContext users object. 
@@ -49,19 +47,6 @@ function ChatSection() {
         }
     }
 
-//If replaced is not null, then the conversation was a "fake" one and a message was sent creating a new conversation.
-//This looks for the created conversation.
-    useEffect(()=>{
-        if (replace !== null) {
-            ConvCtx.conversations.forEach((conversation_object) => {
-                if (conversation_object.conversation.uuid.uuid == replace) {
-                    ConvCtx.setSelected(conversation_object)
-                    setReplace(null)
-                }
-            });
-        }
-    }, [ConvCtx.conversations])
-
     const handleSendMessage = (e: HTMLInputElement) => {
         if ("new" in selected!){
             let participants: uuid[] = []
@@ -72,7 +57,7 @@ function ChatSection() {
                 if (uuid === undefined){
                     return
                 }
-                setReplace(uuid.uuid)
+                ConvCtx.setAwaitForConvo(uuid.uuid)
             };
             ReplaceWithCreatedConversation()
 //---------

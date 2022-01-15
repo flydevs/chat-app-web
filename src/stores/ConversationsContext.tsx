@@ -14,12 +14,13 @@ const ConversationsContext = React.createContext<{
   conversations: (PrivateConvo | GroupConvo)[],
   selected: PrivateConvo | GroupConvo | NewConvo | undefined,
   setSelected: (arg0: PrivateConvo | GroupConvo) => void
+  setAwaitForConvo: (arg0: string | null) => void
 }>({
   users: {},
   conversations: [],
-  selected: undefined
-  ,
-  setSelected: (arg0: PrivateConvo | GroupConvo) => {}
+  selected: undefined,
+  setSelected: (arg0: PrivateConvo | GroupConvo) => {},
+  setAwaitForConvo: (arg0: string | null) => {}
 });
 
 const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
@@ -31,6 +32,8 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
   let logged = AuthCtx.logged
 
   const [timeout, setTimeoutVariable] = useState<NodeJS.Timeout | null>(null)
+
+  const [AwaitForConvo, setAwaitForConvo] = useState<string|null>(null)
 
   let fetch_AuthUser = true;
   const short_poll = async () => {
@@ -75,10 +78,20 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
     }
   }
     func()
-  }, [conversations])
+//If AwaitForConvo is not null, then the conversation was a "fake" one and a message/groupchat was sent creating a new conversation.
+//This looks for the created conversation.
+    if (AwaitForConvo != null){
+      conversations.forEach((conversation_object) => {
+        if (conversation_object.conversation.uuid.uuid == AwaitForConvo) {
+            setSelected(conversation_object)
+            setAwaitForConvo(null)
+        }
+    });
+    };
+  }, [conversations]);
 
   return (
-    <ConversationsContext.Provider value={{ users, conversations, selected, setSelected }}>
+    <ConversationsContext.Provider value={{ users, conversations, selected, setSelected, setAwaitForConvo }}>
       {children}
     </ConversationsContext.Provider>
   );

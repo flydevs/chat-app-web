@@ -2,13 +2,16 @@ import { SearchBar } from "../../../../utils/searchbar/searchbar";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 
 import "./createconversation.scss";
-import { NewConvo, newError, storageUsers, userProfile } from "../../../../utils/interfaces";
+import { NewConvo, newError, storageUsers, userProfile, uuid } from "../../../../utils/interfaces";
 import { IoIosPeople, IoIosPerson } from "react-icons/io";
 
 import { CreateConversationContext } from "./components/CreateConversationContext";
 import { leaveBackdropProp } from "./components/common";
 import { SearchContactGroup, SearchContactPrivate } from "./components/searchContact";
 import { GroupConversationForm } from "./components/GroupConversationForm";
+import { createConversRequest } from "../../../../utils/back/conversutils";
+import { AuthContext } from "../../../../stores/AuthContext";
+import { ConversationsContext, ConversationsProvider } from "../../../../stores/ConversationsContext";
 
 
 const CreateConversationWrapper = ({turnbackdropoff}:leaveBackdropProp) =>{
@@ -26,6 +29,8 @@ const CreateConversationWrapper = ({turnbackdropoff}:leaveBackdropProp) =>{
 const CreateConversation = ({turnbackdropoff}:leaveBackdropProp) =>{
     const [isPrivate, setIsPrivate] = useState<boolean>(true)
     const CreateConvoCtx = useContext(CreateConversationContext)
+    const ConvoCtx= useContext(ConversationsContext)
+    const AuthCtx = useContext(AuthContext)
 
     const GroupFormHandle = ()=>{
         let name= (document.getElementById("groupName") as HTMLInputElement).value;
@@ -34,6 +39,19 @@ const CreateConversation = ({turnbackdropoff}:leaveBackdropProp) =>{
             CreateConvoCtx.setError({danger:1, message:"Name of the group cant be empty."})
             return
         }
+        let participants: uuid[] = []
+        participants.push(AuthCtx.userInfo.uuid!)
+        Object.entries(CreateConvoCtx.select).forEach((participant) => {participants.push(participant[1].uuid)})
+        const promise_uuid = createConversRequest(AuthCtx.userInfo,"Welcome to "+name, 0, participants, name, image)
+        const asyncSetAwaitUuid = async () => {
+            const uuid = await promise_uuid
+            if (uuid === undefined){
+                CreateConvoCtx.setError({danger:2, message:"Error ocurred"})
+                return
+            }
+            ConvoCtx.setAwaitForConvo(uuid.uuid)
+        }
+        asyncSetAwaitUuid()
         turnbackdropoff()
     }
 
