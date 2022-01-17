@@ -1,17 +1,22 @@
 import React from "react";
 import "./MembersCards.scss";
 import Avatar from "../../../common/Avatar/Avatar";
+import { userProfile } from "../../../../utils/interfaces";
 
-const MembersCards: React.FC = () => {
+interface MemberCardProps {
+  user: userProfile
+}
+
+const MembersCards= ({user}:MemberCardProps) => {
   return (
     <div className="MemberCard">
       <Avatar
-        profileImg={`https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500`}
+        profileImg={user.avatar_url}
         size={48}
       />
       <div className="MemberCard__InfoFlex">
-        <h5>Florencio Dorrance</h5>
-        <p>Market Development Manager</p>
+        <h5>{user.first_name + " " + user.last_name}</h5>
+        <p>{user.description}</p>
       </div>
     </div>
   );

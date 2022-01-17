@@ -145,4 +145,4 @@ interface newError {
 }
 
 export {null_uuid_string,null_uuid,CreateDummyUserProfile}
-export type {  NewConvo,storageUsers,PrivateConvo, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles, newError };
+export type {  NewConvo,storageUsers,PrivateConvo, userConversation, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles, newError };

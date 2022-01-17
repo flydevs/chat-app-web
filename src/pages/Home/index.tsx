@@ -24,10 +24,10 @@ function Home() {
         <ChatSection />
         </ChatProvider>
       </div>
-        </ConversationsProvider>
       <div className="HomeLayout__directory">
         <DirectorySection />
       </div>
+      </ConversationsProvider>
     </div>
   );
 }
