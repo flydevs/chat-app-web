@@ -70,7 +70,7 @@ interface userConversation{
 }
 
 interface conversationWParticipants{
-  conversation: conversation, user_conversation: userConversation, participants: userConversation[]
+  conversation: conversation, user_conversation: userConversation, participants: userConversation[], unread_messages: number
 }
 
 interface PrivateConvo extends conversationWParticipants{

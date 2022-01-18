@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import "./MessageSection.scss";
 import { BsChevronDown } from "react-icons/bs";
-import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
 import { ConversationsContext } from "../../stores/ConversationsContext";
 import { PrivateConvo, GroupConvo, objectInterface, conversationWParticipants, userProfile, storageUsers } from "../../utils/interfaces";
-import { randomNum } from "../../utils/back/conversutils";
 import { AuthContext } from "../../stores/AuthContext";
 import { SearchBar } from "../../utils/searchbar/searchbar";
 import { CreateConversation } from "./components/CreateConversation/CreateConversation";
@@ -108,7 +106,7 @@ const MessageSection: React.FC = () => {
                 lastMessage={conver.conversation.last_msg!.text}
                 name={conver.private ? (user?.first_name!) + (user?.last_name!) : conver.conversation.name!}
                 profileImg={conver.private ? user?.avatar_url! : conver.conversation.avatar_url!}
-                unread={0}
+                unread={conver.unread_messages}
                 toggleSelected={() =>
                   toggleSelected(conver)
                 }
