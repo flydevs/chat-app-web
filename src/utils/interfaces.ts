@@ -47,11 +47,6 @@ interface userProfile{
   created_at: number
 }
 
-interface getUserProfiles{
-  response: apiResponseFix,
-  data: userProfile[],
-}
-
 interface conversation{
     name?: string,
     uuid: uuid,
@@ -86,11 +81,6 @@ interface NewConvo extends conversationWParticipants{
   new: true,
 }
 
-interface getConversationsResponse {
-  response: apiResponse,
-  data: conversationWParticipants[]
-}
-
 interface message{
   uuid: uuid,
   conversation_uuid: uuid,
@@ -98,11 +88,6 @@ interface message{
   text: string,
   created_at: number,
   updated_at: number
-}
-
-interface getMessagesResponse{
-  response: apiResponse,
-  data: message[]
 }
 
 interface objectInterface {
@@ -145,4 +130,4 @@ interface newError {
 }
 
 export {null_uuid_string,null_uuid,CreateDummyUserProfile}
-export type {  NewConvo,storageUsers,PrivateConvo, userConversation, GroupConvo, objectInterface, contactsCardProps, getConversationsResponse, conversationWParticipants, uuid, message, getMessagesResponse, userProfile, getUserProfiles, newError };
+export type {  NewConvo,storageUsers,PrivateConvo, userConversation, GroupConvo, objectInterface, contactsCardProps, conversationWParticipants, uuid, message, userProfile, newError };

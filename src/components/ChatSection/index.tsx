@@ -14,7 +14,8 @@ import { getUsers } from '../../utils/back/usersutils';
 function ChatSection() {
     const ConvCtx = useContext(ConversationsContext)
     const selected = ConvCtx.selected
-    const userinfo = useContext(AuthContext)
+    const AuthCtx = useContext(AuthContext)
+    const userinfo = AuthCtx.userInfo
     const conversation = selected?.conversation
     const users = ConvCtx.users
 
@@ -25,7 +26,7 @@ function ChatSection() {
                     return users[convo.participants[0].user_uuid.uuid]
                 } else {
                     let dummy_user = CreateDummyUserProfile({uuid: convo.participants[0].user_uuid.uuid, first_name: "retrieving user info..."});
-                    getUsers(userinfo.userInfo, [convo.participants[0].user_uuid]).then((retrieved_user) =>{
+                    AuthCtx.requestsManager<storageUsers | undefined>(getUsers, [convo.participants[0].user_uuid]).then((retrieved_user) =>{
                         let new_user = retrieved_user![convo.participants[0].user_uuid.uuid];
                         
                         let name_doc = document.getElementById("chatHeaderProfileName") as HTMLParagraphElement;
@@ -51,7 +52,7 @@ function ChatSection() {
         if ("new" in selected!){
             let participants: uuid[] = []
             selected.participants.forEach((participant) => {participants.push(participant.user_uuid)})
-            const promise_uuid = createConversRequest(userinfo.userInfo,e.value, conversation?.type!, participants, conversation?.name, conversation?.avatar_url)
+            const promise_uuid = AuthCtx.requestsManager<any>(createConversRequest,e.value, conversation?.type!, participants, conversation?.name, conversation?.avatar_url)
             const ReplaceWithCreatedConversation = async () =>{
                 let uuid = await promise_uuid
                 if (uuid === undefined){
@@ -62,14 +63,14 @@ function ChatSection() {
             ReplaceWithCreatedConversation()
 //---------
         } else {
-            sendMessage(userinfo.userInfo,e.value, conversation?.uuid!)
+            sendMessage(userinfo,e.value, conversation?.uuid!)
         }
         e.value = ""
     }
 
     return (
         <div className="chatOverlay">
-            {userinfo.logged ? (conversation ? makeHeader(): <NoChatSelected/>) : <NotLoggedHeader/> }
+            {AuthCtx.logged ? (conversation ? makeHeader(): <NoChatSelected/>) : <NotLoggedHeader/> }
             <ChatBody/>
             <div className="chatOverlay__footer">
                 <FiPaperclip className="chatOverlay__footer__paperClip" />

@@ -44,7 +44,7 @@ const SearchContactPrivate = ({turnbackdropoff}:leaveBackdropProp) => {
 
     useEffect(()=>{
         const func = async () => {
-            setContacts(await searchContact(AuthCtx.userInfo, search))
+            setContacts(await AuthCtx.requestsManager<userProfile[]>(searchContact, search))
         }
         func()
     }, [search])
@@ -87,7 +87,7 @@ const SearchContactGroup = () => {
 
     useEffect(()=>{
         const func = async () => {
-            setContacts(await searchContact(AuthCtx.userInfo, search))
+            setContacts(await AuthCtx.requestsManager<userProfile[]>(searchContact, search))
         }
         func()
     }, [search])

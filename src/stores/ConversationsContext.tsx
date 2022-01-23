@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, ReactNode, useContext } from "react";
 import React from "react";
 import { getConvers } from "../utils/back/conversutils";
 import { getUsers } from "../utils/back/usersutils";
-import { PrivateConvo, NewConvo,GroupConvo,objectInterface, getConversationsResponse, conversationWParticipants, uuid, userProfile, null_uuid, storageUsers } from "../utils/interfaces";
+import { PrivateConvo, NewConvo,GroupConvo,objectInterface, conversationWParticipants, uuid, userProfile, null_uuid, storageUsers } from "../utils/interfaces";
 import { AuthContext } from "./AuthContext";
 
 interface propsInterface {
@@ -24,11 +24,11 @@ const ConversationsContext = React.createContext<{
 });
 
 const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
-  const authInfo= useContext(AuthContext)
   const [users, setUsers] = useState<storageUsers>({});
   const [conversations, setConversations] = useState<(PrivateConvo | GroupConvo)[]>([]);
   const [selected, setSelected] = useState<PrivateConvo | GroupConvo | NewConvo | undefined>();
   const AuthCtx = useContext(AuthContext)
+  const authInfo = AuthCtx.userInfo
   let logged = AuthCtx.logged
 
   const [timeout, setTimeoutVariable] = useState<NodeJS.Timeout | null>(null)
@@ -38,7 +38,7 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
   let fetch_AuthUser = true;
   const short_poll = async () => {
     const func = async () => {
-        const convers = await getConvers(authInfo.userInfo);
+        const convers = await AuthCtx.requestsManager<conversationWParticipants[]>(getConvers);
         let classified_convos:(PrivateConvo | GroupConvo)[] = []
         let unknown_users: uuid[] = []
         convers.forEach((conver) => {
@@ -58,11 +58,11 @@ const ConversationsProvider: React.FC<propsInterface> = ({ children }) => {
         })
 
         if (fetch_AuthUser){
-          unknown_users.push(authInfo.userInfo.uuid!)
+          unknown_users.push(authInfo.uuid!)
           fetch_AuthUser = false
         }
         if (unknown_users.length > 0){
-          const new_users = await getUsers(authInfo.userInfo,unknown_users);
+          const new_users = await AuthCtx.requestsManager<storageUsers | undefined>(getUsers,unknown_users);
           setUsers({...users, ...new_users})
         }
         setTimeoutVariable(null);

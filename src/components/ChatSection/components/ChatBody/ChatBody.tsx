@@ -21,7 +21,7 @@ const ChatBody= () => {
                             ChatCxt.setTimeoutVariable(null)
                         }
                         const last_message = ChatCxt.messages[0].created_at;
-                        const older_messages =await getMessages(AuthCxt.userInfo, ConvoCtx.selected?.conversation.uuid.uuid!, "?before=" + last_message);
+                        const older_messages =await AuthCxt.requestsManager<message[]>(getMessages, ConvoCtx.selected?.conversation.uuid.uuid!, "?before=" + last_message);
                         older_messages.push.apply(older_messages, ChatCxt.messages);
                         
                         let scroll_to_msg_uuid =    ChatCxt.messages[0].uuid.uuid

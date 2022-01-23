@@ -1,11 +1,14 @@
-import { objectInterface, getConversationsResponse } from "../interfaces";
-import { UuidResponse, AuthInfo, SendMessageInterface, NewConversationInterface, uuid } from "./request_interfaces";
-import { standardRequest } from "./common";
+import { objectInterface } from "../interfaces";
+import { UuidResponse, AuthInfo, SendMessageInterface, NewConversationInterface, uuid, getConversationsResponse } from "./request_interfaces";
+import { standardRequest, basic401Message } from "./common";
 import { CreateMessage } from "./chatutils";
+import { useContext } from "react";
+import { AuthContext } from "../../stores/AuthContext";
+import { conversationWParticipants } from "../interfaces";
 
-const getConvers = async (userinfo:AuthInfo) => {
+const getConvers = async (userinfo:AuthInfo): Promise<getConversationsResponse> => {
   if (userinfo.access_token == undefined || userinfo.uuid == undefined){
-    return[]
+    return basic401Message<never[]>([])
 }
 
   const data = await fetch(
@@ -15,17 +18,20 @@ const getConvers = async (userinfo:AuthInfo) => {
   );
   const jn: getConversationsResponse= await data.json();
 //This is just for testing
+  if (jn.data == null) {
+    jn.data = []
+  } 
   jn.data.forEach(element => {
     if (element.conversation.name === undefined){
       element.conversation.name = "TEST";
     };
   });
-  return jn.data;
+  return jn;
 };
 
 const createConversRequest = async (userinfo:AuthInfo, text: string, type: number, participants: uuid[], name?:string, avatar_url?:string) => {
   if (userinfo.access_token == undefined || userinfo.uuid == undefined){
-    return
+    return basic401Message<undefined>(undefined)
 }
   let message = CreateMessage(userinfo.uuid, text)
   let body = createConversationMessage(message, createConversation(type, participants, name, avatar_url)) 
@@ -38,8 +44,8 @@ const createConversRequest = async (userinfo:AuthInfo, text: string, type: numbe
     );
   const jn: UuidResponse = await data.json()
   console.log(jn.response)
-  return jn.data
-};
+  return jn
+  };
 
 const createConversationMessage = (message:SendMessageInterface, conversation_and_participants:NewConversationInterface):SendMessageInterface => {
   message.create_conversation = true

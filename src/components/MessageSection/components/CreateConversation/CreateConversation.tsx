@@ -42,7 +42,7 @@ const CreateConversation = ({turnbackdropoff}:leaveBackdropProp) =>{
         let participants: uuid[] = []
         participants.push(AuthCtx.userInfo.uuid!)
         Object.entries(CreateConvoCtx.select).forEach((participant) => {participants.push(participant[1].uuid)})
-        const promise_uuid = createConversRequest(AuthCtx.userInfo,"Welcome to "+name, 0, participants, name, image)
+        const promise_uuid = AuthCtx.requestsManager<any>(createConversRequest,"Welcome to "+name, 0, participants, name, image)
         const asyncSetAwaitUuid = async () => {
             const uuid = await promise_uuid
             if (uuid === undefined){

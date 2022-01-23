@@ -33,11 +33,11 @@ const ChatProvider = ({children}:ChatProps) => {
         const quant_msgs = existing_messages.length
         let overall_messages:message[] = []
          if (quant_msgs != 0){
-            const new_messages = await getMessages(AuthCtx.userInfo, selected!.conversation.uuid.uuid, "?after="+existing_messages[quant_msgs-1].created_at)
+            const new_messages = await AuthCtx.requestsManager<message[]>(getMessages, selected!.conversation.uuid.uuid, "?after="+existing_messages[quant_msgs-1].created_at)
             overall_messages.push.apply(overall_messages, existing_messages)
             overall_messages.push.apply(overall_messages, new_messages)
         } else{
-            overall_messages = await getMessages(AuthCtx.userInfo, selected!.conversation.uuid.uuid, "")
+            overall_messages = await AuthCtx.requestsManager<message[]>(getMessages, selected!.conversation.uuid.uuid, "")
         }
         //scrolling
         const ScrollingIsBottom= CheckIfScrollBottom()

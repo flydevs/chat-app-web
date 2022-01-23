@@ -1,11 +1,13 @@
-import { uuid, getUserProfiles, userProfile, storageUsers } from '../interfaces'
+import { uuid, userProfile, storageUsers } from '../interfaces'
 import { access_token } from '../mock_auth';
-import { AuthInfo } from './request_interfaces';
-import { standardRequest } from "./common"
+import { AuthInfo, getStorageUsersResponse, getUserProfilesResponse } from './request_interfaces';
+import { standardRequest, basic401Message } from "./common"
+import { useContext } from 'react';
+import { AuthContext } from '../../stores/AuthContext';
 
-const getUsers= async (userinfo:AuthInfo,users:uuid[]) => {
+const getUsers= async (userinfo:AuthInfo,users:uuid[]):Promise<getStorageUsersResponse> => {
     if (userinfo.access_token == undefined){
-        return
+        return basic401Message<storageUsers>({})
     }
     const requestHeaders: HeadersInit = new Headers();
     requestHeaders.set("access-token", userinfo.access_token)
@@ -18,20 +20,24 @@ const getUsers= async (userinfo:AuthInfo,users:uuid[]) => {
       { method: "GET",
       headers: requestHeaders}
     );
-    const jn: getUserProfiles= await data.json();
+    const jn: getUserProfilesResponse= await data.json();
     let users_storage_string = localStorage.getItem("users")
     let users_storage:storageUsers = (users_storage_string != null) ? JSON.parse(users_storage_string) : {}
     let new_users_storage:storageUsers = {}
+    if (jn.data == null) {
+        jn.data = [];
+    }
     jn.data.forEach((user) => {
         new_users_storage[user.uuid.uuid] = user
     });
     localStorage.setItem("users", JSON.stringify({...users_storage, ...new_users_storage}))
-    return new_users_storage
-}
+    return { data: new_users_storage, response: jn.response }
+};
 
-const searchContact = async (userinfo:AuthInfo, query:string):Promise<userProfile[]>=>{
+const searchContact = async (userinfo:AuthInfo, query:string):Promise<getUserProfilesResponse>=>{
+
     if (userinfo.access_token == undefined || userinfo.uuid == undefined || query.trim() == ""){
-        return []
+        return basic401Message<never[]>([])
     }
     let url = 'http://localhost:7999/search?query='+query
 
@@ -43,11 +49,12 @@ const searchContact = async (userinfo:AuthInfo, query:string):Promise<userProfil
         }
     )
 
-    const jn: getUserProfiles=await data.json();
-    if (jn.response.status != 200) {
-        return []
+    const jn: getUserProfilesResponse=await data.json();
+    if (jn.data == null) {
+        jn.data = [];
     }
-    return jn.data
-}
+    return jn
+};
+
 
 export {getUsers, searchContact}

@@ -13,7 +13,7 @@ type MessageProps = {
 }
 
 const Message = ({message, first, group}:MessageProps) => {
-    const authorUuid: string= useContext(AuthContext).userInfo.uuid?.uuid!
+    const userclientUuid: string= useContext(AuthContext).userInfo.uuid?.uuid!
     const users:storageUsers = useContext(ConversationsContext).users
     const author_parsed = users[message.author_uuid.uuid]
     if (author_parsed == undefined || author_parsed == null){
@@ -22,29 +22,32 @@ const Message = ({message, first, group}:MessageProps) => {
         )
     }
 
-    let sentOrReceived: string = (():string=>{
-        let result = ""
-        author_parsed.uuid.uuid == authorUuid ? result="__sent" : result="__received"
-        return result;
+    let isSent: boolean = (():boolean=>{
+        return author_parsed.uuid.uuid == userclientUuid
     })()
 
     if (first) {
         return (
+            <div>
+                {!(isSent) && <div>{author_parsed.first_name+ " " + author_parsed.last_name}</div>}
             <div className="chatTextColumn" id={message.uuid.uuid}>
-                <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv"+sentOrReceived}>
-                    <p className={"chatTextColumn__text chatTextColumn__text"+sentOrReceived}>{message.text}</p>
+                <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv"+(isSent ? "__sent" : "__received")}>
+                    <p className={"chatTextColumn__text chatTextColumn__text"+(isSent ? "__sent" : "__received")}>{message.text}</p>
                     <Avatar size={40} profileImg={author_parsed.avatar_url} />
                 </div>
 
+            </div>
             </div>
         )
     }
     else {
         return (
+            <div>
             <div className="chatTextColumn" id={message.uuid.uuid}>
-                <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv__withoutAvatar" + sentOrReceived + " chatTextColumn__messageDiv"+sentOrReceived}>
-                    <p className={"chatTextColumn__text chatTextColumn__text"+sentOrReceived}>{message.text}</p>
+                <div className={"chatTextColumn__messageDiv chatTextColumn__messageDiv__withoutAvatar" + (isSent ? "__sent" : "__received") + " chatTextColumn__messageDiv"+(isSent ? "__sent" : "__received")}>
+                    <p className={"chatTextColumn__text chatTextColumn__text"+(isSent ? "__sent" : "__received")}>{message.text}</p>
                 </div>
+            </div>
             </div>
         )
     }

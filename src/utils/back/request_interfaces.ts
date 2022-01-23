@@ -1,4 +1,5 @@
 import internal from "stream";
+import { message, conversationWParticipants, userProfile, storageUsers } from "../interfaces";
 
 interface uuid{
     uuid: string
@@ -47,11 +48,6 @@ interface AuthLoginResponse {
     data?: AuthInfo
 }
 
-interface UuidResponse {
-  data?: uuid,
-  response: apiResponseFix
-}
-
 interface AuthRegisterResponse {
   response: apiResponseFix
 }
@@ -74,4 +70,20 @@ interface RegisterProp {
   }
 }
 
-export type {UuidResponse, SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp, NewConversationInterface}
+interface requestManagerProp<T> {
+  data: T,
+  response: apiResponseFix
+}
+
+type getMessagesResponse = requestManagerProp<message[]>
+
+type getConversationsResponse = requestManagerProp<conversationWParticipants[]>
+
+type UuidResponse = requestManagerProp<uuid | undefined>
+
+type getUserProfilesResponse = requestManagerProp<userProfile[]>
+
+type getStorageUsersResponse = requestManagerProp<storageUsers>
+
+
+export type {UuidResponse, SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp, NewConversationInterface, requestManagerProp, getMessagesResponse, getConversationsResponse, getUserProfilesResponse, getStorageUsersResponse}
