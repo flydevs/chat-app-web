@@ -5,11 +5,12 @@ import { userProfile } from "../../../../utils/interfaces";
 
 interface MemberCardProps {
   user: userProfile
+  select: () =>void
 }
 
-const MembersCards= ({user}:MemberCardProps) => {
+const MembersCards= ({user, select}:MemberCardProps) => {
   return (
-    <div className="MemberCard">
+    <div className="MemberCard" onClick={select}>
       <Avatar
         profileImg={user.avatar_url}
         size={48}
