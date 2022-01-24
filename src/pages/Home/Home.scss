@@ -8,17 +8,22 @@
     @include sidebar;
   }
   &__messages {
-    width: 22.5%;
+    flex-grow: 0.8;
     height: 100%;
   }
   &__chat {
-    width: 50%;
+    flex-grow: 2;
     height: 100%;
     border-inline: 1px solid lightgray;
   }
   &__directory {
-    width: 22.5%;
+    flex-grow: 1;
     height: 100%;
+    overflow-y: hidden;
+  }
+  &__smallDirectory{
+    flex-grow: 0.2;
+    height:100%;
     overflow-y: hidden;
   }
 }

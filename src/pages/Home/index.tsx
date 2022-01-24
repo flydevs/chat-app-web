@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import DirectorySection from "../../components/DirectorySection";
 import MessageSection from "../../components/MessageSection";
 import ChatSection from "../../components/ChatSection";
@@ -9,6 +9,24 @@ import {Sidebar} from "../../components/Sidebar";
 import { ChatProvider } from "../../stores/ChatContext";
 import { CheckLogged } from "../../utils/checkiflogged";
 function Home() {
+
+  const [isDirectoryButton, SetisDirectoryButton] = useState<boolean>(false)
+
+
+  const directoryWidthCheck = () => {
+    if (window.innerWidth <= 1360){
+      SetisDirectoryButton(true)
+    } else {
+      SetisDirectoryButton(false)
+    };
+  }
+  useEffect(()=>{
+    directoryWidthCheck()
+  }, [])
+  window.addEventListener("resize", () => {
+    directoryWidthCheck()
+  });
+
   return (
     <div className="HomeLayout">
       <CheckLogged/>
@@ -24,8 +42,8 @@ function Home() {
         <ChatSection />
         </ChatProvider>
       </div>
-      <div className="HomeLayout__directory">
-        <DirectorySection />
+      <div className={!isDirectoryButton ? "HomeLayout__directory": "HomeLayout__smallDirectory"}>
+        <DirectorySection isDirectoryButton={isDirectoryButton}/>
       </div>
       </ConversationsProvider>
     </div>

@@ -1,5 +1,34 @@
 .ProfileCard{
-    height: 85%;
-    min-width: 350px;
-    right:0px;
+    height: 40vh;
+    width: inherit;
+    &__avatar{
+        width: 62px;
+        position: relative;
+        left: calc(50% - 62px);
+    };
+    &__title{
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+        font-weight: 700;
+    };
+    &__description{
+        margin-top: 12px;
+        width: 100%;
+        text-align: center;
+        font-weight: 300;
+    }
+    &__kick{
+        cursor: pointer;
+        position: relative;
+        top: 90px;
+        display: flex;
+        width: 200px;
+        background-color: rgb(92, 65, 240);
+        left: calc(50% - 130px);
+        p{
+            color: crimsom;
+            margin-top: 7px;
+        }
+    }
 }

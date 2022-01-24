@@ -109,6 +109,20 @@
   }
 }
 
+.DirectoryButton {
+  width: 50px;
+  position: relative;
+  height: 100vh;
+  right: 0px;
+  &:hover{
+    background-color: rgb(235, 232, 232);
+  }
+  div{
+    position: relative;
+    top:45vh;
+  }
+}
+
 .DirectoryContFloating {
   z-index: 2;
   position: absolute;

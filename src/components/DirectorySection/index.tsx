@@ -8,8 +8,13 @@ import { ConversationsContext } from "../../stores/ConversationsContext";
 import { userConversation, userProfile } from "../../utils/interfaces";
 import { ProfileSection } from "./components/ProfileCard";
 import BackDrop from "../BackDrop/Backdrop";
+import { IoIosArrowBack } from "react-icons/io";
 
-function DirectorySection() {
+type DirectoryProps = {
+  isDirectoryButton: boolean
+}
+
+function DirectorySection({isDirectoryButton}:DirectoryProps) {
   const ConvoCtx = useContext(ConversationsContext)
   const [participants, setParticipants] = useState<userConversation[]>([])
   useEffect(()=>{
@@ -19,16 +24,8 @@ function DirectorySection() {
   }, [ConvoCtx.selected])
   const [userSelect, setUserSelect] = useState<userProfile | null>(null)
 
-  const [isDirectoryButton, SetisDirectoryButton] = useState<boolean>(false)
   const [displayDirectory, setDisplayDirectory] = useState<boolean>(false)
   
-  window.addEventListener("resize", () => {
-    if (window.innerWidth <= 1360){
-      SetisDirectoryButton(true)
-    } else {
-      SetisDirectoryButton(false)
-    };
-  });
 
   const teamMembers = () => {
     return (
@@ -94,8 +91,10 @@ function DirectorySection() {
       (displayDirectory ? <div>
         {directoryContent("DirectoryContFloating")}
         <BackDrop turnbackdropoff={()=>{setDisplayDirectory(false)}}/>
-      </div> : <div onClick={()=>{setDisplayDirectory(true)}}>
-        OPEN
+      </div> : <div className="DirectoryButton" onClick={()=>{setDisplayDirectory(true)}}>
+        <div>
+          <IoIosArrowBack size={40}/>
+        </div>
       </div>)
      :  directoryContent("DirectoryCont") 
   }
