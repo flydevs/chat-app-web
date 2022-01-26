@@ -22,7 +22,7 @@ function DirectorySection({isDirectoryButton}:DirectoryProps) {
       setParticipants(ConvoCtx.selected?.participants)
     }
   }, [ConvoCtx.selected])
-  const [userSelect, setUserSelect] = useState<userProfile | null>(null)
+  const [userSelect, setUserSelect] = useState<userConversation | null>(null)
 
   const [displayDirectory, setDisplayDirectory] = useState<boolean>(false)
   
@@ -38,14 +38,14 @@ function DirectorySection({isDirectoryButton}:DirectoryProps) {
       {participants.map((participant) => {
         let user=ConvoCtx.users[participant.user_uuid.uuid];
         const SelectMember = () => {
-          setUserSelect(user)
+          setUserSelect(participant)
         };
         return <MembersCards user={user} select={SelectMember}/>
       })}
     </div>
   </div>)
   };
-  const profileCard = (selectedProfile: userProfile) => {
+  const profileCard = (selectedProfile: userConversation) => {
     const DeselectMember = () => {
       setUserSelect(null)
     }

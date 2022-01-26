@@ -1,5 +1,5 @@
 import { objectInterface } from "../interfaces";
-import { UuidResponse, AuthInfo, SendMessageInterface, NewConversationInterface, uuid, getConversationsResponse } from "./request_interfaces";
+import { UuidResponse, AuthInfo, SendMessageInterface, NewConversationInterface, uuid, getConversationsResponse, KickParticipantRequest, KickParticipantResponse, apiResponseFix } from "./request_interfaces";
 import { standardRequest, basic401Message } from "./common";
 import { CreateMessage } from "./chatutils";
 import { useContext } from "react";
@@ -47,6 +47,16 @@ const createConversRequest = async (userinfo:AuthInfo, text: string, type: numbe
   return jn
   };
 
+const kickParticipantRequest = async(userinfo: AuthInfo, body:KickParticipantRequest):Promise<KickParticipantResponse> => {
+  const data = await fetch("http://localhost:7999/conversation/kick_user", {
+    method: "POST",
+    headers: standardRequest(userinfo.access_token),
+    body: JSON.stringify(body)
+  })
+  const jn: apiResponseFix = await data.json()
+  return {data: undefined, response: jn}
+}
+
 const createConversationMessage = (message:SendMessageInterface, conversation_and_participants:NewConversationInterface):SendMessageInterface => {
   message.create_conversation = true
   message.new_convo= conversation_and_participants
@@ -71,4 +81,4 @@ const randomNum = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-export { getConvers, createConversRequest, randomNum };
+export { getConvers, createConversRequest, kickParticipantRequest,randomNum };

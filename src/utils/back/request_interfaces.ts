@@ -70,6 +70,11 @@ interface RegisterProp {
   }
 }
 
+interface KickParticipantRequest{
+  user_conversation: uuid,
+  conversation: uuid
+}
+
 interface requestManagerProp<T> {
   data: T,
   response: apiResponseFix
@@ -85,5 +90,6 @@ type getUserProfilesResponse = requestManagerProp<userProfile[]>
 
 type getStorageUsersResponse = requestManagerProp<storageUsers>
 
+type KickParticipantResponse = requestManagerProp<undefined>
 
-export type {UuidResponse, SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp, NewConversationInterface, requestManagerProp, getMessagesResponse, getConversationsResponse, getUserProfilesResponse, getStorageUsersResponse}
+export type {UuidResponse, SendMessageInterface, AuthLoginResponse as AuthInfoInterface, AuthInfo, uuid, apiResponse, apiResponseFix, AuthRegisterResponse,LoginProp, RegisterProp, NewConversationInterface, requestManagerProp, getMessagesResponse, getConversationsResponse, getUserProfilesResponse, getStorageUsersResponse, KickParticipantRequest, KickParticipantResponse}
