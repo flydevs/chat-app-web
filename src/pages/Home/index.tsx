@@ -8,19 +8,19 @@ import "./Home.scss";
 import Sidebar from "../../components/Sidebar";
 function Home() {
 	return (
-		<div className="HomeLayout">
-			<div className="HomeLayout__sidebar">
+		<div className="homeLayout">
+			<div className="homeLayout__sidebar">
 				<Sidebar />
 			</div>
-			<div className="HomeLayout__messages">
+			<div className="homeLayout__messages">
 				<ConversationsProvider>
 					<MessageSection />
 				</ConversationsProvider>
 			</div>
-			<div className="HomeLayout__chat">
+			<div className="homeLayout__chat">
 				<ChatSection />
 			</div>
-			<div className="HomeLayout__directory">
+			<div className="homeLayout__directory">
 				<DirectorySection />
 			</div>
 		</div>

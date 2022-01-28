@@ -9,7 +9,7 @@ import "./Sidebar.scss";
 function Sidebar() {
 	return (
 		<div className="sidebar">
-			<div className="sidebar__uppersection">
+			<div className="sidebar__upperSection">
 				<Avatar
 					profileImg={"https://www.vidacolorpintores.com.ar/resources/img/profile/0000000086.png"}
 					size={48}

@@ -3,9 +3,9 @@ import "./Login.scss";
 
 function Login() {
 	return(
-		<div className='Wrapper'>
+		<div className='wrapper'>
         
-			<div className='Form'>
+			<div className='form'>
 				<div>
 					<label htmlFor="User">User</label>
 					<input type="text" name="User" id="" />

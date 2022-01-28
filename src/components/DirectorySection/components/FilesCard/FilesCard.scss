@@ -1,11 +1,11 @@
-.FileCard {
+.fileCard {
   width: 100%;
   padding: 12px;
   display: flex;
   justify-content: flex-start;
   gap: 16px;
 
-  &__ImgContainer {
+  &__imgContainer {
     width: 48px;
     height: 48px;
     display: flex;
@@ -14,33 +14,33 @@
     border-radius: 12px;
     background-color: #0000ff1f;
 
-    &__FilePic {
+    &__filePic {
       width: 18px;
       height: 24px;
     }
 
     &--png {
-      background-color: rgba(240, 255, 244, 1);
+      background-color: rgba(240 255 244 100%);
       color: green;
     }
 
     &--pdf {
-      background-color: rgba(255, 245, 245, 1);
+      background-color: rgba(255 245 245 100%);
       color: red;
     }
 
     &--word {
-      background-color: rgba(235, 248, 255, 1);
+      background-color: rgba(235 248 255 100%);
       color: blue;
     }
 
     &--xxl {
-      background-color: rgba(250, 245, 255, 1);
+      background-color: rgba(250 245 255 100%);
       color: purple;
     }
   }
 
-  &__InfoFlex {
+  &__infoFlex {
     display: flex;
     flex-direction: column;
 
@@ -56,24 +56,24 @@
       font-size: 12px;
       line-height: 18px;
       font-weight: 600;
-      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0 0 0 40%);
     }
   }
 
-  &__Download {
+  &__download {
     width: 40px;
     height: 40px;
     outline: none;
     border: none;
     border-radius: 30px;
-    background-color: rgba(97, 94, 240, 0.1);
+    background-color: rgba(97 94 240 10%);
     margin-left: auto;
     cursor: pointer;
 
-    &__Icon {
+    &__icon {
       font-size: 20px;
       font-weight: 600;
-      color: rgba(97, 94, 240, 1);
+      color: rgba(97 94 240 100%);
     }
   }
 }
