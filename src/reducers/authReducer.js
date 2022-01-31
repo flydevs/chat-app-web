@@ -14,11 +14,11 @@ const authReducer = (state = initialState, action) => {
 			isLoggedIn: true
 		};
 
-        case AUTH_LOGOUT:
-            return initialState
-        default:
-            return state;
-    }
-}
+	case AUTH_LOGOUT:
+		return initialState;
+	default:
+		return state;
+	}
+};
 
 export default authReducer;

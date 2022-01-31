@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx . && stylelint **/*.scss",
     "start": "yarn lint && node server.js",
-    "dev": "webpack serve",
+    "dev": "yarn lint && webpack serve",
     "heroku-postbuild": "webpack",
     "test": "jest"
   },
