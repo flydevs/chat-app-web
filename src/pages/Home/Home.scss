@@ -1,20 +1,24 @@
-.HomeLayout {
+.homeLayout {
   width: 100vw;
   height: 99.5vh;
   display: flex;
+
   &__sidebar {
     width: 5%;
     height: 100%;
   }
+
   &__messages {
     width: 22.5%;
     height: 100%;
   }
+
   &__chat {
     width: 50%;
     height: 100%;
     border-inline: 1px solid lightgray;
   }
+
   &__directory {
     width: 22.5%;
     height: 100%;
@@ -110,6 +114,7 @@ video {
   vertical-align: baseline;
   box-sizing: border-box;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -124,24 +129,29 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
+
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

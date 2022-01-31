@@ -1,11 +1,11 @@
-.MemberCard {
+.memberCard {
   width: 100%;
   padding: 12px;
   display: flex;
   justify-content: flex-start;
   gap: 16px;
 
-  &__InfoFlex {
+  &__infoFlex {
     display: flex;
     flex-direction: column;
 
@@ -19,7 +19,7 @@
       font-size: 12px;
       line-height: 18px;
       font-weight: 600;
-      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0 0 0 40%);
     }
   }
 }

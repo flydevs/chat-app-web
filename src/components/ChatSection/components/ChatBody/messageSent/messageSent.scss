@@ -1,26 +1,28 @@
 .chatTextColumn {
-    display: flex;
-    flex-flow: column nowrap;
-     &__textLineWithAvatar {
-         display: flex;
-         flex-flow: row nowrap;
-     }
-     &__textLineWithoutAvatar {
-        display: flex;
-        flex-flow: row nowrap;
-        margin: 10px 0px 0px 40px;
-     }
-     &__sentText {
-         background-color: #f1f1f1;
-         padding: 10px 16px;
-         border-radius: 12px;
-         font-size: 14px;
-         line-height: 150%;
-         color: #000000;
-         clear:both;
-         float:left;
-         margin: 0px 10px;
-         text-transform: capitalize;
-     }
+  display: flex;
+  flex-flow: column nowrap;
 
- }
+  &__textLineWithAvatar {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  &__textLineWithoutAvatar {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 10px 0 0 40px;
+  }
+
+  &__sentText {
+    background-color: #f1f1f1;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000;
+    clear: both;
+    float: left;
+    margin: 0 10px;
+    text-transform: capitalize;
+  }
+}

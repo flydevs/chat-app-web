@@ -3,13 +3,13 @@ import { AUTH_LOGIN, AUTH_LOGOUT } from "./types";
 
 
 const userLogin = (username) => ({
-    type: AUTH_LOGIN,
-    username
-  });
+	type: AUTH_LOGIN,
+	username
+});
   
-  const userLogout = () => ({
-    type: AUTH_LOGOUT
-  });
+const userLogout = () => ({
+	type: AUTH_LOGOUT
+});
 
 const fakeLoginRequest = (username, password) =>
   new Promise((resolve, reject) =>
@@ -27,6 +27,6 @@ const fakeLoginRequest = (username, password) =>
     }
   };
 
-  export const doLogout = () => (dispatch) => {
-    dispatch(userLogout());
-  };
+export const doLogout = () => (dispatch) => {
+	dispatch(userLogout());
+};
