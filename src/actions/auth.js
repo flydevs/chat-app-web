@@ -1,3 +1,4 @@
+
 import { AUTH_LOGIN, AUTH_LOGOUT } from "./types";
 
 
@@ -14,12 +15,12 @@ const fakeLoginRequest = (username, password) =>
   new Promise((resolve, reject) =>
     setTimeout(() => {
       username === "user" && password === 'pass' ? resolve(username) : reject("User or password are invalid");
-    }, 1000)
+    }, 3000)
   );
 
-  export const doLogin = (username) => async (dispatch) => {
+  export const doLogin = (username, password) => async (dispatch) => {
     try {
-      const userResponse = await fakeLoginRequest(username);
+      const userResponse = await fakeLoginRequest(username, password);
       dispatch(userLogin(userResponse));
     } catch (error) {
       alert(error);

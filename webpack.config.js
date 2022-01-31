@@ -31,5 +31,11 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"]
       }
     ]
+  },
+  output: {
+    publicPath: '/'
+  },
+  devServer: {
+    historyApiFallback: true
   }
 };

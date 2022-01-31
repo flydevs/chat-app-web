@@ -28,9 +28,21 @@
     }
   }
 
-  &__settings {
-    cursor: pointer;
+  &__bottom{
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__settings {
+      cursor: pointer;
+    }
+  
+    &__off{
+      color: red;
+    }
   }
+  
 }
 
 .selected {

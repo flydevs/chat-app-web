@@ -2,26 +2,29 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from "./pages/Home";
 import "./App.scss";
-import {Provider} from 'react-redux'
-import store from './stores/reduxStore'
+import {connect} from 'react-redux'
 import Login from "./pages/Login";
+import ProtectedRoute from "./components/protectedRoute";
 
-function App() {
+function App({auth} : any) {
   return (
-    <Provider store={store}>
+
       <Router>
         <div className="wrapper">
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Login />
             </Route>
             <Route exact path="/home">
-              <Home />
+              <ProtectedRoute path="/home" auth={auth} component={Home}></ProtectedRoute>
             </Route>
           </Switch>
         </div>
       </Router>
-    </Provider>
   );
 }
-export default App;
+
+const mapStateToProps = (state: any) => ({
+  auth: state.auth
+})
+export default connect(mapStateToProps)(App);

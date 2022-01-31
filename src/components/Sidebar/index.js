@@ -1,12 +1,14 @@
 import React from "react";
-import { BiHome, BiConversation, BiCalendarAlt } from "react-icons/bi";
+import { BiHome, BiConversation, BiCalendarAlt, BiPowerOff } from "react-icons/bi";
 import { HiOutlineChartPie } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import Avatar from "../common/Avatar/Avatar";
 import "./Sidebar.scss";
+import { connect } from "react-redux";
+import {doLogout} from '../../actions/auth'
 
-function Sidebar() {
+function Sidebar({doLogout}) {
   return (
     <div className="sidebar">
       <div className="sidebar__uppersection">
@@ -22,9 +24,14 @@ function Sidebar() {
           <BiCalendarAlt className="sidebar__uppersection__tabs__tab" />
         </div>
       </div>
-      <FiSettings className="sidebar__settings" />
+
+      <div  className="sidebar__bottom">
+      <BiPowerOff onClick={doLogout} className="sidebar__bottom__off" />
+      <FiSettings className="sidebar__bottom__settings" />
+      </div>
+      
     </div>
   );
 }
 
-export default Sidebar;
+export default connect(null, {doLogout})(Sidebar);
