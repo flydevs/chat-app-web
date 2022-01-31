@@ -1,59 +1,65 @@
 .headerContainer {
-    padding: 20px;
-    display: flex; 
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(2 0 0 8%);
+
+  &__profileContainer {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(2, 0, 0, 0.08);
-    &__profileContainer {
-         display: flex; 
-         flex-direction: row;
-         align-items: center;
-         &__nameStatusContainer{
-             display: flex;
-             flex-direction: column;
-             margin-left: 16px;
-            &__chatTitle {
-                font-size: 20px;
-                font-weight: 600;
-                line-height: 25px;
-                color:#000000;
-            }
-            &__chatStatusContainer {
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: center;
-                &__statusDot{
-                    width: 10px;
-                    height: 10px;
-                    border-radius: 50%;
-                    margin-right: 8px;
-                }
-                &__status {
-                    font-size: 12px;
-                    opacity: 0.6;
-                    }
-            }
-    
-        }
-    }
-    &__callContainer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        width: 85px;
-        height: 40px;
-        background-color: #615EF01A;
-        padding-left: 10px;
-        &__call {
-            font-size: 16px;
-            font-weight: 600;
-            line-height: 20px;
-            color: #615EF0;
-            margin: 0px 8px;
-        }
-    }
-}
 
+    &__nameStatusContainer {
+      display: flex;
+      flex-direction: column;
+      margin-left: 16px;
+
+      &__chatTitle {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 25px;
+        color: #000;
+      }
+
+      &__chatStatusContainer {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        &__statusDot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          margin-right: 8px;
+        }
+
+        &__status {
+          font-size: 12px;
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+
+  &__callContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    width: 85px;
+    height: 40px;
+    background-color: #615ef01a;
+    padding-left: 10px;
+
+    &__call {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 20px;
+      color: #615ef0;
+      margin: 0 8px;
+    }
+  }
+}

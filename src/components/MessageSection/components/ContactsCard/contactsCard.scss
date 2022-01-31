@@ -3,10 +3,12 @@
     width: 0%;
     height: 0%;
   }
+
   50% {
     width: 20px;
     height: 20px;
   }
+
   100% {
     width: 15px;
     height: 15px;
@@ -21,37 +23,44 @@
   border-radius: 12px;
   display: flex;
   cursor: pointer;
+
   &:hover {
-    background: rgba(97, 94, 240, 0.06);
+    background: rgba(97 94 240 6%);
   }
+
   &.selected {
-    background: rgba(97, 94, 240, 0.06);
+    background: rgba(97 94 240 6%);
     background-color: #00adff29;
     border: 1px solid #80808012;
   }
+
   &__image {
     width: 48px;
     height: 48px;
     overflow: hidden;
     border-radius: 12px;
     margin-right: 12px;
+
     img {
       object-fit: cover;
       width: 100%;
       height: 100%;
     }
   }
+
   &__info {
     margin-left: 16px;
     overflow: hidden;
     max-width: 70%;
+
     h2 {
       font-size: 14px;
       line-height: 21px;
       font-weight: 600;
     }
+
     h3 {
-      color: rgba(0, 0, 0, 0.4);
+      color: rgba(0 0 0 40%);
       line-height: 18px;
       font-size: 12px;
       margin-bottom: 10px;
@@ -59,10 +68,12 @@
       text-overflow: ellipsis;
       overflow: hidden;
     }
+
     &__badges {
       display: flex;
       align-items: center;
       gap: 8px;
+
       &__badge {
         cursor: pointer;
         display: flex;
@@ -77,10 +88,11 @@
       }
     }
   }
+
   &__timeAgo {
     font-size: 14px;
     line-height: 21px;
-    color: rgba($color: #000000, $alpha: 0.3);
+    color: rgba($color: #000, $alpha: 30%);
     margin-left: auto;
   }
 
@@ -98,10 +110,11 @@
     display: flex;
     border-radius: 50%;
     background-color: #615ef0;
-    background-image: linear-gradient(
-      -45deg,
-      rgba(255, 255, 220, 0.3) 0%,
-      transparent 100%
-    );
+    background-image:
+      linear-gradient(
+        -45deg,
+        rgba(255 255 220 30%) 0%,
+        transparent 100%
+      );
   }
 }

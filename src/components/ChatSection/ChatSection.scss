@@ -4,6 +4,7 @@
   flex-direction: column;
   margin: 0;
   height: 100%;
+
   &__footer {
     display: flex;
     flex-direction: row nowrap;
@@ -11,15 +12,17 @@
     width: 100%;
     position: absolute;
     bottom: 0;
-    padding: 10px 24px 10px 24px;
+    padding: 10px 24px;
+
     &__paperClip {
       margin-right: 24px;
       font-weight: 900;
       font-size: 20px;
       line-height: 20px;
-      color: #000000;
+      color: #000;
       cursor: pointer;
     }
+
     &__textInputContainer {
       position: relative;
       display: flex;
@@ -29,18 +32,20 @@
       border-radius: 12px;
       align-items: center;
       padding: 10px 20px;
+
       &__textInput {
         width: 100%;
         border: none;
         box-sizing: border-box;
         border-radius: 12px;
-        background: #ffffff;
+        background: #fff;
         font-size: 14px;
         line-height: 150%;
         outline: none;
       }
+
       &__sendMessage {
-        color: rgb(97, 94, 240);
+        color: rgb(97 94 240);
         cursor: pointer;
       }
     }
