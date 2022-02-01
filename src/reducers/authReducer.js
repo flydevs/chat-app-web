@@ -1,9 +1,12 @@
 import { AUTH_LOGIN, AUTH_LOGOUT } from "../actions/types";
+import { defineState } from "redux-localstore";
 
-const initialState = {
+const defaultState = {
 	username: "",
 	isLoggedIn: false
 };
+
+const initialState = defineState(defaultState)("auth");
 
 const authReducer = (state = initialState, action) => {
 	switch(action.type) {
@@ -15,7 +18,7 @@ const authReducer = (state = initialState, action) => {
 		};
 
 	case AUTH_LOGOUT:
-		return initialState;
+		return defaultState;
 	default:
 		return state;
 	}

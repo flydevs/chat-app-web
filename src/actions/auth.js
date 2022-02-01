@@ -1,5 +1,5 @@
 
-import { AUTH_LOGIN, AUTH_LOGOUT } from "./types";
+import { AUTH_LOGIN, AUTH_LOGOUT} from "./types";
 
 
 const userLogin = (username) => ({
@@ -24,6 +24,7 @@ export const doLogin = (username, password) => async (dispatch) => {
 		dispatch(userLogin(userResponse));
 	} catch (error) {
 		alert(error);
+		
 	}
 };
 
