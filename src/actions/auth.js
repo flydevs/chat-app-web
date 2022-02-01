@@ -1,12 +1,11 @@
 
 import { AUTH_LOGIN, AUTH_LOGOUT} from "./types";
 
-
 const userLogin = (username) => ({
 	type: AUTH_LOGIN,
 	username
 });
-  
+
 const userLogout = () => ({
 	type: AUTH_LOGOUT
 });
@@ -14,7 +13,9 @@ const userLogout = () => ({
 const fakeLoginRequest = (username, password) =>
 	new Promise((resolve, reject) =>
 		setTimeout(() => {
-			username === "user" && password === "pass" ? resolve(username) : reject("User or password are invalid");
+			username === "user" && password === "pass"
+				? resolve(username)
+				: reject("User or password are invalid");
 		}, 3000)
 	);
 

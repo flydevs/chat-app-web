@@ -2,11 +2,7 @@ import React from "react";
 import "./messageRecived.scss";
 import Avatar from "../../../../common/Avatar/Avatar";
 
-function MessageRecived({
-	text,
-	first,
-	profileImg
-}) {
+function MessageRecived({ text, first, profileImg }) {
 	if (first) {
 		return (
 			<div className="chatTextColumn">
@@ -14,11 +10,9 @@ function MessageRecived({
 					<p className="chatTextColumn__recivedText">{text}</p>
 					<Avatar size={40} profileImg={profileImg} />
 				</div>
-
 			</div>
 		);
-	}
-	else {
+	} else {
 		return (
 			<div className="chatTextColumn">
 				<div className="chatTextColumn__textLineRecievedWithoutAvatar chatTextColumn__flexEnd">
@@ -30,4 +24,3 @@ function MessageRecived({
 }
 
 export default MessageRecived;
-

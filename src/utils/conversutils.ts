@@ -6,7 +6,6 @@ const getConvers = async () => {
 		{ method: "GET" }
 	);
 	const jn: objectInterface[] = await data.json();
-	console.log(jn);
 	return jn;
 };
 

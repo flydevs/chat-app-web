@@ -2,12 +2,7 @@ import React from "react";
 import "./messageSent.scss";
 import Avatar from "../../../../common/Avatar/Avatar";
 
-
-function MessageSent({
-	text,
-	first,
-	profileImg
-}) {
+function MessageSent({ text, first, profileImg }) {
 	if (first) {
 		return (
 			<div className="chatTextColumn">
@@ -17,8 +12,7 @@ function MessageSent({
 				</div>
 			</div>
 		);
-	}
-	else {
+	} else {
 		return (
 			<div className="chatTextColumn">
 				<div className="chatTextColumn__textLineWithoutAvatar">

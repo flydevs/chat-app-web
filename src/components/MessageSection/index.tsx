@@ -1,19 +1,26 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch, RootStateOrAny } from "react-redux";
 import "./MessageSection.scss";
 import { BsChevronDown } from "react-icons/bs";
 import { RiSearchLine } from "react-icons/ri";
 import ContactsCard from "./components/ContactsCard/ContactsCard";
-import { ConversationsContext } from "../../stores/ConversationsContext";
 import { objectInterface } from "../../utils/interfaces";
 import { randomNum } from "../../utils/conversutils";
+import { fetchConversations } from "../../actions/conversations";
 
 const MessageSection: React.FC = () => {
-	const objeto = useContext(ConversationsContext);
 	const [search, setSearch] = useState("");
 	const [results, setResults] = useState<objectInterface[]>([]);
 	const [selected, setSelected] = useState("");
 
-	console.log(objeto);
+	const dispatch = useDispatch();
+	const conversations = useSelector(
+		(state: RootStateOrAny) => state.conversations.conversations
+	);
+
+	useEffect(() => {
+		dispatch(fetchConversations());
+	}, [dispatch]);
 
 	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setSearch(e.target.value);
@@ -26,9 +33,9 @@ const MessageSection: React.FC = () => {
 
 	useEffect(() => {
 		//without this first render would give undefined on conversations array since async is not completed
-		if (search === "") {
+		if (search === "" && conversations) {
 			setResults(
-				objeto.conversations
+				conversations
 					.sort((a: objectInterface, b: objectInterface) => {
 						const date1: Date = new Date(a.createdAt);
 						const date2: Date = new Date(b.createdAt);
@@ -37,13 +44,13 @@ const MessageSection: React.FC = () => {
 					.reverse()
 			);
 		}
-	}, [objeto.conversations, search]);
+	}, [conversations, search]);
 
 	useEffect(() => {
-		if (search != "") {
+		if (search != "" && conversations) {
 			//compares search parameter and conversations names to find matches and render those convs.
 			const regSearch = new RegExp(search, "i");
-			const results = objeto.conversations
+			const results = conversations
 				.filter((obj: objectInterface) =>
 					regSearch.test(obj.firstName + obj.lastName)
 				)
@@ -56,9 +63,9 @@ const MessageSection: React.FC = () => {
 
 			setResults(results);
 		} else {
-			setResults(objeto.conversations);
+			conversations && setResults(conversations);
 		}
-	}, [objeto.conversations, search]);
+	}, [conversations, search]);
 
 	return (
 		<div data-testid="messages" className="messages">
@@ -69,7 +76,7 @@ const MessageSection: React.FC = () => {
 						<BsChevronDown size={12} />
 					</span>
 					<span className="messages__header__title__badge">
-						{objeto.conversations.length}
+						{conversations && conversations.length}
 					</span>
 				</div>
 				<button className="messages__header__plusButton">+</button>

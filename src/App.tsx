@@ -1,14 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import "./App.scss";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/protectedRoute";
 
-function App({auth} : any) {
+function App({ auth }: any) {
 	return (
-
 		<Router>
 			<div className="wrapper">
 				<Switch>
@@ -16,7 +15,11 @@ function App({auth} : any) {
 						<Login />
 					</Route>
 					<Route exact path="/home">
-						<ProtectedRoute path="/home" auth={auth} component={Home}></ProtectedRoute>
+						<ProtectedRoute
+							path="/home"
+							auth={auth}
+							component={Home}
+						></ProtectedRoute>
 					</Route>
 				</Switch>
 			</div>

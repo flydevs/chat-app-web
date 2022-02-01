@@ -9,7 +9,7 @@ const defaultState = {
 const initialState = defineState(defaultState)("auth");
 
 const authReducer = (state = initialState, action) => {
-	switch(action.type) {
+	switch (action.type) {
 	case AUTH_LOGIN:
 		return {
 			...state,

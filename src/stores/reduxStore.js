@@ -1,4 +1,4 @@
-import {createStore, applyMiddleware, compose} from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import ReduxThunk from "redux-thunk";
 import rootReducer from "../reducers";
 import storeSynchronize from "redux-localstore";
@@ -6,9 +6,10 @@ import storeSynchronize from "redux-localstore";
 const middleware = [ReduxThunk];
 
 
-const store = createStore(rootReducer, compose(
-	applyMiddleware(...middleware),
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+const store = createStore(rootReducer,
+	compose(
+		applyMiddleware(...middleware),
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
 
 export default store;
 
