@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: ["react", "@typescript-eslint", "react-hooks"],
   rules: {
-    indent: ["error", 2, { SwitchCase: 1 }],
+    indent: ["error", "tab"],
     "linebreak-style": 0,
     quotes: ["error", "double"],
     semi: ["error", "always"],

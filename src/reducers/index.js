@@ -3,8 +3,8 @@ import authReducer from "./authReducer";
 import conversationsReducer from "./conversationsReducer";
 
 const rootReducer = combineReducers({
-  auth: authReducer,
-  conversations: conversationsReducer
+	auth: authReducer,
+	conversations: conversationsReducer
 });
 
 export default rootReducer;
